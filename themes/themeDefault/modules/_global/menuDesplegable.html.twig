@@ -1,0 +1,20 @@
+<ul id="accordion" class="menu">
+    {% for seccion in values.menuDesplegable %}		
+        <li>
+            {% if seccion.url == "" %} 
+                <a onclick>{{seccion.seccion}}</a>   
+            {% else %}
+                <a href="{{seccion.url.url}}" title="{{seccion.seccion}}">{{seccion.seccion}}</a>
+            {% endif %}                        
+
+
+            {% if seccion.subsecciones is iterable %}
+                <ul>
+                {% for subseccion in seccion.subsecciones %}   
+                    <li><a href="{{subseccion.url.url}}" title="{{subseccion.seccion}}">{{subseccion.seccion}}</a></li>
+                {% endfor %}
+                </ul>   
+            {% endif %}                   
+        </li>		
+    {% endfor %}              		
+</ul>

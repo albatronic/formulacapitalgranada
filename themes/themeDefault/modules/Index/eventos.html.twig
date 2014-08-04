@@ -1,0 +1,11 @@
+{# EVENTOS #}
+
+<div class="media_drcha">
+    <span class="raya verde"></span>
+    <h1>{{macro.idioma('eventos')}}</h1>
+    {% for evento in values.eventos %}
+        {% include 'Index/eventoIndividual.html.twig' %}
+    {% endfor %}
+    <span class="filete"></span>
+    <a href="{{app.path}}/eventos" title="{{macro.idioma('verMasEventos')}}" class="boton right">{{macro.idioma('verMasEventos')}}</a>
+</div>

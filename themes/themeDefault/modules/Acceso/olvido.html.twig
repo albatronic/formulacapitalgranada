@@ -1,0 +1,27 @@
+{% extends layout %}
+
+{% block contenido %}
+    <div class="col_drcha">
+        {% include '/_global/ruta.html.twig' %}
+        <h1>Olvido de contraseña</h1>
+		<div class="contenedor_100">
+            <p class="descripcion">{{values.mensaje.acceso}}</p>
+			<div id="formulario">
+			    <form>
+			        <div id="input_oculto">
+			            <input type="text" name="buzon" value="" />
+			            <input type="text" name="action" value="" />
+			        </div>
+
+			        <label>E-mail</label>
+			        <input type="text" name="" class="celda" />
+
+			        <div class="botonera">			           
+			            <a href="#" title="enviar" class="boton right">enviar</a>
+			        </div>					        
+			    </form>
+			</div>
+            {#{% include'Acceso/mensajesOlvido.html.twig' %}; /* ------------------- ESTOS SON LOS MENSAJES DE RESPUESTA DEL FORMULARIO ------------------- */#}
+		</div>    
+    </div>
+{% endblock %}

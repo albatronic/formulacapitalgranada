@@ -1,0 +1,19 @@
+{% extends layout %}
+
+{% block contenido %}
+    <div class="col_drcha">
+        {% include '/_global/ruta.html.twig' %}
+	<h1>{{macro.idioma('galeriaDeVideos')}}</h1>
+        
+	<div id="showreel">
+            <div id="video">
+                <iframe width="417" height="329" src="http://www.youtube.com/embed/{{values.video.embed}}" frameborder="0" allowfullscreen></iframe>
+            </div>
+		<h2>{{values.video.titulo}}</h2>
+		{% if values.video.autor %}<p>{{macro.idioma('autorFuente')}}: <strong>{{values.video.autor}}</strong></p>{%endif%}
+		<p>{{values.video.resumen}}</p>             
+		<a href="javascript:history.back()" title="{{macro.idioma('volverAtras')}}" class="boton right">{{macro.idioma('volverAtras')}}</a>
+	</div>
+
+    </div> 
+{% endblock %}

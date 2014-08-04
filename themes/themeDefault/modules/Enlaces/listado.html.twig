@@ -1,0 +1,26 @@
+{% extends layout %}
+
+{% block contenido %}
+<div class="col_drcha">
+    {% include '_global/ruta.html.twig' %}
+    <h1>{{macro.idioma('enlacesDeInteres')}}</h1>
+    <div class="contenedor_100">
+        <h2>{{values.enlacesInteres.seccion.titulo}}</h2>
+
+        <ul id="contenedorEnlaces">
+            {% for enlace in values.enlacesInteres.enlaces %}
+                <li>
+                    <h3>{{ macro.link(enlace.titulo,none,enlace.url.url,enlace.url.targetBlank) }}</h3>
+                    <h4>        
+			<a href="{{enlace.url.url}}" 
+		       title="{{enlace.url.title|default(enlace.url.titulo)}}" 
+		       {% if enlace.url.targetBlank == "1" %} rel="pop-up" {% endif %} 
+		       >{{enlace.url.url}}</a>
+		    </h4>
+                </li>
+            {% endfor %}
+        </ul>
+        <a href="javascript:history.back()" title="{{macro.idioma('volverAtras')}}" class="boton left">{{macro.idioma('volverAtras')}}</a>        
+    </div>          
+</div>
+{% endblock %}

@@ -1,0 +1,9 @@
+<div class="mosaicoProyectos"> 
+
+    <div class="proyectosFila">
+        {% for key, galeria in values.galeriaImagenes %}
+            {{ macro.galeria (galeria, key) }}
+        {% endfor %}
+    </div>
+
+</div>

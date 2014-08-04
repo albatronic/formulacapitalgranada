@@ -1,0 +1,22 @@
+{% extends layout %}
+
+{% block contenido %}
+<div class="col_drcha">
+    {% include '_global/ruta.html.twig' %}
+    <h1>{{macro.idioma('noticias')}}</h1>
+
+    <div id="col_izqda">
+        {% for key,noticia in values.noticias.rows %}    
+            {% if key is even %} {{ macro.noticia (noticia,2) }} {% endif %}
+        {% endfor %}
+    </div>
+
+    <div id="col_drcha">
+        {% for key,noticia in values.noticias.rows %}    
+            {% if key is odd %} {{ macro.noticia (noticia,2) }} {% endif %}
+        {% endfor %}
+    </div>
+
+    {{ macro.paginacion(values.noticias.paginacion) }}   
+</div>	
+{% endblock %}

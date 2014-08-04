@@ -1,0 +1,11 @@
+<div class="evento_indiv">
+	{% if noticia.imagen!="" %}
+        <div class="imagen_evento">
+		<img src="{{noticia.imagen}}" alt="{{noticia.titulo}}" title="{{noticia.titulo}}" />
+		<a href="{{noticia.url}}" title="{{noticia.url}}"><span class="fecha_evento arriba">{{noticia.fecha}}</span></a>
+	</div>
+        {% endif %}
+	<h2><a href="contenido-aislado.php" title="#">{{noticia.titulo}}</a></h2>
+	<h3>{{noticia.subtitulo}}</h3>
+	<p>{{noticia.descripcion}}</p>
+</div>

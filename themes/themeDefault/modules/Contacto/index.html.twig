@@ -1,0 +1,14 @@
+{% extends layout %}
+
+{% block bodyContacto %}onload="initialize ()"{% endblock %}
+
+{% block contenido %}
+    <div class="col_drcha">
+        {% include '_global/ruta.html.twig' %}
+	<div class="media">
+            <h1>{{macro.idioma('contactaConNosotros')}}</h1>
+            {% include 'Contacto/formulario.html.twig' %}
+            {% include 'Contacto/situacion.html.twig' %}
+	</div>
+    </div>	
+{% endblock %}

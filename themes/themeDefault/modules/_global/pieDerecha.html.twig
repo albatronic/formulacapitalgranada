@@ -1,0 +1,19 @@
+<div class="pieDerecho">
+    <div id="corporativo">
+        <a href="{{app.path}}/{{theme}}" title="Comunidad de Regantes | Virgen de la Salud"><img src="{{app.path}}/{{theme}}/images/comunidad-regantes-virgen-de-la-salud-agua.png" alt="Comunidad de Regantes | Virgen de la Salud" title="Comunidad de Regantes | Virgen de la Salud" /></a>
+        <ul>
+            <li id="direccion">{{values.datosContacto.direccion}}  |  {{values.datosContacto.codigoPostal}} {{values.datosContacto.poblacion}} ({{values.datosContacto.provincia}})</li>
+            <li id="telefono">{{values.datosContacto.telefono1}}</li>
+            <li id="mail" class="ultimo"><a href="mailto:{{values.datosContacto.emailInfo}}" title="escr&iacute;benos a: {{values.datosContacto.emailInfo}}">{{values.datosContacto.emailInfo}}</a></li>
+        </ul>
+    </div>
+
+    <div id="datos_legales">
+        <a href="{{values.firma.url}}" title="{{values.firma.service}} | {{values.firma.location}}" rel="pop-up" id="diseno_web">
+            {{values.firma.service}} {{values.firma.location}}
+            <img src="{{app.path}}/{{theme}}/images/logoAlbatronic.png" alt="Albatronic | {{values.firma.service}} {{values.firma.location}}" title="Albatronic | {{values.firma.service}} {{values.firma.location}}" class="albatronic" />
+        </a>
+        <a href="{{app.path}}/aviso-legal" rel="iframe-800-550"  class="pirobox" title="Aviso Legal" id="aviso_legal">Aviso Legal</a>
+    </div>
+</div>
+

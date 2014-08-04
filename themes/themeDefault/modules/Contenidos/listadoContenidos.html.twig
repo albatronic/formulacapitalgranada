@@ -1,0 +1,70 @@
+
+{% extends layout %}
+
+
+{% block contenido %}
+    <div class="col_drcha">
+        {% include '_global/ruta.html.twig' %}
+
+        {% set seccion = values.listadoContenidos.contenidos[0].IdSeccion %}            
+        {% set nH = 0 %}
+            
+        {# CABECERA CON LOS DATOS DE LA SECCION #}
+        <div id="grupoSeccion">            
+        {% if (seccion.MostrarTitulo.IDTipo and seccion.Titulo) %}
+            {% set nH = nH + 1 %}
+            <h{{nH}}>{{seccion.Titulo}}</h{{nH}}>
+        {% endif %}
+
+        {% if (seccion.MostrarSubtitulo.IDTipo and seccion.Subtitulo) %}
+            {% set nH = nH + 1 %}
+            <h{{nH}}>{{seccion.Subtitulo}}</h{{nH}}>
+        {% endif %}
+
+        {% if (seccion.MostrarIntroduccion.IDTipo and seccion.Introduccion) %}
+            {% set nH = nH + 1 %}            
+            <h{{nH}}>{{seccion.Introduccion}}</h{{nH}}>
+        {% endif %}
+        </div>            
+        {# ------------------------------------ #}            
+
+        <ul class="listaContenidos">
+            {% for contenido in values.listadoContenidos.contenidos %}
+                {% if contenido.ShowPublishedAt.IDTipo and contenido.PublishedAt | date('d/m/Y')%}
+                    {% set claseCss = "con_fecha" %}
+                {% else %}
+                    {% set claseCss = "sin_fecha" %}
+                {% endif %}
+            <li> 
+                {% if contenido.Titulo %}
+                    {% set nHH = nH + 1 %}
+                    <h{{nHH}} class="{{claseCss}}">
+                        {% set link = contenido.Href() %}
+                        {% if link.url %}
+                            {{ macro.link(contenido.Titulo,none,link.url,link.targetBlank)}}
+                        {% else %}
+                            {{contenido.Titulo}}
+                        {% endif %}
+                    </h{{nHH}}>
+                {% endif %}
+                {% if contenido.ShowPublishedAt.IDTipo and contenido.PublishedAt %}
+                    <span class="fecha">{{contenido.PublishedAt | date('d/m/Y')}}</span>
+                {% endif %}
+                {% if contenido.Subtitulo %}
+                    {% set nHH = nHH + 1 %}
+                    <h{{nHH}} class="subtituloListado">{{contenido.Subtitulo}}</h{{nHH}}>
+                {% endif %}
+                {% if contenido.Resumen %}
+                    <p>{{contenido.Resumen}}</p>
+                {% endif %}
+            </li>
+            {% endfor %}
+
+        </ul>
+			
+        {{ macro.paginacion(values.listadoContenidos.paginacion) }}
+
+        <a href="javascript:history.back()" title="{{macro.idioma('volverAtras')}}" class="boton left">{{macro.idioma('volverAtras')}}</a>         
+    </div>
+
+{% endblock %}

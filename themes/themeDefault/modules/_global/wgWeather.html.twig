@@ -1,0 +1,23 @@
+{# INFORMACION DEL TIEMPO #}
+{% set info = values.widgets.getWeather() %}
+
+<div class="weather">
+    <div class="poblacion">{{info.name}}</div>
+
+    <div style="display: block; clear: left;">
+        <div title="Titel" style="float: left;">
+        <img width="45" height="45" src="http://openweathermap.org/images/transparent.png" alt="title" style="border: medium none; width: 45px; height: 45px; background: url('http://openweathermap.org/img/w/{{info.weather.0.icon}}.png') repeat scroll 0% 0% transparent;">
+        </div>
+        <div style="float: left;">
+            <div title="{{macro.idioma('temperatura')}}" style="display: block; clear: left; font-size: medium; font-weight: bold; padding: 8pt 3pt;">{{info.main.temp}}°</div>
+            <div style="display: block; width: 85px; overflow: visible;"> </div>            
+        </div>
+        <div class="item">{{info.weather.0.description|capitalize}}</div>
+        <div class="item">{{macro.idioma('humedad')}}: {{info.main.humidity}}%</div>
+        <div class="item">{{macro.idioma('viento')}}: {{info.wind.speed}} m/s</div>
+        <div class="item">{{macro.idioma('presion')}}: {{info.main.pressure}} hpa</div>
+    </div>
+    <div class="item">
+    <a target="_blank" href="http://openweathermap.org/city/{{info.id}}">{{macro.idioma('masInfo')}}..</a>
+    </div>
+</div>

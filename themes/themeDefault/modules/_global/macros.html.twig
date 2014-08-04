@@ -1,0 +1,199 @@
+{# MACROS COMUNES AL PROYECTO #}
+
+{#  MACRO NOTICIA #}
+{# Es el resumen de una noticia y puede estar en las siguientes secciones: INDEX, NOTICIAS, EVENTOS #}
+{# El contenido de un resumen de noticia sería: IMAGEN (puede llevar o no), FECHA (puede llevar o no), TÍTULO, SUBTÍTULO (puede llevar o no), PÁRRAFO #}
+{% macro noticia (noticia,nImagen) %}
+<div class="evento_indiv">
+    {% if noticia.getPathNameImagenN(nImagen|default('1')) %}
+    <div class="imagen_evento">
+        <img src="{{appPath}}/{{theme}}/{{noticia.getPathNameImagenN(nImagen|default('1'))}}" alt="{{noticia.titulo}}" title="{{noticia.titulo}}" />
+        <a href="{{noticia.Href.url}}" title="{{noticia.Titulo}}"><span class="fecha_evento arriba">{{noticia.PublishedAt | date('d/m/Y')}}</span></a>
+    </div>
+    {% endif %}
+    <h2>{{_self.link(noticia.Titulo,none,noticia.Href.url,noticia.Href.targetBlank)}}</h2>
+    <h3>{{noticia.subtitulo}}</h3>
+    <p>{{noticia.resumen}}</p>
+</div>    
+{% endmacro %}
+
+{#  MACRO SERVICIO #}
+{% macro servicio (servicio,nImagen) %}
+<div class="evento_indiv">
+    {% if servicio.getPathNameImagenN(nImagen|default('1')) %}
+    <div class="imagen_evento">
+        <img src="{{appPath}}/{{theme}}/{{servicio.getPathNameImagenN(nImagen|default('1'))}}" alt="{{servicio.titulo}}" title="{{servicio.titulo}}" />
+        <a href="{{servicio.Href.url}}" title="{{servicio.Titulo}}"><span class="fecha_evento arriba">{{servicio.PublishedAt | date('d/m/Y')}}</span></a>
+    </div>
+    {% endif %}
+    <h2>{{_self.link(servicio.Titulo,none,servicio.Href.url,servicio.Href.targetBlank)}}</h2>
+    <h3>{{servicio.Subtitulo}}</h3>
+    <p>{{servicio.ResumenBreve}}</p>
+</div>    
+{% endmacro %}
+
+{#  MACRO EVENTO #}
+{# Es el resumen de un evento y puede estar en las siguientes secciones: INDEX, NOTICIAS, EVENTOS #}
+{# El contenido de un resumen de un evento sería: IMAGEN (puede llevar o no), FECHA (puede llevar o no), TÍTULO, SUBTÍTULO (puede llevar o no), PÁRRAFO #}
+{% macro evento (evento) %}
+<article class="evento_indiv {% if not evento.imagen %}sin_imagen{% endif %}">
+    {% if evento.imagen %}
+    <div class="imagen_evento">
+        <a href="{{evento.url.url}}" title="{{evento.url.url}}">
+            <img src="{{appPath}}/{{theme}}/{{evento.imagen}}" alt="{{evento.titulo}}" title="{{evento.titulo}}" />
+        </a>
+        <span class="fechaEvento arriba">
+           <span class="fechaLeft"></span>
+            <span class="fechaInter">{{evento.fecha | date('d/m/Y')}}</span>  
+           <span class="fechaRigth"></span>         
+        </span>
+    </div>
+    {% else %}
+       <span class="fecha">
+           <span class="fechaLeft"></span>
+            <span class="fechaInter">{{evento.fecha | date('d/m/Y')}}</span>  
+           <span class="fechaRigth"></span>           
+       </span> 
+    {% endif %}
+    <h2>{{_self.link(evento.titulo,none,evento.url.url,evento.url.targetBlank)}}</h2>
+    <h3>{{evento.subtitulo}}</h3>
+    <p>{{evento.resumen}}</p>
+</article>    
+{% endmacro %}
+
+{# MACRO VIDEO #}
+{# Es la imagen del vídeo en la sección VÍDEOS #}
+{# Los vídeos entran en un <div class="proyectosFila"> y cada "proyectosFila" contiene 3 vídeos,
+ con lo que al recibir más vídeos se genera otro <div class="proyectosFila"> quedando siempre filas de 3 vídeos o menos, pero nunca más. #}
+{# El array de un vídeo contiene: IMAGEN del vídeo, TITULO, ENLACE al vídeo individual #}
+{# Es importante la variable 'key' porque el video 3 y sus múltiplos van a tener estilos diferenes que el 1 y el 2. #}
+{% macro video (video, key, nCaracteres, ultimoFila)%}
+{% set nCar=nCaracteres | default(100) %}
+<div class="mosaic-block bar proyecto{{key}}">
+    <div class="mosaic-backdrop" style="display: block;"> 
+        <img src="{{appPath}}/{{theme}}/{{video.imagen}}" alt="{{video.titulo}}" title="{{video.titulo}}" />
+    </div>
+    <a href="{{video.url.url}}" class="mosaic-overlay" style="{% if ultimoFila %}display: inline;{% endif %} left: 0px; bottom: -146px;">
+        <span class="details">{{video.titulo|slice(0, nCar)}}{% if video.titulo | length > nCar %}...{% endif %}</span>
+    </a>
+</div>
+{% endmacro %}
+
+
+{# MACRO GALERIA DE IMÁGENES #}
+{# Al igual que en los vídeos, son 3 thumbnails por cada fila. #}
+{# Las imágenes entran en un <div class="proyectosFila"> y cada "proyectosFila" contiene 3 imágenes,
+ con lo que al recibir más thumbnails se genera otro <div class="proyectosFila"> quedando siempre filas de 3 thumbnails o menos, pero nunca más. #}
+{# El array de un proyecto contiene: TÍTULO DE LA GALERÍA, que se muestra bajo el thumbnail, IMAGEN del proyecto, NOMBRE de la imagen, ENLACE a otras imágenes de la galería de fotos. #}
+{# Es importante la variable 'key' porque la imagen 3 y sus múltiplos van a tener estilos diferenes que la imagen 1 y la imagen 2. #}
+{% macro galeria (galeria, key)%}
+<div class="proyecto{{key}}">
+    <a href="{{appPath}}/{{theme}}/{{galeria.imagen}}" rel="gallery" class="pirobox_gall{{key}}" title="{{galeria.titulo}}">
+        <img src="{{appPath}}/{{theme}}/{{galeria.imagen}}" alt="{{galeria.titulo}}" title="{{galeria.titulo}}" />
+    </a>
+    <div class="textoAlbum"><h4>{{galeria.titulo}}</h4></div>
+
+    {% for thumbnail in galeria.bloqueThumbnail %}
+        <a href="{{appPath}}/{{theme}}/{{thumbnail.PathName}}" rel="gallery" class="pirobox_gall{{key}}" title="{{thumbnail.Title}}"></a>
+    {% endfor %}
+</div>
+{% endmacro %}
+
+{#
+    MACRO PARA CREAR ENLACES HREF
+
+    @param string titulo    El texto que se mostrará para el enlace y en el title
+    @param string title     El texto que se pone en title="". Si está vacio se pone el valor de titulo
+    @param string url       La url donde apunta el link
+    @param boolean esPopup  Si se abre en nueva ventana o no
+    @param string id        El id (opcional)
+    @param string claseCss  La clase css (opcional)
+#}
+{% macro link (titulo, title, url, esPopup, id, claseCss) %}
+    {% if url == "" %} 
+        {{titulo}}
+    {% else %}
+        <a href="{{url}}" 
+           title="{{title|default(titulo)}}" 
+           {% if esPopup == "1" %} rel="pop-up" {% endif %} 
+           {% if id != "" %} id="{{id}}" {% endif %}               
+           {% if claseCss != "" %} class="{{claseCss}}" {% endif %}
+           >{{titulo}}</a>
+    {% endif %}
+{% endmacro %}
+
+{#
+    MACRO PARA PAGINAR
+
+    Muestra los botones 'anterior' y 'siguiente'
+
+    @param string entidad             La urlamigable que se dispara al pulsar el boton
+    @param array paginacion           Array con los elmentos: pagina, totalPaginas, totalItems, itemsPorPagina
+    @param string claseCssAnterior    El nombre de la clase css para el boton "anterior"
+    @param string claseCssSiguiente   El nombre de la clase css para el boton "siguiente"
+    
+#}
+{% macro paginacion (paginacion,claseCssAnterior,claseCssSiguiente) %}
+    <div class="botonera">
+        {% if paginacion.pagina > 1 %}
+            <a href="{{appPath}}{{urlAmigable}}/{{paginacion.pagina-1}}" title="{{_self.idioma('anterior')}}" class="{{claseCssAnterior|default("boton left")}}">{{_self.idioma('anterior')}}</a>
+        {% endif %}
+        {% if paginacion.pagina < paginacion.totalPaginas %}
+            <a href="{{appPath}}{{urlAmigable}}/{{paginacion.pagina+1}}" title="{{_self.idioma('siguiente')}}" class="{{claseCssSiguiente|default("boton right")}}">{{_self.idioma('siguiente')}}</a>
+        {% endif %}
+    </div> 
+{% endmacro%}
+
+{# GOOGLE MAPS #}
+{% macro googleMap(title,longitude,latitude)%}
+<script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+<script>
+  function initialize() {
+    var latlng = new google.maps.LatLng({{longitude}}, {{latitude}});
+	
+    var myOptions = {
+      zoom: 17,
+      center: latlng,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var map = new google.maps.Map(document.getElementById("map_canvas"),
+        myOptions);
+
+	 var marker = new google.maps.Marker({
+		  position: latlng,
+		  map: map,
+		  title:"{{title}}"
+	  });
+  }
+</script>
+{% endmacro %}
+
+{#
+    MACRO PARA RECORTAR TEXTOS
+
+    Pinta los primeros 'nCaracteres' del 'texto' y si la longitud del texto
+    es mayor al número de caracteres recortados, pinta también puntos suspensivos
+
+    USO:    
+        {{ macro.recortaTexto('Hola buenos días',6)}}
+        esto pinta: Hola b ...
+
+    @param string texto El texto a recortar
+    @param int nCaracteres el número de caracteres a mostrar
+#}
+{% macro recortaTexto (texto, nCaracteres) %}
+    {% if texto|length > nCaracteres %}
+        {% set puntos = " ..." %}
+    {% endif %}
+    {{texto|slice(0,nCaracteres)}}{{puntos}}
+{% endmacro %}
+
+{% macro moneda(importe, nDecimales, separadorMiles, separadorDecimales, simbolo)%}
+    {{importe | number_format(nDecimales|default(2), separadorDecimales|default('.'), separadorMiles|default(','))}} {{simbolo|default('€')}}
+{% endmacro%}
+
+{% macro idioma(clave)%}
+    {%spaceless%}
+    {% if LABELS[clave] %}{{LABELS[clave]}}{% else %}[{{clave}}]{% endif %}
+    {%endspaceless%}        
+{% endmacro%}

@@ -1,0 +1,41 @@
+<title>{%spaceless%}
+    {% if values.meta.titleSimple %}
+        {{values.meta.title}}
+    {% else %}
+        {% if values.meta.titlePosition %}
+            {{ values.meta.webName }} {{ values.meta.title }}
+        {% else %}
+            {{ values.meta.title }} {{ values.meta.webName }}    
+        {% endif %}
+    {% endif %}
+    {%endspaceless%}
+</title>
+<link rel="shortcut icon" href="favicon.ico"/>
+<link rel="canonical" href="{{app.url}}{{urlAmigable}}">
+<meta name="Title" content="{{values.meta.title}}"/>
+<meta name="Description" content="{{values.meta.description}}"/>
+<meta name="Keywords" content="'{{values.meta.keyWords}}"/>
+<meta name="Robots" content="all"/>
+<meta name="Author" content="'{{values.meta.author}}"/>
+{% if controller == 'Index' %}
+    <meta name="resource-type" content="Homepage"/>
+    <meta name="doc-type" content="Homepage"/>
+{% endif %}
+<meta name="Classification" content="General"/>
+<meta name="Distribution" content="Global"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta http-equiv="Cache-Control" content="no-cache"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="Revisit-after" content="{{values.meta.revisitAfter}}"/>
+<meta name="robots" content="{% if values.blockRobots == '1' %}noindex,nofollow{%else%}index,follow{%endif%}" />
+<meta name="googlebot" content="{% if values.blockRobots == '1' %}noindex,nofollow{%else%}index,follow{%endif%}" />
+<meta name="geo.region" content="{{values.meta.geoRegion}}"/>
+<meta name="geo.placename" content="{{values.meta.geoPlaceName}}"/>
+{% if values.meta.geoPositionLatitude and values.meta.geoPositionLongitude %}
+    <meta name="geo.position" content="{{values.meta.geoPositionLatitude}};{{values.meta.geoPositionLongitude}}"/>
+    <meta name="ICBM" content="{{values.meta.geoPositionLatitude}}, {{values.meta.geoPositionLongitude}}"/>    
+{% endif %}
+{% if values.meta.urlImagen %}
+<meta property="og:image" content="{{values.meta.urlImagen}}">
+{% endif %}
+<link href="{{app.path}}/favicon.ico" rel="shortcut icon" hreflang="es" />

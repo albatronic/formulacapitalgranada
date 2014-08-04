@@ -1,0 +1,57 @@
+{% extends layout %}
+
+{% block contenido %}
+    <div class="col_drcha">
+        {% include '/_global/ruta.html.twig' %}
+        <h1>Registro de Nuevo Usuario</h1>
+		<div class="contenedor_100">
+            <p class="descripcion">{{values.mensaje.acceso}}</p>
+			<div id="formulario">
+			    <form>
+			        <div id="input_oculto">
+			            <input type="text" name="buzon" value="" />
+			            <input type="text" name="action" value="" />
+			        </div>
+
+			        <div class="fila">
+			        	<span class="left">
+			        		<label>Nombre de Usuario</label>
+				     	    <input type="text" name="" class="celda" />
+				        </span>
+				        
+				        <span class="right">
+				        	<label>E-mail</label>
+				        	<input type="text" name="" class="celda" />			        
+				        </span>	
+			        </div>
+			        
+			        <div class="fila">
+			        	<span class="left">
+			        		<label>Contraseña</label>
+				     	    <input type="password" name="" class="celda" />
+				        </span>
+				        
+				        <span class="right">
+				        	<label>Repite Contraseña</label>
+				        	<input type="password" name="" class="celda" />			        
+				        </span>	
+			        </div>			        
+			        
+
+            <div id="contenedorEnviar">
+                <div id="politicaPrivacidad" class="{% if values.formContacta.campos.leidoPolitica.error %}celdaError {% else %}checboxesCaja{% endif %}">
+                    <input name="campos[leidoPolitica][valor]" type="checkbox" id="leidoPolitica" {%if values.formContacta.campos.leidoPolitica.valor == 'on' %} CHECKED{% endif %} />
+                    He le&iacute;do y acepto la <a href="{{app.path}}/{{theme}}/politica-privacidad" rel="iframe-800-360" class="pirobox" title="Pol&iacute;tica de Privacidad">pol&iacute;tica de privacidad.</a>
+                </div>
+
+                <a href="#" 
+                   title="enviar" 
+                   class="boton right"
+                   onclick="$('#formEnvio').submit();">enviar</a>
+            </div>				        
+			    </form>
+			</div>
+           	{% include'Acceso/mensajes.html.twig' %} {#} ------------------- ESTOS SON LOS MENSAJES DE RESPUESTA DEL FORMULARIO ------------------- #}
+		</div>    
+    </div>
+{% endblock %}

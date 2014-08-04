@@ -1,0 +1,14 @@
+{% extends layout %}
+
+{% block contenido %}
+
+<div class="col_drcha">
+    <div id="error_404">
+        <img src="{{app.path}}/{{theme}}/images/aspa.png" alt="Error 404" title="Error 404" />
+        <h1>{{macro.idioma('loSentimos')}}<br />{{macro.idioma('noHemosPodidoLocalizarLaPagina')}}.</h1>
+        <p class="exito">{{macro.idioma('sigueNavegando')}}</p>
+    </div>
+</div>
+
+{% endblock %}
+

@@ -1,0 +1,20 @@
+{#
+    ESTA USTED EN....
+#}
+<div id="usted_esta_en">
+    <div id="usted_top"></div>
+    <div id="usted_inter">
+        <h6>{{values.ustedEstaEn.titulo}}</h6>
+        {% for subseccion in values.ustedEstaEn.subsecciones %}    
+        <ul>
+            <li>{{ macro.link(subseccion.titulo,none,subseccion.url.url,subseccion.url.targerBlank)}}</li>
+        </ul>
+        {% endfor %}        
+    </div>
+    <div id="usted_bottom"></div>    
+    {% if values.ustedEstaEn.subirNivel %}
+    <a href="{{values.ustedEstaEn.subirNivel}}" title="Subir un nivel"><img src="{{app.path}}/{{theme}}/images/subir-nivel.png" alt="Subir un nivel" title="Subir un nivel" /></a>
+    {% endif%}
+</div>
+
+

@@ -1,0 +1,18 @@
+<ul class="galeria">
+    
+    {% set nItems = values.galeriaFotos[0].bloqueThumbnail|length %}
+        
+    {% for key, galeria in values.galeriaFotos[0].bloqueThumbnail %}
+	<li {% if nItems==key+1 %}class="ultimo"{% endif %}>
+            <a href="{{app.path}}/{{theme}}/{{galeria.PathName}}" rel="gallery" class="pirobox_gall1" title="{{galeria.Title}}">
+                <img src="{{app.path}}/{{theme}}/{{galeria.PathNameThumbnail}}" alt="{{galeria.Title}}" title="{{galeria.Title}}" />
+            </a>
+	</li>       
+    {% endfor %}    
+</ul>
+
+{% for galeria in values.galeriaFotos[0].restoImagenes %}
+    <a href="{{app.path}}/{{theme}}/{{galeria.PathName}}" rel="gallery" class="pirobox_gall1" title="{{galeria.Title}}"></a>
+{% endfor %}  
+
+<a href="{{app.path}}/galeria" title="{{macro.idioma('masAlbumes')}}" class="albumes">{{macro.idioma('masAlbumes')}}</a>			

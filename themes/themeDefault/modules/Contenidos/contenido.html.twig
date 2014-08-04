@@ -1,0 +1,43 @@
+{# 
+## Aquí tenemos que decirle, si solo hay 1 contenido desarrollado el h1 se queda tal cual, si hay más hay un titulo (de sección) por encima de h1
+## Así que tenemos que forzar el h1 a que se convierta en h2. El h2 en h3 y el h3 en h4.
+## Comprobar que he colocado bien la pregunta de que si el h1, h2, etc no está vacío, hay que pintarlo. Lo he comprobado con la fecha y no lo pinta.
+## Contemplar la posibilidad de intercalar imágenes y texto. Párrafo + imagen + párrafo
+#}
+
+
+<div class="contenedorNoticia">  
+    
+    {% if (contenido.contenido.ShowPublishedAt.IDTipo == '1') %}
+        <div class="fecha">{{contenido.contenido.PublishedAt | date('d/m/Y')}}</div>
+    {% endif %}
+
+    {% if (contenido.contenido.MostrarTituloContenido.IDTipo and contenido.contenido.Titulo) %}
+        {% set nH = nH + 1 %}        
+        <h{{nH}}>{{contenido.contenido.Titulo}}</h{{nH}}>
+    {% endif %}
+
+    {% if (contenido.contenido.MostrarSubtituloContenido.IDTipo and contenido.contenido.Subtitulo) %}
+        {% set nH = nH + 1 %}            
+        <h{{nH}}>{{contenido.contenido.Subtitulo}}</h{{nH}}>
+    {% endif %}
+
+    {% if (contenido.contenido.MostrarResumenContenido.IDTipo and contenido.contenido.Resumen) %}
+        {% set nH = nH + 1 %}        
+        <h{{nH}}>{{contenido.contenido.Resumen}}</h{{nH}}>
+    {% endif %}
+
+    {% if (contenido.contenido.Desarrollo) %}
+        {% autoescape false%}{{contenido.contenido.Desarrollo}}{% endautoescape%}
+    {% endif %}
+
+    {% for key,video in contenido.videos %}
+    {% if (video.urlVideo != "") %}
+        <div class="videos_youtube">
+            <iframe width="{{contenido.videoYoutube.ancho}}" height="{{contenido.videoYoutube.alto}}" src="http://www.youtube.com/embed/{{contenido.videos[0].urlVideo}}" frameborder="{{contenido.videoYoutube.anchoBorde}}"></iframe>
+        </div>
+    {% endif %}
+    {% endfor %}
+        
+    <a href="javascript:history.back()" title="{{macro.idioma('volverAtras')}}" class="boton left">{{macro.idioma('volverAtras')}}</a>       
+</div>

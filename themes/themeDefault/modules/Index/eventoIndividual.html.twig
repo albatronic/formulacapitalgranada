@@ -1,0 +1,23 @@
+<div class="evento_indiv {% if not evento.imagen %}sin_imagen{% endif %}">
+    {% if evento.imagen %}
+    <div class="imagen_evento">
+        <img src="{{app.path}}/{{theme}}/{{evento.imagen}}" alt="{{evento.titulo}}" title="{{evento.titulo}}" />
+        <a href="{{evento.url.url}}" title="{{evento.titulo}}"><span class="fecha_evento arriba">{{evento.fecha|date('d/m/Y')}}</span></a>
+    </div>
+    {% else %}
+       <span class="fecha">{{evento.fecha | date('d/m/Y')}}</span> 
+    {% endif %}
+    {% if evento.titulo | length > 100 %}   
+    <h2>{{ macro.link(evento.titulo|slice(start,100),none,evento.url.url,evento.url.targetBlank)}} ...</h2>
+	{% else %}
+    <h2>{{ macro.link(evento.titulo|slice(start,100),none,evento.url.url,evento.url.targetBlank)}}</h2>
+    {% endif %}
+    <h3>{%if evento.subtitulo | length > 150%}{{evento.subtitulo|slice(start,150)}} ...{%else%}{{evento.subtitulo}}{%endif%}</h3>
+    <p>
+	{% if evento.resumen | length > 300 %}
+	{{evento.resumen | slice(start,300) }} ...
+	    {% else %}
+	{{ evento.resumen }}
+	{% endif %}
+    </p>
+</div>

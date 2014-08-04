@@ -1,0 +1,20 @@
+{% extends layout %}
+
+{% block title parent() ~ " - Inicio" %}
+
+{% block contenido %}
+<div class="col_drcha">
+    {% include '_global/ruta.html.twig' %}
+    <h1>{{macro.idioma('enlacesDeInteres')}}</h1>
+    <div class="contenedor_100">
+        <ul id="contenedorEnlaces">
+            {% for enlace in values.seccionesEnlaces %}
+                <li>
+                    <h3><a href="{{enlace.url.url}}" title="{{enlace.titulo}}">{{enlace.titulo}}</a></h3>
+                    <h4>{{enlace.subtitulo}}</h4>
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends layout %}
+
+{% block contenido %}
+    <div class="col_drcha">
+        {% include '/_global/ruta.html.twig' %}
+	<h1>{{macro.idioma('galeriaDeVideos')}}</h1>
+        
+        <div id="mosaicoProyectos"> 
+        {% for fila in values.galeriaVideos %}
+            {% set videosPorFila = fila|length %}
+            <div class="proyectosFila">
+                {% for key,video in fila %}
+                    {% set ultimoFila = ((key+1) == videosPorFila)%}
+                    {{ macro.video (video, key+1, none, ultimoFila) }}
+                {% endfor %}
+            </div>
+        {% endfor %}
+
+        </div> 
+    </div>    
+{% endblock %}

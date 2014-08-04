@@ -1,0 +1,26 @@
+
+<script type="text/javascript" src="{{app.path}}/{{theme}}/js/jquery-1.8.2.min.js"></script> {# LLAMADA A JQUERY #}
+{#  MENÚ DESPLEGABLE --------------------------------------------------------------------------------------------- #}
+<script type="text/javascript" src="{{app.path}}/{{theme}}/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="{{app.path}}/{{theme}}/js/jquery.hoverIntent.minified.js"></script>
+<script type="text/javascript" src="{{app.path}}/{{theme}}/js/jquery.dcjqaccordion.2.7.min.js"></script> 
+<script type="text/javascript" src="{{app.path}}/{{theme}}/js/acordeon-menu-function.js"></script>
+{# -------------------------------------------------------------------------------------------------------------- #}
+
+<script type="text/javascript">
+jQuery(document).ready(function($){
+
+        $("a[rel='pop-up']").click(function () {
+        var caracteristicas = "height="+(screen.availHeight - 40)+",width="+(screen.availWidth - 13)+",screenX=0,screenY=0,left=0,top=0,status=no,menubar=yes,scrollbars=yes,resizable=yes,toolbar=yes,location=yes";
+        nueva=window.open(this.href, 'Popup', caracteristicas);
+        return false;
+        });
+
+
+});
+</script> {# POP-UP #}
+<script type="text/javascript" src="{{app.path}}/{{theme}}/js/albatronic.js"></script>
+<script type="text/javascript" src="{{app.path}}/{{theme}}/js/jquery-ui-1.8.2.custom.min.js"></script> {# JQUERY 1.8.2 #}
+<script type="text/javascript" src="{{app.path}}/{{theme}}/js/pirobox_extended.js"></script> {# PIROBOX #}
+<script type="text/javascript" src="{{app.path}}/{{theme}}/js/pirobox_function.js"></script> {# PIROBOX #}
+<script type="text/javascript" src="http://use.edgefonts.net/open-sans.js"></script> {# TIPOGRAFIA #}

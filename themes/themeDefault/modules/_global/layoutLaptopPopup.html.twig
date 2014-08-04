@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es-ES" lang="es-ES">
+    <head>
+        {% include '_global/meta.twig' %}
+        {% include values.archivoCss %}
+            
+        <!-- Para que esté disponible el path de la app en todos los java scripts -->
+        <script type="text/javascript">
+            var appPath = "{{appPath}}";
+            var language = "{{language}}";
+        </script>  
+        
+        {% include values.archivoJs %}
+        <script type="text/javascript" src="{{app.path}}/{{theme}}/js/albatronic.js"></script>         
+    </head>
+
+    <body>
+                    
+        {% block contenido %}
+        {% endblock %}                    
+
+        {# PARA HACER DEBUGER EN ENTORNO DE DESARROLLO #}        
+        {% if values._debugMode %}
+            {% include '_global/debuger.html.twig' %}
+        {% endif %}
+    </body>
+</html>

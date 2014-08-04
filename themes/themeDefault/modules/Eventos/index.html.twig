@@ -1,0 +1,28 @@
+{% extends layout %}
+
+{% block contenido %}
+<div class="col_drcha">
+    {% include '_global/ruta.html.twig' %}
+    <h1>{{macro.idioma('eventos')}}</h1>
+
+    {% if values.eventos %}
+    <div id="col_izqda">
+        {% for key,evento in values.eventos %}    
+            {% if key is even %} {{ macro.evento (evento) }} {% endif %}
+        {% endfor %}
+    </div>
+
+    <div id="col_drcha">
+        {% for key,evento in values.eventos %}    
+            {% if key is odd %} {{ macro.evento (evento) }} {% endif %}
+        {% endfor %}
+    </div> 
+    {% else %}
+	<article class="mensajeEventos">
+	    <p>{{macro.idioma('loSentimos')}}</p>
+	    <p>{{macro.idioma('noHayEventosProximosDias')}}.<br />
+	    {{macro.idioma('loMantendremosInformado')}}.</p>
+	</article>    
+    {% endif %}
+</div>	
+{% endblock %}

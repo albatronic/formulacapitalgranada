@@ -1,0 +1,11 @@
+{# SI NO HAY VIDEO DE PORTADA, NO SE MUESTRA NADA #}
+{% if values.videoYoutube[0].urlVideo %}
+<div id="video">
+    {#<iframe width="404" height="230" src="http://www.youtube.com/embed/{{values.videoYoutube[0].urlVideo}}" frameborder="0" allowfullscreen></iframe>#}
+    <a href="{{values.videoYoutube[0].url.url}}" title="">
+	<img src="{{app.path}}/{{theme}}/{{values.videoYoutube[0].imagen}}" alt="{{values.videoYoutube[0].titulo}}" title="{{values.videoYoutube[0].titulo}}" />
+	<span><img src="{{app.path}}/{{theme}}/images/play.png" alt="{{values.videoYoutube[0].titulo}}" title="{{values.videoYoutube[0].titulo}}" /></span>
+    </a>
+    <h5><a href="{{values.videoYoutube[0].url.url}}" title="">{{values.videoYoutube[0].titulo}}</a></h5>
+</div>
+{% endif %}

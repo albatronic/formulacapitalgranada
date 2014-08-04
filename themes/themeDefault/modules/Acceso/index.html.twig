@@ -1,0 +1,14 @@
+{% extends layout %}
+
+{% block contenido %}
+    <div class="col_drcha">
+        {% include '/_global/ruta.html.twig' %}
+        <h1>Acceso identificado</h1>
+	<div class="contenedor_100">
+            <p class="descripcion">{{values.mensaje.acceso}}</p>
+            {% include '/Acceso/formularioAcceso.html.twig' %}
+            {#//include('acceso/maquetacion-mensajes.php'); /* ------------------- ESTOS SON LOS MENSAJES DE RESPUESTA DEL FORMULARIO ------------------- */#}
+	</div>    
+    </div>
+
+{% endblock %}

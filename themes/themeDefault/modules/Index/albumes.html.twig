@@ -1,0 +1,9 @@
+<div class="media_drcha">
+    {% if values.galeriaFotos|length%}
+        <span class="raya verde"></span>
+        <h1>{{macro.idioma('albumesFotograficos')}}</h1>
+        <h4><a href="{{app.path}}/galeria" title="{{macro.idioma('masAlbumes')}}">{{values.galeriaFotos[0].titulo}}</a></h4>
+        {% include '/Index/galeria.html.twig' %} 
+    {% endif %}
+    {% include '/Index/video.html.twig' %}  
+</div>		

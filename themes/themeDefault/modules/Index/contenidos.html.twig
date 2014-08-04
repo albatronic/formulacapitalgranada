@@ -1,0 +1,24 @@
+{# CONTENIDOS MAS VISITADOS#}
+
+{% if (values.eventos|length) < 3 %}
+    <div class="media_drcha">
+        <div id="contenidos">
+            <h1>{{macro.idioma('contenidosMasVisitados')}}</h1>
+            <ul class="left">
+                {% for key, contenido in values.contenidosVisitados %}
+                    {% if key is even %}
+                    <li>{{ macro.link(contenido.titulo|slice(0,50) ~ '...',none,contenido.url.url,contenido.url.targetBlank) }}</li>
+                    {% endif %}
+                {% endfor %}    
+            </ul>
+
+            <ul class="right">
+                {% for key, contenido in values.contenidosVisitados %}
+                    {% if key is odd %}
+                    <li>{{ macro.link(contenido.titulo|slice(0,50) ~ '...',none,contenido.url.url,contenido.url.targetBlank) }}</li>
+                    {% endif %}
+                {% endfor %}  
+            </ul>
+        </div>
+    </div>
+{% endif %}

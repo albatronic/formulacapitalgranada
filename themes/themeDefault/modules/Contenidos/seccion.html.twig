@@ -1,0 +1,27 @@
+{# Muestro la seccion, sin subsecciones ni contenidos #}
+
+{% extends layout %}
+
+{% block title parent() ~ " - Inicio" %}
+
+{% block contenido %}
+    <div class="col_drcha">
+        <div class="contenedorNoticia">  
+
+            {% if (values.seccion.MostrarTitulo.IDTipo and values.seccion.Titulo) %}
+                <h1>{{values.seccion.Titulo}}</h1>
+            {% endif %}
+
+            {% if (values.seccion.MostrarSubtitulo.IDTipo and values.seccion.Subtitulo) %}
+                <h2>{{values.seccion.Subtitulo}}</h2>
+            {% endif %}
+
+            {% if (values.seccion.MostrarIntroduccion.IDTipo and values.seccion.Introduccion) %}
+                {% autoescape false%}{{values.seccion.Introduccion}}{%endautoescape%}
+            {% endif %}
+
+        </div>
+
+        <a href="javascript:history.back()" title="{{macro.idioma('volverAtras')}}" class="boton left">{{macro.idioma('volverAtras')}}</a>         
+    </div> 
+{% endblock%}

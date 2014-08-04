@@ -1,0 +1,37 @@
+<div id="formulario">
+    {% if values.formContacta.accion == '' %}
+        <form name="formEnvio" id="formEnvio" action="" method="POST">
+            <input name="controller" value="Contacto" type="hidden" />
+            <input name="action" value="Index" type="hidden" />
+
+            <input type="text" name="campos[Nombre][valor]" id="nombre" 
+                   value="{% if values.formContacta.campos.Nombre.valor %}{{values.formContacta.campos.Nombre.valor}}{%else%}Nombre{%endif%}" 
+                   class="{% if values.formContacta.campos.Nombre.error %}celdaError {% else %}celda{% endif %}" 
+                   onFocus="if (this.value == 'Nombre') this.value='';" />
+            <input type="text" name="campos[Email][valor]" id="email" 
+                   value="{% if values.formContacta.campos.Email.valor %}{{values.formContacta.campos.Email.valor}}{%else%}Email{%endif%}" 
+                   class="{% if values.formContacta.campos.Email.error %}celdaError {% else %}celda{% endif %}" 
+                   onFocus="if (this.value == 'Email') this.value='';" />
+            <textarea name="campos[Mensaje][valor]" id="mensaje" 
+                      class="{% if values.formContacta.campos.Mensaje.error %}celdaError {% else %}celda{% endif %}" 
+                      rows="10" cols="" 
+                      onFocus="if (this.value == 'Mensaje') this.value='';">{%if values.formContacta.campos.Mensaje.valor%}{{values.formContacta.campos.Mensaje.valor}}{%else%}Mensaje{%endif%}</textarea>
+            
+            <div id="contenedorEnviar">
+                <div id="politicaPrivacidad" class="{% if values.formContacta.campos.leidoPolitica.error %}celdaError {% else %}checboxesCaja{% endif %}">
+                    <input name="campos[leidoPolitica][valor]" type="checkbox" id="leidoPolitica" {%if values.formContacta.campos.leidoPolitica.valor == 'on' %} CHECKED{% endif %} />
+                    <label for="leidoPolitica">{{macro.idioma('heLeidoYAceptoLa')}} <a href="{{app.path}}/politica-privacidad" title="{{macro.idioma('politicaPrivacidad')}}">{{macro.idioma('politicaPrivacidad')}}</a>.</label>
+                </div>
+
+                <a href="javascript:;" 
+                   title="{{macro.idioma('enviar')}}" 
+                   class="boton right"
+                   onclick="$('#formEnvio').submit();">{{macro.idioma('enviar')}}</a>
+            </div>
+        </form>
+    {% else %}
+        <div class="mensaje">
+            <div class="{%if values.formContacta.resultado%}exito mensaje_enviado{%else%}error{%endif%}">{{values.formContacta.mensaje}}</div>
+        </div>
+    {% endif %}
+</div>

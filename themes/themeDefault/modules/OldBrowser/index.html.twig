@@ -1,0 +1,21 @@
+{% extends layout %}
+
+{% block body %}
+
+    <div id="contenedor_global">
+	<div id="logotipo"><a href="{{app.path}}/{{theme}}" title=""><img src="{{app.path}}/{{theme}}/images/{{values.datos.logo}}" alt="{{values.datos.empresa}}" title="{{values.datos.empresa}}" /></a></div>
+	<div id="texto">
+            <p>{{macro.idioma('tuNavegadorNoEstaActualizado')}}Tu navegador no est&aacute; actualizado para visualizar esta p&aacute;gina.</p>
+            <p>{{macro.idioma('descargaLosQueTeProponemos')}}.</p>
+		
+            <div id="navegadores">
+                <a href="http://view.atdmt.com/action/mrtiex_FY12IE9StaPrdIE9WWpageforVistaWin7FNL_1?href=http://download.microsoft.com/download/6/7/6/67666836-7A97-48D9-82BD-6E76B2A9D659/IE9-WindowsVista-x86-esn.exe" title="{{macro.idioma('descargarUltimaVersionde')}} Internet Explorer" class="link_tooltip marker_left" target="_blank"><img src="{{app.path}}/{{theme}}/images/ie8.png" alt="{{macro.idioma('descargarUltimaVersionde')}} Internet Explorer" title="{{macro.idioma('descargarUltimaVersionde')}} Internet Explorer" /></a>
+                <a href="http://www.mozilla.org/es-ES/download/?product=firefox-13.0.1&os=osx&lang=es-ES" title="{{macro.idioma('descargarUltimaVersionde')}} Mozilla Firefox" class="link_tooltip marker_left" target="_blank"><img src="{{app.path}}/{{theme}}/images/firefox.png" alt="{{macro.idioma('descargarUltimaVersionde')}} Mozilla Firefox" title="{{macro.idioma('descargarUltimaVersionde')}} Mozilla Firefox" /></a>
+                <a href="http://www.google.es/chrome/eula.html?hl=es&platform=linux_ubuntu_i386" title="{{macro.idioma('descargarUltimaVersionde')}} Google Chrome" class="link_tooltip marker_left" target="_blank"><img src="{{app.path}}/{{theme}}/images/chrome.png" alt="{{macro.idioma('descargarUltimaVersionde')}} Google Chrome" title="{{macro.idioma('descargarUltimaVersionde')}} Google Chrome" /></a>
+                <a href="http://www.opera.com/download/get.pl?id=34835&thanks=true&sub=true" title="{{macro.idioma('descargarUltimaVersionde')}} &Oacute;pera" class="link_tooltip marker_left" target="_blank"><img src="{{app.path}}/{{theme}}/images/opera.png" alt="{{macro.idioma('descargarUltimaVersionde')}} &Oacute;pera" title="{{macro.idioma('descargarUltimaVersionde')}} &Oacute;pera" /></a>
+                <a href="http://www.apple.com/es/safari/download/" title="{{macro.idioma('descargarUltimaVersionde')}} Safari" class="link_tooltip marker_left" target="_blank"><img src="{{app.path}}/{{theme}}/images/safari.png" alt="{{macro.idioma('descargarUltimaVersionde')}} Safari" title="{{macro.idioma('descargarUltimaVersionde')}} Safari" /></a>
+            </div>
+	</div>
+    </div>
+
+{% endblock %}

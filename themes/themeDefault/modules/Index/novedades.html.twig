@@ -1,0 +1,14 @@
+{# NOVEDADES. MUESTRA EL SLIDER DE NOTICIAS #}
+
+<div class="media_izqda">
+    {% if values.carruselNoticias.rows|length > 0%}
+    <div id="noticias_top"></div>
+    <div id="noticias_inter">
+        <h1>{{macro.idioma('noticias')}}</h1>
+        {% include 'Index/carruselNoticias.html.twig' %}
+    </div>
+    <div id="noticias_bottom"></div>
+
+    <a href="{{app.path}}/noticias" title="{{macro.idioma('verMasNoticias')}}" class="boton right">{{macro.idioma('verMasNoticias')}}</a>
+    {% endif %}
+</div>

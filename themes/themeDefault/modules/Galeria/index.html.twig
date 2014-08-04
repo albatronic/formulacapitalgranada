@@ -1,0 +1,20 @@
+{% extends layout %}
+
+{% block contenido %}
+
+<div class="col_drcha">
+    {% include '_global/ruta.html.twig' %}
+    <h1>{{macro.idioma('galeriaDeImagenes')}}</h1>
+
+    <div id="mosaicoProyectos"> 
+        {% for fila in values.galeriaImagenes %}        
+            <div class="proyectosFila">
+                {% for key,album in fila %}
+                    {{ macro.galeria(album,key+1) }}
+                {% endfor %}
+            </div>
+        {% endfor %}            
+    </div> 
+</div>
+
+{% endblock %}

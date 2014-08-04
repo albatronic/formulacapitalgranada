@@ -1,0 +1,10 @@
+<div class="media_drcha">
+    {#<span class="raya verde"></span>
+    <h1>Noticias m&aacute;s le&iacute;das</h1>
+        {% for noticia in values.noticias %}
+            {{ macro.noticia(noticia) }}
+        {% endfor %}
+    <span class="filete"></span>
+    <a href="{{app.path}}/{{theme}}/noticias" title="ver m&aacute;s noticias" class="boton right">m&aacute;s noticias</a>#}
+    {% include 'Index/contenidos.html.twig' %}
+</div>	

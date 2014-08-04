@@ -1,0 +1,31 @@
+{#
+
+    MUESTRA CALENDARIO DE EVENTOS
+
+    DEPENDENCIAS:
+
+        css/calendario.css
+        js/albatronic.js
+        lib/calendario.php
+        
+#}
+<div id="contenedor_calendario">
+    <input name="mesActual" id="calendarioMesActual" value="{{values.calendario.mesNumero}}" type="hidden" />
+    <input name="anoActual" id="calendarioAnoActual" value="{{values.calendario.ano}}" type="hidden" />
+        
+    <div id="borde_sup_calendario">
+        
+        <img id="calendarioBotonAnterior" src="{{app.path}}/{{theme}}/images/flecha-izq-calendario.png" class="left puntero" alt="{{macro.idioma('mesAnterior')}}" title="{{macro.idioma('mesAnterior')}}" />
+	<span id="calendarioTextoMes" class="mes_year">{{values.calendario.mesTexto}} {{values.calendario.ano}}</span>
+        <img id="calendarioBotonSiguiente" src="{{app.path}}/{{theme}}/images/flecha-der-calendario.png" class="right puntero" alt="{{macro.idioma('mesSiguiente')}}" title="{{macro.idioma('mesSiguiente')}}" />
+
+    </div>
+    
+    <div id='calendarioTablaDias'>
+        {% autoescape false %}
+        {{values.calendario.calendario}}
+        {% endautoescape %}
+    </div>    
+    
+    <div id='borde_inf_calendario'>&nbsp;</div>
+</div>

@@ -1,0 +1,45 @@
+{% import '_global/macros.html.twig' as macro %}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es-ES" lang="es-ES">
+    <head>
+        {% include '_global/meta.twig' %}
+        {% include '_global/googleAnalytics.js.twig' %}      
+        {% include values.archivoCss %}
+    </head>
+
+    <body {% block bodyContacto %}{% endblock %}>
+        {% block header %}
+            {% include '_global/cabecera.html.twig' %}
+        {% endblock %}
+       
+        {% block contenido %}
+            {% include '_global/contenido.html.twig' %}
+        {% endblock %}
+
+        {% block footer %}
+            {% include '_global/pie.html.twig' %}
+        {% endblock%}
+        
+        {% include '_global/avisoCookies.html.twig' %} 
+        
+        {# Para que esté disponible el path de la app en todos los java scripts #}
+        <script type="text/javascript">
+            var appPath = "{{appPath}}";
+            var theme = "{{theme}}";
+            var language = "{{language}}";
+        </script>
+
+        {% include values.archivoJs %}
+
+        {# Obtener la resolución del dispositivo de navegación del cliente web #}
+        {% if not chequeadaResolucionVisitante %}
+        <script type="text/javascript">chequeaResolucionVisitante();</script>
+        {% endif %}
+    
+        {# PARA HACER DEBUGER EN ENTORNO DE DESARROLLO #}            
+        {% if values._debugMode %}
+            {% include '_global/debuger.html.twig' %}
+        {% endif %}
+    </body>
+</html>

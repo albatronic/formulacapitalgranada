@@ -1,0 +1,42 @@
+{# SERVICIO DESARROLLADO #}
+{% extends layout %}
+
+{% set servicio = values.servicio.servicio %}
+{% block contenido %}
+<div class="col_drcha">
+    {% include '_global/ruta.html.twig' %}
+    <div class="contenedorNoticia">  
+
+        {% if (servicio.ShowPublishedAt.IDTipo == '1') %}
+            <div class="fecha">{{servicio.PublishedAt | date('d/m/Y')}}</div>
+        {% endif %}
+
+        {% set nH = nH + 1 %}       
+        <h{{nH}}>{{servicio.Titulo}}</h{{nH}}>
+
+        {% if (servicio.Subtitulo) %}
+            {% set nH = nH + 1 %}            
+            <h{{nH}}>{{servicio.Subtitulo}}</h{{nH}}>
+        {% endif %}
+
+        {% if (servicio.ResumenBreve) %}
+            {% set nH = nH + 1 %}        
+            <h{{nH}}>{{servicio.ResumenBreve}}</h{{nH}}>
+        {% endif %}
+
+        {% if (servicio.Resumen) %}
+            {% autoescape false%}{{servicio.Resumen}}{% endautoescape%}
+        {% endif %}
+
+        {% for key,video in values.servicio.videos %}
+        {% if (video.urlVideo != "") %}
+            <div class="videos_youtube">
+                <iframe width="{{contenido.videoYoutube.ancho}}" height="{{contenido.videoYoutube.alto}}" src="http://www.youtube.com/embed/{{contenido.videos[0].urlVideo}}" frameborder="{{contenido.videoYoutube.anchoBorde}}"></iframe>
+            </div>
+        {% endif %}
+        {% endfor %}
+
+        <a href="javascript:history.back()" title="{{macro.idioma('volverAtras')}}" class="boton left">{{macro.idioma('volverAtras')}}</a>       
+    </div>
+</div>
+{% endblock %}

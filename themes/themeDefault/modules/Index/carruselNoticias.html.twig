@@ -1,0 +1,33 @@
+{# SLIDER DE NOTICIAS #}
+
+<div class="slider_noticias">
+    <div class="flechas">
+        <ul class="widget_custom_portfolio_entries_slides responsiveContentSlider">
+
+            {% for noticia in values.carruselNoticias.rows %}
+                <li><h2>
+		    {%if noticia.Titulo | length > 50%}
+			{{ macro.link(noticia.Titulo|slice(start,50),none,noticia.Href.url,noticia.Href.targetBlank) }} ...{%else%}
+			{{ macro.link(noticia.Titulo,none,noticia.Href.url,noticia.Href.targetBlank)}}
+		    {%endif%}
+		    </h2>
+                    {#{% if noticia.subtitulo %}
+                    <h3>{{ macro.link(noticia.subtitulo,none,noticia.url.url,noticia.url.targetBlank) }}</h3>
+                    {% endif %}#}
+                    {% set imagen = noticia.getPathNameImagenN(1)%}
+                    {% if imagen %}
+                    <img src="{{app.path}}/{{theme}}/{{imagen}}" alt="{{noticia.Titulo}}" title="{{noticia.Titulo}}" class="img_noticias" />
+                    {% endif %}
+                    
+		    {% if noticia.imagen %}
+                    <p>{{macro.recortaTexto(noticia.Resumen,100)}}</p>
+		    {% else %}
+                    <p>{{macro.recortaTexto(noticia.Resumen,150)}}</p>                  
+		    {% endif %}
+		    {{ macro.link('+',macro.idioma('seguirLeyendo'),noticia.Href.url,noticia.Href.targetBlank,none,'saber_mas') }}			    
+                </li>
+            {% endfor %}
+
+        </ul>
+    </div>
+</div>

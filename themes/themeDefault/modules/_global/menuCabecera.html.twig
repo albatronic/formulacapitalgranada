@@ -1,0 +1,50 @@
+
+<div  class="contenido_header row">
+    <div  class="span12">
+        <nav class="menu">
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <ul class="nav clearfix">
+                        {% for item in values.menuCabecera %}
+                        <li class="optMenu menuP{{loop.index+1}} ">
+                            <a class="optMenuA" href="{{app.path}}{{item.url.url}}" alt="{{item.titulo}}" title="{{item.titulo}}">{{item.titulo}}</a>
+                        </li>
+                        {% endfor %}
+                        <!--
+                        <li class="optMenu menuP2 ">
+                            <a class="optMenuA" href="/como-conseguir-dinero" alt="Qué hacemos" title="Qué hacemos">										
+                                Qué <span>hacemos</span>					</a>
+                        </li>
+                        <li class="optMenu menuP3 ">
+                            <a class="optMenuA" href="/formas-de-conseguir-dinero" alt="Por qué Fórmula Capital" title="Por qué Fórmula Capital">										
+                                Por qué Fórmula Capital					</a>
+                        </li>
+                        <li class="optMenu menuP4 ">
+                            <a class="optMenuA" data-toggle="dropdown" data-target="/soluciones-financieras-creditos-minicreditos" href="#" alt="Soluciones" title="Soluciones">
+                                Soluciones					</a>
+                            <div class="dropdown-menu"  role="menu" aria-labelledby="dLabel">
+                                <ul class="listado_menu2">
+                                    <li><a href="/soluciones-particulares" alt="Particulares" title="Particulares">Particulares</a></li>
+                                    <li><a href="/soluciones-empresas" alt="Empresas" title="Empresas">Empresas</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="optMenu menuP5 ">
+                            <a class="optMenuA" href="/informacion-y-consejos-financieros" alt="Magazine" title="Magazine">										
+                                Magazine					</a>
+                        </li>
+                        <li class="optMenu menuP6 ">
+                            <a class="optMenuA" href="/preguntas-frecuentes-sobre-financiacion-embargos-creditos" alt="FAQs" title="FAQs">										
+                                FAQs					</a>
+                        </li>
+                        <li class="optMenu menuP7 ">
+                            <a class="optMenuA" href="/contacto" alt="Contacto Formula Capital" title="Contacto Formula Capital">										
+                                Contacto					</a>
+                        </li>
+                        -->
+                    </ul> 
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>

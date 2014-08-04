@@ -1,0 +1,23 @@
+{% if values.sliderNoticias|length > 0%}
+<div class="slider_noticias">
+    <div class="flechas">
+        <ul class="widget_custom_portfolio_entries_slides responsiveContentSlider">
+
+            {% for noticia in values.sliderNoticias %}
+                <li><h2><a href="{{noticia.url}}" title="{{noticia.titulo}}">{{noticia.titulo}}</a></h2>
+                    {% if noticia.subtitulo!="" %}
+                    <h3><a href="{{noticia.url}}" title="#">{{noticia.subtitulo}}</a></h3>
+                    {% endif %}
+                    
+                    {% if noticia.imagen!="" %}
+                        <a href="{{noticia.url}}" title="#"><img src="{{noticia.imagen}}" alt="{{noticia.titulo}}" title="{{noticia.titulo}}" class="img_noticias" /></a>
+                    {% endif %}
+                    <p>{{noticia.descripcion}}</p>		
+                    <a href="{{noticia.url}}" title="Seguir leyendo" class="saber_mas">+</a>	
+                </li>
+            {% endfor %}
+
+        </ul>
+    </div>
+</div>
+{% endif %}

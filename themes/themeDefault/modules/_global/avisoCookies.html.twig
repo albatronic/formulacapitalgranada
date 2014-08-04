@@ -1,0 +1,6 @@
+{# Aviso de cookies #}
+{%if values.session_id == ""%}
+<div id="cookie-compliant" class="clearfix">
+   <p>{{macro.idioma('avisoCookies')}} <a href="{{app.path}}/aviso-cookies" rel="iframe-800-550" class="pirobox" title="{{macro.idioma('masInfo')}}" id="contenidosLegales">{{macro.idioma('masInfo')}}</a></p>
+</div>
+{%endif%}
