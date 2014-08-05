@@ -1,0 +1,23 @@
+{% extends layout %}
+
+{% block contenido %}
+<div id="contenido">
+    {% include '_global/ruta.html.twig' %}
+    <div id="contenidoModuloBlanco" class="clearfix">
+        <div class="contenido_interior row">    
+            {% include '_global/menuIzquierda.html.twig' %}
+            <div class="span9 columna_derecha columna_derecha_quienes_somos">
+                <h1 class="contenido_interior">{{values.contenido.Titulo}}</h1>
+
+                <div class="clearfix clearboth contenido_textos">
+                    <div class="textoComillas textoComillasPeq">
+                            <p>{{values.contenido.Subtitulo}}</p>
+                    </div>
+                    {% autoescape false%}{{values.contenido.Introduccion}}{% endautoescape %}
+                </div>
+            </div>    
+        </div> 
+    </div>
+    {% include '_global/franjas.html.twig' %}              
+</div>	
+{% endblock %}

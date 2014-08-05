@@ -1,6 +1,11 @@
 {# Aviso de cookies #}
 {%if values.session_id == ""%}
-<div id="cookie-compliant" class="clearfix">
-   <p>{{macro.idioma('avisoCookies')}} <a href="{{app.path}}/aviso-cookies" rel="iframe-800-550" class="pirobox" title="{{macro.idioma('masInfo')}}" id="contenidosLegales">{{macro.idioma('masInfo')}}</a></p>
+<div class="alert fade in" id="alerta-cookies">
+    <div class="clearfix clearboth" id="alerta-cookiesInner">
+        <h2>Uso de cookies</h2>
+        <p>Este sitio utiliza cookies de terceros para realizar labores analíticas. Al continuar navegando aceptas nuestra            <a title="Política de Cookies" href="{{app.path}}/politica-de-cookies?iframe=true&amp;width=800&amp;height=400" rel="prettyPhoto" class="aTerminos">Política de Cookies</a>.
+            <a id="closeCookies" href="javascript:void(0);">x</a>
+        </p>
+    </div>
 </div>
-{%endif%}
+{% endif %}

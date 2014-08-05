@@ -13,12 +13,9 @@ class AvisoCookiesController extends ControllerProject {
     protected $entity = "AvisoCookies";
 
     public function IndexAction() {
-        
-        $this->values['dominio'] = $this->varWeb['Pro']['globales']['dominio'];
-        $this->values['empresa'] = $this->varWeb['Pro']['globales']['empresa'];
+
+        $this->values['politica'] = new GconSecciones($this->request['IdEntity']);
         
         return parent::IndexAction();
     }
 }
-
-?>

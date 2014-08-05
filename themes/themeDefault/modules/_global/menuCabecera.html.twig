@@ -1,4 +1,4 @@
-
+{# MENU DE CABECERA #}
 <div  class="contenido_header row">
     <div  class="span12">
         <nav class="menu">
@@ -6,8 +6,19 @@
                 <div class="navbar-inner">
                     <ul class="nav clearfix">
                         {% for item in values.menuCabecera %}
-                        <li class="optMenu menuP{{loop.index+1}} ">
-                            <a class="optMenuA" href="{{app.path}}{{item.url.url}}" alt="{{item.titulo}}" title="{{item.titulo}}">{{item.titulo}}</a>
+                        <li class="optMenu menuP{{loop.index-1}}">
+                            {% if item.subsecciones|length < 1 %}
+                                <a class="optMenuA" href="{{app.path}}{{item.url.url}}" alt="{{item.seccion}}" title="{{item.seccion}}">{{item.seccion}}</a>
+                            {% else %}
+                                <a class="optMenuA" data-toggle="dropdown" data-target="{{app.path}}{{item.url.url}}" href="#" alt="{{item.seccion}}" title="{{item.seccion}}">{{item.seccion}}</a>
+                                <div class="dropdown-menu"  role="menu" aria-labelledby="dLabel">
+                                    <ul class="listado_menu2">
+                                        {% for subItem in item.subsecciones %}
+                                            <li><a href="{{app.path}}{{subItem.url.url}}" alt="{{subItem.seccion}}" title="{{subItem.seccion}}">{{subItem.seccion}}</a></li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>                                
+                            {% endif %}
                         </li>
                         {% endfor %}
                         <!--

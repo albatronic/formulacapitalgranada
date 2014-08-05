@@ -1,13 +1,9 @@
-<div id="ruta">
-    {% set nItems = values.ruta|length -1%}
-    {% for key,ruta in values.ruta %}
-        {% if key != nItems %}        
-            {{ macro.link(ruta.nombre,none,ruta.url.url,ruta.url.targetBlank) }}
-            &nbsp;&nbsp;>&nbsp;&nbsp;
-        {% else %}
-            {{ruta.nombre}}
-        {% endif %}
-    {% endfor %}
+<div class="breadcrumb">
+    <ul class="breadcrumb contenido_interior">
+        <li><span class="estasen">Estás en</span></li>
+        <li class="divider"><span class="miga_divider">&nbsp;</span></li>
+        <li><a class="inicio" href="/" title="Home"><span class="icon-home">&nbsp;</span></a></li>
+        <li class="divider"><span class="miga_divider">&nbsp;</span></li>
+        <li class="active"><span>{{values.ruta[1].nombre}}</span></li>
+    </ul>
 </div>
-
-<span class="raya azul"></span>

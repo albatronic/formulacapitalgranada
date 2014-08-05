@@ -1,0 +1,12 @@
+
+<div class="span3 columna_izquierda_quienes_somos">
+    <nav>
+        <ul>
+            {% for item in values.menuLateral %}
+            <li class="{% if loop.first == 1 %}prim{% endif %}{% if loop.last %}ult{% endif %}{% if item.url.url == values.urlAmigable%} menuLateralOn{% endif %}">
+                <a href="{{app.path}}{{item.url.url}}"><strong>{{item.etiquetaWeb}}</strong></a>
+            </li>
+            {% endfor %}
+        </ul>
+    </nav>
+</div>

@@ -18,15 +18,15 @@ class ControllerProject extends ControllerWeb {
 
         $this->values['firma'] = $this->getFirma();
         $this->values['ruta'] = $this->getRuta();
-        $this->values['calendario'] = Calendario::getCalendario();
+        //$this->values['calendario'] = Calendario::getCalendario();
         $this->values['ustedEstaEn'] = $this->getUstedEstaEn();
-        $this->values['menuCabecera'] = Menu::getMenuN(1,7);
-        $this->values['menuLateral'] = Menu::getMenuDesplegable(2);
+        $this->values['menuCabecera'] = Menu::getMenuDesplegable(1,7);
         $this->values['menuPie'] = Menu::getMenuN(3,8);
+        
+        $this->values['serviciosPie'] = Servicios::getServicios(0, true, 7);
         
         $this->values['datosContacto'] = $this->varWeb['Pro']['globales'];    
         $this->values['redes'] = RedesSociales::getRedes();
-
         
         // El objeto widgets para que esté disponible en todas las vistas
         $this->values['widgets'] = new Widgets();           

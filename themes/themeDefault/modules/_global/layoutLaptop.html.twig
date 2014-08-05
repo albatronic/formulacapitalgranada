@@ -9,9 +9,10 @@
     </head>
 
     <body {% block bodyContacto %}{% endblock %}>
-        {% block header %}
+        <header>
             {% include '_global/cabecera.html.twig' %}
-        {% endblock %}
+            {% block slider %}{% endblock %}
+        </header>
        
         {% block contenido %}
             {% include '_global/contenido.html.twig' %}
@@ -31,11 +32,6 @@
         </script>
 
         {% include values.archivoJs %}
-
-        {# Obtener la resolución del dispositivo de navegación del cliente web #}
-        {% if not chequeadaResolucionVisitante %}
-        <script type="text/javascript">chequeaResolucionVisitante();</script>
-        {% endif %}
     
         {# PARA HACER DEBUGER EN ENTORNO DE DESARROLLO #}            
         {% if values._debugMode %}
