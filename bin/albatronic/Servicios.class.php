@@ -43,11 +43,11 @@ class Servicios {
         }
 
         $filtro = "{$filtroFamilia} AND {$filtroPortada}";
-        
+
         if ($idExcluir > 0) {
             $filtro .= " AND (Id <> '$idExcluir')";
         }
-        
+
         $orden = ($mostrarEnPortada > 0) ? "MostrarPortadaOrden ASC" : "SortOrder ASC";
 
         $servicio = new ServServicios();
@@ -58,6 +58,51 @@ class Servicios {
 
         foreach ($rows as $row) {
             $servicios[] = self::getServicio($row['Id']);
+        }
+
+        return $servicios;
+    }
+
+    /**
+     * Devuelve un array con objetos Servicios
+     * 
+     * @param int $mostrarEnPortada Menor a 0 para todos, 0 para los NO portada, 1 para los SI portada. Por defecto 0
+     * @param int $nItems Número máximo de servicios a devolver. Por defecto todos.
+     * @param int $idExcluir El id del servicio a excluir en la lista de servicios devueltos
+     * @return array Array con objetos servicios
+     */
+    static function getServiciosAgrupados($mostrarEnPortada = 0, $nItems = 999999, $idExcluir = 0) {
+
+        if ($mostrarEnPortada < 0) {
+            $filtroPortada = "(1)";
+        } else {
+            $filtroPortada = ($mostrarEnPortada == 0) ? "(MostrarPortada='0')" : "(MostrarPortada='1')";
+        }
+
+        if ($nItems <= 0) {
+            $nItems = 999999;
+        }
+
+        $filtro = "{$filtroPortada}";
+
+        if ($idExcluir > 0) {
+            $filtro .= " AND (Id <> '$idExcluir')";
+        }
+
+        $orden = ($mostrarEnPortada > 0) ? "MostrarPortadaOrden ASC" : "SortOrder ASC";
+
+        $servicio = new ServServicios();
+        $rows = $servicio->cargaCondicion("IdFamilia,Id", $filtro, "IdFamilia ASC,{$orden} LIMIT {$nItems}");
+        unset($servicio);
+
+        $servicios = array();
+
+        foreach ($rows as $row) {
+            $servicio = self::getServicio($row['Id']);
+            if (!isset($servicios[$row['IdFamilia']]['familia'])) {
+                $servicios[$row['IdFamilia']]['familia'] = $servicio->getIdFamilia();
+            }
+            $servicios[$row['IdFamilia']]['servicios'][] = $servicio;
         }
 
         return $servicios;

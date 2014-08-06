@@ -123,7 +123,7 @@ $_SESSION['EntornoDesarrollo'] = $rq->isDevelopment();
 // EN ENTORNO DE PRODUCCION, OBTENER EL ORIGEN DE LA PETICION PARA
 // LA GESTION DE VISITAS
 // ----------------------------------------------------------------
-if ((!$_SESSION['EntornoDesarrollo']) and (!$_SESSION['origen'])) {
+if ((!$_SESSION['EntornoDesarrollo']) and ( !$_SESSION['origen'])) {
     //$_SESSION['origen'] = WebService::getOrigenVisitante($config['wsControlVisitas'] . $rq->getRemoteAddr());
 }
 // ----------------------------------------------------------------
@@ -138,16 +138,16 @@ if (!isset($_SESSION['idiomas']['actual'])) {
 // Si el navegador es antiguo muestro template especial
 $url = new CpanUrlAmigables();
 if ($rq->isOldBrowser()) {
-    $rows = $url->cargaCondicion("Id,Idioma,UrlFriendly,Controller,Action,Parameters,Entity,IdEntity", "UrlFriendly='/oldbrowser'");
+    $rows = $url->cargaCondicion("Id,Idioma,UrlFriendly,Controller,Action,Template,Parameters,Entity,IdEntity", "UrlFriendly='/oldbrowser'");
 } else {
     // Localizar la url amigable
-    $rows = $url->cargaCondicion("Id,Idioma,UrlFriendly,Controller,Action,Parameters,Entity,IdEntity", "Idioma='{$_SESSION['idiomas']['actual']}' and UrlFriendly='{$rq->getUrlFriendly($app['path'])}'"); 
-// Localizar la url amigable
+    $rows = $url->cargaCondicion("Id,Idioma,UrlFriendly,Controller,Action,Template,Parameters,Entity,IdEntity", "Idioma='{$_SESSION['idiomas']['actual']}' and UrlFriendly='{$rq->getUrlFriendly($app['path'])}'");
+    // Localizar la url amigable
     //$rows[0] = $url->matchUrl($rq->getUrlFriendly($app['path']));
 
     if (count($url->getErrores()) == 0) {
         if (!$rows[0]['Id']) {
-            $rows = $url->cargaCondicion("Id,Idioma,UrlFriendly,Controller,Action,Parameters,Entity,IdEntity", "UrlFriendly='/error404'");
+            $rows = $url->cargaCondicion("Id,Idioma,UrlFriendly,Controller,Action,Template,Parameters,Entity,IdEntity", "UrlFriendly='/error404'");
         }
     } else {
         print_r($url->getErrores());
@@ -157,7 +157,8 @@ if ($rq->isOldBrowser()) {
 
 unset($url);
 $row = $rows[0];
-if (!$row['Id']) die("No se ha localizado ninguna url amigable");
+if (!$row['Id'])
+    die("No se ha localizado ninguna url amigable");
 
 $_SESSION['idiomas']['actual'] = $row['Idioma'];
 $_SESSION['urlFriendly'] = $row['UrlFriendly'];
@@ -176,10 +177,6 @@ switch ($rq->getMethod()) {
         //$action = $request[1];
         $controller = ucfirst($row['Controller']);
         $action = $row['Action'];
-        $request['IdUrlAmigable'] = $row['Id'];
-        $request['Parameters'] = $row['Parameters'];
-        $request['Entity'] = $row['Entity'];
-        $request['IdEntity'] = $row['IdEntity'];
         break;
 
     case 'POST':
@@ -187,12 +184,14 @@ switch ($rq->getMethod()) {
         $request['METHOD'] = "POST";
         $controller = ucfirst($request['controller']);
         $action = $request['action'];
-        $request['IdUrlAmigable'] = $row['Id'];
-        $request['Parameters'] = $row['Parameters'];
-        $request['Entity'] = $row['Entity'];
-        $request['IdEntity'] = $row['IdEntity'];
         break;
 }
+
+$request['Template'] = $row['Template'];
+$request['IdUrlAmigable'] = $row['Id'];
+$request['Parameters'] = $row['Parameters'];
+$request['Entity'] = $row['Entity'];
+$request['IdEntity'] = $row['IdEntity'];
 
 // Si no se ha localizado el controlador, lo pongo a Error404
 if ($controller == '') {
@@ -239,6 +238,7 @@ if ($_SESSION['isMobile']) {
 $result['values']['urlAmigable'] = $_SESSION['urlFriendly'];
 $result['values']['controller'] = $controller;
 $result['values']['action'] = $metodo;
+$result['values']['template'] = $result['template'];
 $result['values']['archivoCss'] = ControllerWeb::getArchivoCss($result['template']);
 $result['values']['archivoJs'] = ControllerWeb::getArchivoJs($result['template']);
 
@@ -251,7 +251,7 @@ if ($config['debug_mode']) {
 }
 
 // Si el método no devuelve template o no exite, muestro un template de error.
-if (!file_exists($app['theme'] . '/modules/' . $result['template']) or ($result['template'] == '')) {
+if (!file_exists($app['theme'] . '/modules/' . $result['template']) or ( $result['template'] == '')) {
     $result['values']['error'] = 'No existe el template: "' . $result['template'] . '" devuelto por el método "' . $clase . ':' . $action . 'Action"';
     $result['template'] = ($_SESSION['isMobile']) ?
             '_global/error.mobile.html.twig' :

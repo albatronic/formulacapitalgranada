@@ -1,0 +1,82 @@
+{# CAJA DE SERVICIOS #}
+<div class="span3 columna_derecha columna_derecha_faqs">
+    <div class="lateral">
+        <h2><strong>Particulares</strong></h2>	
+
+        <ul>
+            {% for item in values.servicios %}
+            <li class="clearboth clearfix small">
+                <a class="clearfix" alt="{{item.Titulo}}" title="{{item.Titulo}}" href="{{app.path}}{{item.Href.url}}">
+                    <img src="/resources/default_theme/img/comunes/quenecesitas_module/credito_rapido_small.png" alt="Hipoteca Capital Privado formula capital" title="Hipoteca Capital Privado formula capital">
+                    <h3><strong>{{item.Titulo}}				<br />	
+                            <span>{{item.Subtitulo}}</span></strong></h3>
+                </a>
+            </li>
+            {% endfor %}
+            <!--
+            <li class="clearboth clearfix small">
+                <a class="clearfix" alt="Refinanciación de Deudas" title="Refinanciación de Deudas" href="/refinanciacion-de-deudas">
+                    <img src="/resources/default_theme/img/comunes/quenecesitas_module/refinacion_pie.png" alt="Refinanciación de Deudas formula capital" title="Refinanciación de Deudas formula capital">
+                    <h3><strong>Refinanciación                        <br />
+                            <span>de Deudas</span></strong></h3>
+                </a>
+            </li>
+            <li class="clearboth clearfix small">
+                <a class="clearfix" alt="Minicrédito hasta 500€ o 1.500€" title="Minicrédito hasta 500€ o 1.500€" href="/minicreditos">
+                    <img src="/resources/default_theme/img/comunes/quenecesitas_module/minicredito_pie.png" alt="Minicrédito hasta 500€ o 1.500€ formula capital" title="Minicrédito hasta 500€ o 1.500€ formula capital">
+                    <h3><strong>Minicrédito				<br />
+                            <span>hasta 500€ o 1.500€</span></strong></h3>
+                </a>
+            </li>
+
+            <li class="clearboth clearfix small">
+                <a class="clearfix" alt="Cancelación de Subastas <br/>y Embargos" title="Cancelación de Subastas <br/>y Embargos" href="/cancelacion-de-subastas">
+                    <img src="/resources/default_theme/img/comunes/quenecesitas_module/cancelacion_subastas_small.png" alt="Cancelación de Subastas <br/>y Embargos formula capital" title="Cancelación de Subastas <br/>y Embargos formula capital">
+                    <h3><strong>Cancelación                        <br />
+                            <span>de Subastas <br/>y Embargos</span></strong></h3>
+                </a>
+            </li>
+
+            <li class="clearboth clearfix small">
+                <a class="clearfix" alt="Dinero por mi vehículo" title="Cancelación de Subastas <br/>y Embargos" href="/empeno-de-vehiculos">
+                    <img src="/resources/default_theme/img/comunes/quenecesitas_module/empeno_vehiculos_small.png" alt="Dinero por mi vehículo formula capital" title="Dinero por mi vehículo formula capital">
+                    <h3><strong>Dinero por                        <br />
+                            <span>mi vehículo</span></strong></h3>
+                </a>
+            </li>
+
+
+
+            <li class="clearboth clearfix small">
+                <a class="clearfix" alt="Financiar mis ventas" title="Financiar mis ventas" href="/financiar-ventas">
+                    <img src="/resources/default_theme/img/comunes/quenecesitas_module/financiar_small.png" alt="Financiar mis ventas formula capital" title="Financiar mis ventas formula capital">
+                    <h3><strong>Financiar				<br />
+                            <span>mis ventas</span></strong></h3>
+                </a>
+            </li>
+            <li class="clearboth clearfix small">
+                <a class="clearfix" alt="Cancelación de Deudas y Embargos" title="Cancelación de Deudas y Embargos" href="/cancelacion-deudas-embargos">
+                    <img src="/resources/default_theme/img/comunes/quenecesitas_module/cancelacion_small.png" alt="Cancelación de Deudas y Embargos formula capital" title="Cancelación de Deudas y Embargos formula capital">
+                    <h3><strong>Cancelación				<br />
+                            <span>de Deudas y Embargos</span></strong></h3>
+                </a>
+            </li>
+            <li class="clearboth clearfix small">
+                <a class="clearfix" alt="Renting " title="Renting " href="/renting">	
+                    <img src="/resources/default_theme/img/comunes/quenecesitas_module/renting_small.png" alt="Renting  formula capital" title="Renting  formula capital">
+                    <h3><strong>Renting				<br />
+                            <span></span></strong></h3>
+                </a>
+            </li>
+            <li class="clearboth clearfix small">
+                <a class="clearfix" alt="Hipoteca Inversa" title="Hipoteca Inversa formula capital" href="/hipoteca-inversa">
+                    <img src="/resources/default_theme/img/comunes/quenecesitas_module/hipoteca_small.png" alt="Hipoteca Inversa formula capital" title="Hipoteca Inversa formula capital">
+                    <h3><strong>Hipoteca				<br/>
+                            <span>Inversa</span></strong></h3>
+                </a>
+            </li>
+            -->
+        </ul>
+    </div>
+</div>
+

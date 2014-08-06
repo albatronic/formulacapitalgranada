@@ -12,10 +12,17 @@ class ContenidoController extends ControllerProject {
     var $entity = "Contenido";
 
     public function IndexAction() {
-        
+
         $this->values['menuLateral'] = Menu::getMenuN(2);
         $this->values['contenido'] = new GconSecciones($this->request['IdEntity']);
+
+        $template = ($this->request['Template'] !== '') ? $this->entity . "/" . $this->request['Template'] :
+                $this->controller . "/index.html.twig";
         
-        return parent::IndexAction();
+        return array(
+            'template' => $template,
+            'values' => $this->values,
+        );
     }
+
 }

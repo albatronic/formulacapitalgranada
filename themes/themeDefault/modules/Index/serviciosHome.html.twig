@@ -1,0 +1,202 @@
+{# SERVICIOS HOME #}
+<div id="contenidoModuloBlanco">
+
+    <div class="row">
+        <div class="modulo_quenecesitas contenido_interior">
+            <ul class="nav nav-tabs" id="myTab">
+                {% for item in values.serviciosHome %}
+                <li class="{% if loop.index == 1 %}active{% endif %}">
+                    <a href="#{{item.familia.primaryKeyMD5}}" data-toggle="tab" alt="{{item.familia.Titulo}}" title="{{item.familia.Titulo}}"><strong>{{item.familia.Titulo}}</strong></a>
+                </li>
+                {% endfor %}
+
+            </ul>
+            <div class="tab-content">
+                {% for familia in values.serviciosHome %}
+                    <div class="tab-pane active" id="{{familia.familia.primaryKeyMD5}}">
+                        <div class="row bottom">
+                        {% for item in familia.servicios %}
+                            <div class="span3 div_under small" id="div_under0">
+                                <a alt="" title="" href="/minicreditos">
+                                    <img src="/resources/default_theme/img/comunes/quenecesitas_module/microcredito.png" alt="" title="" />
+
+                                    <h3 class="clearfix">
+                                        <span class="clearboth">
+                                            <img src="/resources/default_theme/img/comunes/quenecesitas_module/flecha_H3.png" alt="" title=""/>
+                                            <strong>{{item.Titulo}}</strong>
+                                        </span>
+                                        <strong class="clearfix clearboth">{{item.Subtitulo}}</strong><br>
+                                    </h3>
+
+                                    <div class="subtitulo clearboth">Fórmula Respiro</div>
+                                </a>
+                                <a id="over_div0" alt="" title="" href="/minicreditos" class="over_div">
+                                    <p>{{item.ResumenBreve}}</p>
+                                    <p class="enlace_bot enlaceNegro">Más sobre Minicréditos</p>
+                                </a>
+                            </div>                            
+                        {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+            
+</div>
+            
+            
+<!--
+                <div class="tab-pane active" id="particulares">
+                    <div class="row top">
+                        <div class="span6 topizq">
+                            <img src="/resources/default_theme/img/comunes/quenecesitas_module/creditos_rapidos.png" alt="" title="" />
+                            <a class="titulo" alt="Hipoteca Capital Privado" title="Hipoteca Capital Privado" href="/prestamos-hipoteca-capital-privado">
+                                <h2><strong>Hipoteca<span>Capital Privado</span></strong></h2>
+                                <h3 class="clearfix">Fórmula priBantia</h3>
+                            </a>
+                            <p>Renueva tu coche, haz reformas en casa, haz el viaje que siempre quisiste hacer... <br/> <strong>Sin preguntas y en muy poco tiempo</strong> dispondrás del <strong>dinero en tu cuenta. <br/></strong>Solo necesitas una <strong>vivienda libre de cargas.</strong></p>
+                            <div class="caja_links">
+                                <a class="enlaceNaranja enlace_bot" alt="Más sobre Hipoteca Capital Privado" title="Más sobre Hipoteca Capital Privado" href="/prestamos-hipoteca-capital-privado" class="clearfix clearboth">Más sobre Hipoteca Capital Privado</a>
+                            </div>
+                        </div>
+                        <div class="span6 topder">
+                            <img src="/resources/default_theme/img/comunes/quenecesitas_module/refinacion.png" alt="" title="" />
+                            <a class="titulo" alt="Refinanciación de Deudas" title="Refinanciación de Deudas" href="/refinanciacion-de-deudas">
+                                <h2><strong>Refinanciación<span>de Deudas</span></strong></h2>
+                                <h3 class="clearfix">Fórmula Reunificación</h3>
+                            </a>
+                            <p><strong>¿Te gustaría ahorrar hasta un 50%<br>en las cuotas?</strong><br>Reagrupa tus deudas con Fórmula Reunificación.</p>
+                            <div class="caja_links">
+                                <a class="enlaceNaranja enlace_bot enlace_top_der" alt="Más sobre Refinanciación de Deudas" title="Más sobre Refinanciación de Deudas" href="/refinanciacion-de-deudas" class="clearfix">Más sobre Refinanciación de Deudas</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span3 div_under small" id="div_under3" style="margin-left: 45px;">
+                        <a alt="" title="" href="/credito-personal-rapido">
+                            <img src="/resources/default_theme/img/comunes/quenecesitas_module/credito_express.png" alt="" title="" style="height: 86px;"/>
+
+                            <h3 class="clearfix">
+                                <span class="clearboth">
+                                    <img src="/resources/default_theme/img/comunes/quenecesitas_module/flecha_H3.png" alt="" title=""/>
+                                    <strong>Crédito Personal</strong>
+                                </span>
+                                <strong class="clearfix clearboth">hasta 3.000€</strong><br>
+                            </h3>
+
+                            <div class="subtitulo clearboth">Fórmula Express</div>
+                        </a>
+                        <a id="over_div3" alt="" title="" href="/credito-personal-rapido" class="over_div">
+                            <p>No esperes más para realizar tus proyectos. Consigue hasta 3.000€ para cumplir ese sueño que llevas tanto tiempo aplazando. </p>
+                            <p class="enlace_bot enlaceNegro">Más sobre crédito express</p>
+                        </a>
+                    </div>
+                    <div class="row bottom">
+                        <div class="span3 div_under small" id="div_under0">
+                            <a alt="" title="" href="/minicreditos">
+                                <img src="/resources/default_theme/img/comunes/quenecesitas_module/microcredito.png" alt="" title="" />
+
+                                <h3 class="clearfix">
+                                    <span class="clearboth">
+                                        <img src="/resources/default_theme/img/comunes/quenecesitas_module/flecha_H3.png" alt="" title=""/>
+                                        <strong>Minicrédito</strong>
+                                    </span>
+                                    <strong class="clearfix clearboth">hasta 500€ o 1.500€</strong><br>
+                                </h3>
+
+                                <div class="subtitulo clearboth">Fórmula Respiro</div>
+                            </a>
+                            <a id="over_div0" alt="" title="" href="/minicreditos" class="over_div">
+                                <p>Consigue <strong>dinero rápido y fácil. </strong><br/>Sin avales, sin esperas,<br/><strong>en menos de 24 horas </strong>en tu cuenta.</p>
+                                <p class="enlace_bot enlaceNegro">Más sobre Minicréditos</p>
+                            </a>
+                        </div>
+                        <div class="span3 div_under small" id="div_under1">
+                            <a alt="" title="" href="/cancelacion-de-deudas-y-embargos">
+                                <img src="/resources/default_theme/img/comunes/quenecesitas_module/cancelacion_subastas.png" alt="" title="" />
+
+                                <h3 class="clearfix">
+                                    <span class="clearboth">
+                                        <img src="/resources/default_theme/img/comunes/quenecesitas_module/flecha_H3.png" alt="" title=""/>
+                                        <strong>Cancelación</strong>
+                                    </span>
+                                    <strong class="clearfix clearboth">de Subastas <br/>y Embargos</strong>
+                                </h3>
+
+                                <div class="subtitulo clearboth">Fórmula Stop Embargos</div>
+                            </a>
+                            <a id="over_div1" alt="" title="" href="/cancelacion-de-deudas-y-embargos" class="over_div">
+                                <p><strong>¿Tienes prevista la subasta de tu casa? ¿Necesitas dinero de forma inmediata para paralizar o cancelarla?</strong> Te ayudamos a salir de esta situación con Fórmula Subastas.</p>
+                                <p class="enlace_bot enlaceNegro">Cancelar mi subasta</p>
+                            </a>
+                        </div>
+                        <div class="span3 div_under small" id="div_under2">
+                            <a alt="" title="" href="/empeno-de-vehiculos">
+                                <img src="/resources/default_theme/img/comunes/quenecesitas_module/empeno_vehiculos.png" alt="" title="" />
+
+
+                                <h3 class="clearfix">
+                                    <span class="clearboth">
+                                        <img src="/resources/default_theme/img/comunes/quenecesitas_module/flecha_H3.png" alt="" title=""/>
+                                        <strong>Dinero por</strong>
+                                    </span>
+                                    <strong class="clearfix clearboth">mi vehículo</strong><br>
+                                </h3>
+
+                                <div class="subtitulo clearboth">Fórmula Automóvil</div>
+                            </a>
+                            <a id="over_div2" class="over_div" alt="" title="" href="/empeno-de-vehiculos">
+                                <p>¿Has pensado en dejar en prenda tu automóvil pero necesitas seguir utilizándolo? <strong>Con Fórmula Automóvil conseguirás el dinero que necesitas sin renunciar a tu vehículo.</strong></p>
+                                <p class="enlace_bot enlaceNegro">Dejar en prenda mi vehículo</p>
+                            </a>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div class="tab-pane" id="empresas">
+                    <div class="row">
+                        <div class="span6emp izq-emp">
+                            <div style="height: 200px; "><img src="/resources/default_theme/img/comunes/quenecesitas_module/empresas_pagares.png" alt="" title="" style="width: 140px; margin-top:35px;"/></div>
+                            <img class="imgflecha" src="/resources/default_theme/img/comunes/quenecesitas_module/flecha.png" alt=""/>
+                            <a class="titulo" alt="Descuento de Pagarés" title="Descuento de Pagarés" href="/descuento-pagares">
+                                <h2><strong>Descuento de<br/><span>Pagarés</span></strong></h2>
+                                <h3 class="clerfix">Fórmula Factoring</h3>
+                            </a>
+                            <p>No dejes que el retraso en el pago de tus clientes te impida seguir creciendo.<br/><strong>Convierte tus ventas a crédito en ventas al contado con Fórmula Factoring.</strong></p>
+                            <div class="caja_links_emp">
+                                <a style="margin-left:22px; width: 220px;" class="enlaceNaranja enlace_bot" alt="Más sobre Descuento de Pagarés" title="Más sobre Descuento de Pagarés" href="/descuento-pagares" class="clearfix clearboth">Más sobre Descuento de Pagarés</a>
+                            </div>
+                        </div>
+
+
+                        <div class="span6emp der-emp">
+                            <div style="height: 200px;"><img src="/resources/default_theme/img/comunes/quenecesitas_module/empresa_renting1.png" alt="" title="" style="width: 140px; margin-top:35px;"/></div>
+                            <img class="imgflecha" src="/resources/default_theme/img/comunes/quenecesitas_module/flecha.png" alt=""/>
+                            <a class="titulo" alt="Renting" title="Renting" href="/renting">
+                                <h2><strong>Renting</strong></h2><br><br>
+                                <h3 class="clearfix">Fórmula Renting</h3>
+                            </a>
+                            <p>Elige para tu negocio el renting con las condiciones más ventajosas y <strong>hazlo más competitivo con el renting de Fórmula Capital.</strong></p>
+                            <div class="caja_links_emp">
+                                <a style="margin-left:22px; width: 220px;" class="enlaceNaranja enlace_bot enlace_top_der" alt="Más sobre Fórmula Renting" title="Más sobre Fórmula Renting" href="/renting" class="clearfix">Más sobre Fórmula Renting</a>
+                            </div>
+                        </div>
+
+
+                        <div class="span6emp der-emp">
+                            <div style="height: 200px;"><img src="/resources/default_theme/img/comunes/quenecesitas_module/empresa_financiar.png" alt="" title="" style="width: 110px; margin-top:35px;" /></div>
+                            <img class="imgflecha" src="/resources/default_theme/img/comunes/quenecesitas_module/flecha.png" alt=""/>
+                            <a class="titulo" alt="Financiar mis ventas" title="Financiar mis ventas" href="/financiar-ventas">
+                                <h2><strong>Financiar<br/><span>mis ventas<br/></span></strong></h2>
+                                <h3 class="clearfix">Fórmula Comercio</h3>
+                            </a>
+                            <p><strong>¿Quieres aumentar las ventas?</strong> Impulsa tu negocio <strong>ofreciendo a tus clientes la opción de aplazar los pagos de sus compras</strong> mediante nuestra solución Fórmula Comercio.</p>
+                            <div class="caja_links_emp">
+                                <a style="margin-left:22px; width: 220px;" class="enlaceNaranja enlace_bot enlace_top_der" alt="Más sobre Financiar Ventas" title="Más sobre Financiar Ventas" href="/financiar-ventas" class="clearfix">Más sobre Financiar Ventas</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+-->

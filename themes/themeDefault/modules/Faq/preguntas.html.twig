@@ -1,0 +1,37 @@
+{# PREGUNTAS Y RESPUESTAS DEL MÓDULO FAQ #}
+<div id="content" class="grid_8">
+    <div class="grid_8">
+        <dl class="faq_list">
+            {% for pregunta in values.faq.contenidos %}
+                <dt><span class="marker">{{macro.idioma('pregunta')}}?</span>{{macro.link(pregunta.Titulo,pregunta.Titulo,pregunta.Href.url,pregunta.Href.targetBlank)}}</dt>
+                <dd><span class="marker">{{macro.idioma('respuesta')}}.</span>
+                    <div>{% autoescape false%}{% if pregunta.Resumen%}{{pregunta.Resumen}}{%else%}{{pregunta.Desarrollo}}{%endif%}{% endautoescape %}</div>
+                </dd>
+            {% else %}
+                {{macro.idioma('noHayFaqs')}}
+            {% endfor %}		
+        </dl>
+    </div>
+
+    {% if values.faq.paginacion.totalPaginas > 0 %}
+    <div id="pagination-wrapper">    
+        <div id="pagination">
+            <form name="paginacion" id="formPaginacion" method="POST" action="">
+                <input name="controller" value="{{values.controller}}" type="hidden" />
+                <input name="action" id="action" value="index" type="hidden" />
+                <input name="pagina" id="pagina" value="" type="hidden" />
+                <input name="texto" id="texto" value="{{values.faq.texto}}" type="hidden" />
+
+                <span>{{values.TEXTS.pagina}} {{values.faq.paginacion.pagina}} {{values.TEXTS.de}} {{values.faq.paginacion.totalPaginas}}</span>            
+                {% if values.faq.paginacion.pagina > 1 %}
+                    <a href="#" onclick="$('#pagina').val('{{values.faq.paginacion.pagina-1}}');$('#formPaginacion').submit();" title="{{macro.idioma('anterior')}}" class="inactive">{{macro.idioma('anterior')}}</a>                    
+                {% endif %}
+                {% if values.faq.paginacion.pagina < values.faq.paginacion.totalPaginas %}
+                    <a href="#" onclick="$('#pagina').val('{{values.faq.paginacion.pagina+1}}');$('#formPaginacion').submit();" title="{{macro.idioma('siguiente')}}" class="inactive">{{macro.idioma('siguiente')}}</a>              
+                {% endif %}
+            </form>
+            <div class="line"></div>
+        </div>
+    </div>
+    {% endif %}
+</div>
