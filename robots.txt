@@ -1,2 +1,15 @@
+Sitemap: http://www.formulacapitalgranada.es/sitemap.xml.php
+
 User-agent: *
-Disallow: /
+# Desarrollo
+#Disallow: /
+
+# Produccion
+Disallow: /bin/
+Disallow: /config/
+Disallow: /cron/
+Disallow: /entities/
+Disallow: /lang/
+Disallow: /lib/
+Disallow: /log/
+Disallow: /tmp/

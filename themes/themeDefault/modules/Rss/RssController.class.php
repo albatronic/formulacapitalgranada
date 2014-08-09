@@ -12,10 +12,9 @@ class RssController extends ControllerProject {
 
     public function IndexAction() {
 
-
         $rows = array();
-        
-        $limit = ($this->request[2] > 0 ) ? "limit {$this->request[2]}": "";
+
+        $limit = ($this->request[2] > 0 ) ? "limit {$this->request[2]}" : "";
 
         switch ($this->request['1']) {
             case 'blog':
@@ -65,33 +64,35 @@ class RssController extends ControllerProject {
                 unset($contenido);
         }
 
-
-
-        $xml = "";
+        $items = "";
         foreach ($rows as $row) {
 
-            $xml .= "<item>"
+            $items .= "<item>"
+                    . "<guid isPermaLink='true'>{$_SESSION['appUrl']}{$row['UrlFriendly']}</guid>"
                     . "<title>{$row['Titulo']}</title>"
                     . "<link>{$_SESSION['appUrl']}{$row['UrlFriendly']}</link>"
-                    . "<description>{$row['Resumen']}</description>"
+                    . "<description><![CDATA[{$row['Resumen']}]]></description>"
                     . "<pubDate>" . date('r', strtotime($row['PublishedAt'])) . "</pubDate>"
                     . "</item>";
         }
 
         $xml = '<?xml version="1.0" encoding="UTF-8" ?>'
-                . "<rss version=\"2.0\">"
+                . "<rss version=\"2.0\" xmlns:atom=\"http://www.w3.org/2005/Atom\">"
                 . "<channel>"
                 . "<title>RSS {$_SESSION['varWeb']['Pro']['globales']['empresa']} - {$titulo}</title>"
                 . "<link>{$_SESSION['appUrl']}/rss</link>"
                 . "<description>RSS {$_SESSION['varWeb']['Pro']['globales']['empresa']}</description>"
-                . $xml
-                . "</chanel></rss>";
+                . "<language>es</language>"
+                . "<atom:link href=\"{$_SESSION['appUrl']}/rss\" rel=\"self\" type=\"application/rss+xml\" />"
+                . $items
+                . "</channel></rss>";
 
         $this->values['rss'] = $xml;
 
-        header('Content-type: text/xml; charset="UTF-8"', true);
-        //echo $xml;exit;
-        
+        header('Content-type: application/xml; charset="UTF-8"', true);
+        //echo $xml;
+        //exit;
+
         return array(
             'template' => $this->entity . "/index.xml.twig",
             'values' => $this->values,

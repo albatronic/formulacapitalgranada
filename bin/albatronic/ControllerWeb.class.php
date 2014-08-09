@@ -477,9 +477,9 @@ class ControllerWeb {
         unset($objetoPadre);
 
         foreach ($meta['pro'] as $key => $value) {
-            if (isset($meta['objetoActual'][$key])) {
+            if (trim($meta['objetoActual'][$key]) != '') {
                 $metaInformacion[$key] = $meta['objetoActual'][$key];
-            } elseif (isset($meta['objetoPadre'][$key])) {
+            } elseif (trim($meta['objetoPadre'][$key]) != '') {
                 $metaInformacion[$key] = $meta['objetoPadre'][$key];
             } else {
                 $metaInformacion[$key] = $value;
