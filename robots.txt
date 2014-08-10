@@ -1,5 +1,3 @@
-Sitemap: http://www.formulacapitalgranada.es/sitemap.xml.php
-
 User-agent: *
 # Desarrollo
 #Disallow: /
@@ -13,3 +11,8 @@ Disallow: /lang/
 Disallow: /lib/
 Disallow: /log/
 Disallow: /tmp/
+Sitemap: http://www.formulacapitalgranada.es/sitemap/index.xml
+Sitemap: http://www.formulacapitalgranada.es/sitemap/secciones.xml
+Sitemap: http://www.formulacapitalgranada.es/sitemap/contenidos.xml
+Sitemap: http://www.formulacapitalgranada.es/sitemap/noticias.xml
+Sitemap: http://www.formulacapitalgranada.es/sitemap/eventos.xml
