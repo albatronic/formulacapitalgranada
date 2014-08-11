@@ -25,9 +25,9 @@ class Mail {
     
     public function __construct($mailer = '') {
         
-        if (is_object($mailer))
+        if (is_object($mailer)) {
             $this->mailer = $mailer;
-        else {
+        } else {
             require_once 'bin/Swift-5.0.0/lib/swift_required.php';
 
             // Create the Transport

@@ -1,37 +1,71 @@
-<div id="formulario">
-    {% if values.formContacta.accion == '' %}
-        <form name="formEnvio" id="formEnvio" action="" method="POST">
-            <input name="controller" value="Contacto" type="hidden" />
-            <input name="action" value="Index" type="hidden" />
-
-            <input type="text" name="campos[Nombre][valor]" id="nombre" 
-                   value="{% if values.formContacta.campos.Nombre.valor %}{{values.formContacta.campos.Nombre.valor}}{%else%}Nombre{%endif%}" 
-                   class="{% if values.formContacta.campos.Nombre.error %}celdaError {% else %}celda{% endif %}" 
-                   onFocus="if (this.value == 'Nombre') this.value='';" />
-            <input type="text" name="campos[Email][valor]" id="email" 
-                   value="{% if values.formContacta.campos.Email.valor %}{{values.formContacta.campos.Email.valor}}{%else%}Email{%endif%}" 
-                   class="{% if values.formContacta.campos.Email.error %}celdaError {% else %}celda{% endif %}" 
-                   onFocus="if (this.value == 'Email') this.value='';" />
-            <textarea name="campos[Mensaje][valor]" id="mensaje" 
-                      class="{% if values.formContacta.campos.Mensaje.error %}celdaError {% else %}celda{% endif %}" 
-                      rows="10" cols="" 
-                      onFocus="if (this.value == 'Mensaje') this.value='';">{%if values.formContacta.campos.Mensaje.valor%}{{values.formContacta.campos.Mensaje.valor}}{%else%}Mensaje{%endif%}</textarea>
-            
-            <div id="contenedorEnviar">
-                <div id="politicaPrivacidad" class="{% if values.formContacta.campos.leidoPolitica.error %}celdaError {% else %}checboxesCaja{% endif %}">
-                    <input name="campos[leidoPolitica][valor]" type="checkbox" id="leidoPolitica" {%if values.formContacta.campos.leidoPolitica.valor == 'on' %} CHECKED{% endif %} />
-                    <label for="leidoPolitica">{{macro.idioma('heLeidoYAceptoLa')}} <a href="{{app.path}}/politica-privacidad" title="{{macro.idioma('politicaPrivacidad')}}">{{macro.idioma('politicaPrivacidad')}}</a>.</label>
+<div class="textoComillas">{% autoescape false%}{{values.contenido.Introduccion}}{%endautoescape%}</div>
+<div id="form_contacto">
+    <form action="" method="post" accept-charset="utf-8">			
+        <input type="hidden" class="input_referer" name="referer" value="" />
+        <input type="hidden" class="input_referer" name="controller" value="Contacto" />
+        <input type="hidden" class="input_referer" name="action" value="Index" />
+        <div class="row">
+            <div class="span5">
+                <div class="caja_input caja_input_izq">
+                    <label for="nombre" class="control-label required">Nombre</label>
+                    <input type="text" name="nombre" value="" id="nombre" placeholder="Introduce tu nombre" class="input-xlarge " required=""  />
+                </div>
+                <div class="caja_input">
+                    <label for="apellidos" class="control-label required">Apellidos</label>
+                    <input type="text" name="apellidos" value="" id="apellidos" placeholder="Introduce tus apellidos" class="input-xlarge " required=""  />
+                </div>
+                <div class="caja_input caja_input_izq">
+                    <label for="telefono" class="control-label required">Teléfono</label>
+                    <input type="text" name="telefono" value="" id="telefono" placeholder="Introduce tus teléfono" class="input-xlarge " required=""  />
                 </div>
 
-                <a href="javascript:;" 
-                   title="{{macro.idioma('enviar')}}" 
-                   class="boton right"
-                   onclick="$('#formEnvio').submit();">{{macro.idioma('enviar')}}</a>
+                <div class="caja_input">
+                    <label for="email" class="control-label required">Email</label>	
+                    <input type="email" name="email" value="" id="email" placeholder="Introduce tu email" class="input-xlarge " required=""  />						
+                </div>
+
+                <div class="caja_input caja_input_izq">
+                    <label for="domicilio" class="control-label required">Domicilio</label>
+                    <input type="text" name="domicilio" value="" id="domicilio" placeholder="Introduce tu domicilio" class="input-xlarge " required=""  />
+                </div>
+
+                <div class="caja_input caja_input_izq">
+                    <label for="ciudad" class="control-label required">Ciudad</label>
+                    <input type="text" name="ciudad" value="" id="ciudad" placeholder="Introduce tu ciudad" class="input-xlarge " required=""  />
+                </div>
+                <div class="caja_input caja_input_izq">
+                    <label for="provincia" class="control-label required">Provincia</label>
+                    <input type="text" name="provincia" value="" id="provincia" placeholder="Introduce tu provincia" class="input-xlarge " required=""  />
+                </div>
+
             </div>
-        </form>
-    {% else %}
-        <div class="mensaje">
-            <div class="{%if values.formContacta.resultado%}exito mensaje_enviado{%else%}error{%endif%}">{{values.formContacta.mensaje}}</div>
+            <div class="span4">
+                <div class="caja_input caja_input_izq">
+                    <label for="solucion" class="control-label required">¿En qué solución estás interesado?</label>
+                    <select name="solucion" id="solucion" name="solucion" class="input-xlarge"  required="">
+                        <option value="" selected="selected">Selecciona una opción</option>
+                        <option value="Hipoteca Capital Privado">Hipoteca Capital Privado</option>
+                        <option value="Minicrédito hasta 500€">Minicrédito hasta 500€</option>
+                        <option value="Financiar mis ventas">Financiar mis ventas</option>
+                        <option value="Hipoteca Inversa">Hipoteca Inversa</option>
+                        <option value="Cancelación de Deudas y Embargos">Cancelación de Deudas y Embargos</option>
+                        <option value="Renting">Renting</option>
+                    </select>					</div>
+
+                <div class="caja_input caja_input_izq">
+                    <label for="importe" class="control-label required">Importe a solicitar</label>
+                    <input type="text" name="importe" value="" id="importe" placeholder="Introduce el importe a solicitar" class="input-xlarge " required=""  />
+                </div>
+
+                <label for="observaciones" class="control-label required">Observaciones</label>
+                <textarea name="observaciones" cols="40" rows="10" id="observaciones" class="input-xlarge" placeholder="Introduce tus observaciones" required="" ></textarea>
+
+                <input type="checkbox" name="condiciones" value="si" id="condiciones" class="" title="Condiciones" required=""  />
+                <a class="terminos_contactar" href="/privacidad?iframe=true&width=600&height=400" rel="prettyPhoto" title="Acepto los términos y condiciones">Acepto los términos y condiciones</a>
+
+                <input type="submit" name="btnSubmit" value="Solicitar información ahora" class="btnSubmit btn btn-amarillo"  />
+            </div>
         </div>
-    {% endif %}
+
+    </form>	
 </div>

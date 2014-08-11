@@ -1,14 +1,18 @@
 {% extends layout %}
 
-{% block bodyContacto %}onload="initialize ()"{% endblock %}
-
 {% block contenido %}
-    <div class="col_drcha">
-        {% include '_global/ruta.html.twig' %}
-	<div class="media">
-            <h1>{{macro.idioma('contactaConNosotros')}}</h1>
-            {% include 'Contacto/formulario.html.twig' %}
-            {% include 'Contacto/situacion.html.twig' %}
-	</div>
-    </div>	
+<div id="contenido">
+    {% include '_global/ruta.html.twig' %}
+    <div id="contenidoModuloBlanco" class="clearfix">
+        <div class="contenido_interior row">    
+
+            <div class="span9 columna_izquierda_contacta">
+		<h1 class="contenido_interior"><strong>{{values.contenido.Titulo}}</strong></h1>						
+                {% include 'Contacto/formulario.html.twig' %}
+            </div> 
+            {% include '_global/cajaLocalizacion.html.twig' %}                
+        </div> 
+    </div>
+    {% include '_global/franjas.html.twig' %}              
+</div>	
 {% endblock %}

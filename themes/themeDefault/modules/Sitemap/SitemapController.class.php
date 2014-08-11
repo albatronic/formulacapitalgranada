@@ -21,14 +21,14 @@ class SitemapController extends ControllerProject {
 
         switch ($this->request['1']) {
             case 'index.xml':
-                $rows[]['UrlFriendly'] = "/blog";
-                $rows[]['UrlFriendly'] = "/noticias";
-                $rows[]['UrlFriendly'] = "/eventos";
-                $rows[]['UrlFriendly'] = "/wiki";
-                $rows[]['UrlFriendly'] = "/categorias";
-                $rows[]['UrlFriendly'] = "/productos";
-                $rows[]['UrlFriendly'] = "/contenidos";
-                $rows[]['UrlFriendly'] = "/secciones";
+                $rows[]['UrlFriendly'] = "/blog.xml";
+                $rows[]['UrlFriendly'] = "/noticias.xml";
+                $rows[]['UrlFriendly'] = "/eventos.xml";
+                $rows[]['UrlFriendly'] = "/wiki.xml";
+                $rows[]['UrlFriendly'] = "/categorias.xml";
+                $rows[]['UrlFriendly'] = "/productos.xml";
+                $rows[]['UrlFriendly'] = "/contenidos.xml";
+                $rows[]['UrlFriendly'] = "/secciones.xml";
                 $xml = Feeds::getSiteMapIndex($rows);
                 break;
 

@@ -14,6 +14,8 @@ class ContactoController extends ControllerProject {
 
     public function IndexAction() {
 
+        $this->values['contenido'] = new GconSecciones($this->request['IdEntity']);
+
         switch ($this->request['METHOD']) {
             case 'GET':
                 $this->formContacta = array(
@@ -27,31 +29,32 @@ class ContactoController extends ControllerProject {
                 break;
 
             case 'POST':
+
                 $this->formContacta = $this->request['campos'];
 
-                if ($this->Valida()) {
-                    if ((file_exists('docs/plantillaMailVisitante.htm')) and (file_exists('docs/plantillaMailWebMaster.htm'))) {
 
-                        $mailer = new Mail($this->varWeb['Pro']['mail']);
-                        $envioOk = $this->enviaVisitante($mailer,'docs/plantillaMailVisitante.htm');
+                if ((file_exists('docs/plantillaMailVisitante.htm')) && ( file_exists('docs/plantillaMailWebMaster.htm'))) {
 
-                        if ($envioOk)
-                            $envioOk = $this->enviaWebMaster($mailer,'docs/plantillaMailWebMaster.htm');
+                    $mailer = new Mail($this->varWeb['Pro']['mail']);
+                    $envioOk = $this->enviaVisitante($mailer, 'docs/plantillaMailVisitante.htm');
 
-                        $this->formContacta['accion'] = 'envio';
-                        $this->formContacta['resultado'] = $envioOk;
-                        $this->formContacta['mensaje'] = ($envioOk) ?
-                                $this->varWeb['Pro']['mail']['mensajeExito'] :
-                                $this->varWeb['Pro']['mail']['mensajeError'];
-
-                        unset($mailer);
-                        
-                    } else {
-                        $this->formContacta['accion'] = 'envio';
-                        $this->formContacta['resultado'] = false;
-                        $this->formContacta['mensaje'] = "No se han definido las plantillas.";
+                    if ($envioOk) {
+                        $envioOk = $this->enviaWebMaster($mailer, 'docs/plantillaMailWebMaster.htm');
                     }
+
+                    $this->formContacta['accion'] = 'envio';
+                    $this->formContacta['resultado'] = $envioOk;
+                    $this->formContacta['mensaje'] = ($envioOk) ?
+                            $this->varWeb['Pro']['mail']['mensajeExito'] :
+                            $this->varWeb['Pro']['mail']['mensajeError'];
+
+                    unset($mailer);
+                } else {
+                    $this->formContacta['accion'] = 'envio';
+                    $this->formContacta['resultado'] = false;
+                    $this->formContacta['mensaje'] = "No se han definido las plantillas.";
                 }
+
                 break;
         }
 
@@ -68,8 +71,8 @@ class ContactoController extends ControllerProject {
      * @param string $ficheroPlantilla El archivo que tiene la plantilla htm a enviar
      * @return boolean TRUE si se envío con éxito
      */
-    private function enviaVisitante($mailer,$ficheroPlantilla) {
-                       
+    private function enviaVisitante($mailer, $ficheroPlantilla) {
+
         $plantilla = file_get_contents($ficheroPlantilla);
         $plantilla = str_replace("#TITLE#", $this->varWeb['Pro']['meta']['title'], $plantilla);
         $plantilla = str_replace("#DOMINIO#", $this->varWeb['Pro']['globales']['dominio'], $plantilla);
@@ -80,7 +83,7 @@ class ContactoController extends ControllerProject {
         $plantilla = str_replace("#MAIL#", $this->varWeb['Pro']['globales']['from'], $plantilla);
 
         return $mailer->send(
-                $this->formContacta['campos']['Email']['valor'], $this->varWeb['Pro']['mail']['from'], $this->varWeb['Pro']['mail']['from_name'], 'Hemos recibido su mensaje', $plantilla, array()
+                        $this->request['email'], $this->varWeb['Pro']['mail']['from'], $this->varWeb['Pro']['mail']['from_name'], 'Hemos recibido su mensaje', $plantilla, array()
         );
     }
 
@@ -91,8 +94,8 @@ class ContactoController extends ControllerProject {
      * @param Mail $mailer objeto mailer
      * @param string $ficheroPlantilla El archivo que tiene la plantilla htm a enviar
      * @return boolean TRUE si se envío con éxito
-     */    
-    private function enviaWebMaster($mailer,$ficheroPlantilla) {
+     */
+    private function enviaWebMaster($mailer, $ficheroPlantilla) {
 
         $plantilla = file_get_contents($ficheroPlantilla);
         $plantilla = str_replace("#TITLE#", $this->varWeb['Pro']['meta']['title'], $plantilla);
@@ -100,16 +103,20 @@ class ContactoController extends ControllerProject {
         $plantilla = str_replace("#TEXTOLOPD#", $this->varWeb['Pro']['mail']['textoLOPD'], $plantilla);
         $plantilla = str_replace("#FECHA#", date('d-m-Y'), $plantilla);
         $plantilla = str_replace("#HORA#", date('H:m:i'), $plantilla);
-        $plantilla = str_replace("#VISITANTE#", $this->formContacta['campos']['Nombre']['valor'], $plantilla);
-        $plantilla = str_replace("#MAIL#", $this->formContacta['campos']['Email']['valor'], $plantilla);
-        $plantilla = str_replace("#TELEFONO#", $this->formContacta['campos']['Telefono']['valor'], $plantilla);
-        $plantilla = str_replace("#ASUNTO#", $this->formContacta['campos']['Asunto']['valor'], $plantilla);
-        $plantilla = str_replace("#MENSAJE#", $this->formContacta['campos']['Mensaje']['valor'], $plantilla);
-        
+        $plantilla = str_replace("#NOMBRE#", $this->request['nombre'], $plantilla);
+        $plantilla = str_replace("#APELLIDOS#", $this->request['apellidos'], $plantilla);
+        $plantilla = str_replace("#EMAIL#", $this->request['email'], $plantilla);
+        $plantilla = str_replace("#TELEFONO#", $this->request['telefono'], $plantilla);
+        $plantilla = str_replace("#DOMICILIO#", $this->request['domicilio'], $plantilla);
+        $plantilla = str_replace("#PROVINCIA#", $this->request['provincia'], $plantilla);
+        $plantilla = str_replace("#CIUDAD#", $this->request['ciudad'], $plantilla);
+        $plantilla = str_replace("#SOLUCION#", $this->request['solucion'], $plantilla);
+        $plantilla = str_replace("#IMPORTE#", $this->request['importe'], $plantilla);
+        $plantilla = str_replace("#OBSERVACIONES#", $this->request['observaciones'], $plantilla);
+
         return $mailer->send(
-                $this->varWeb['Pro']['mail']['from'], $this->formContacta['campos']['Email']['valor'], $this->formContacta['campos']['nombre']['valor'], 'Ha recibido un mensaje en la web', $plantilla, array()
+                        $this->varWeb['Pro']['mail']['from'], $this->request['email'], $this->request['nombre'], 'Ha recibido un mensaje en la web', $plantilla, array()
         );
-     
     }
 
     private function Valida() {
@@ -138,5 +145,3 @@ class ContactoController extends ControllerProject {
     }
 
 }
-
-?>
