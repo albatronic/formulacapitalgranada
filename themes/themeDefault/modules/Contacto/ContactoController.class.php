@@ -10,7 +10,6 @@
 class ContactoController extends ControllerProject {
 
     var $entity = "Contacto";
-    var $formContacta = array();
 
     public function IndexAction() {
 
@@ -18,20 +17,12 @@ class ContactoController extends ControllerProject {
 
         switch ($this->request['METHOD']) {
             case 'GET':
-                $this->formContacta = array(
-                    'campos' => array(
-                        'Nombre' => array('valor' => 'Nombre', 'error' => false),
-                        'Email' => array('valor' => 'Email', 'error' => false),
-                        'Asunto' => array('valor' => 'Asunto', 'error' => false),
-                        'Mensaje' => array('valor' => 'Mensaje', 'error' => false),
-                    ),
-                );
+                $this->values['accion'] = "";
                 break;
 
             case 'POST':
 
-                $this->formContacta = $this->request['campos'];
-
+                $this->values['accion'] = "envio";
 
                 if ((file_exists('docs/plantillaMailVisitante.htm')) && ( file_exists('docs/plantillaMailWebMaster.htm'))) {
 
@@ -42,23 +33,17 @@ class ContactoController extends ControllerProject {
                         $envioOk = $this->enviaWebMaster($mailer, 'docs/plantillaMailWebMaster.htm');
                     }
 
-                    $this->formContacta['accion'] = 'envio';
-                    $this->formContacta['resultado'] = $envioOk;
-                    $this->formContacta['mensaje'] = ($envioOk) ?
+                    $this->values['mensaje'] = ($envioOk) ?
                             $this->varWeb['Pro']['mail']['mensajeExito'] :
                             $this->varWeb['Pro']['mail']['mensajeError'];
 
                     unset($mailer);
                 } else {
-                    $this->formContacta['accion'] = 'envio';
-                    $this->formContacta['resultado'] = false;
-                    $this->formContacta['mensaje'] = "No se han definido las plantillas.";
+                    $this->values['mensaje'] = "No se han definido las plantillas.";
                 }
 
                 break;
         }
-
-        $this->values['formContacta'] = $this->formContacta;
 
         return parent::IndexAction();
     }
@@ -117,31 +102,6 @@ class ContactoController extends ControllerProject {
         return $mailer->send(
                         $this->varWeb['Pro']['mail']['from'], $this->request['email'], $this->request['nombre'], 'Ha recibido un mensaje en la web', $plantilla, array()
         );
-    }
-
-    private function Valida() {
-
-        $error = false;
-
-        if (!isset($this->formContacta['leidoPolitica']['valor']))
-            $this->formContacta['leidoPolitica']['valor'] = '';
-
-        foreach ($this->formContacta as $campo => $valor) {
-            $valor = trim(str_replace($campo, "", $valor['valor']));
-            $errorCampo = ($valor == '');
-            $this->formContacta['campos'][$campo]['valor'] = $valor;
-            $this->formContacta['campos'][$campo]['error'] = $errorCampo;
-            $error = ($error or $errorCampo);
-        }
-
-        // Comprobar la validez ortográfica de la dirección de correo
-        $mail = new Mail($this->varWeb['Pro']['mail']);
-        if (!$mail->compruebaEmail($this->formContacta['campos']['Email']['valor'])) {
-            $this->formContacta['campos']['Email']['error'] = 1;
-            $error = true;
-        }
-
-        return !$error;
     }
 
 }

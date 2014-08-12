@@ -1,4 +1,4 @@
-<div class="textoComillas">{% autoescape false%}{{values.contenido.Introduccion}}{%endautoescape%}</div>
+<div class="textoComillas">{% autoescape false%}{{values.contenido.Introduccion}}{% endautoescape %}</div>
 <div id="form_contacto">
     <form action="" method="post" accept-charset="utf-8">			
         <input type="hidden" class="input_referer" name="referer" value="" />
@@ -61,7 +61,7 @@
                 <textarea name="observaciones" cols="40" rows="10" id="observaciones" class="input-xlarge" placeholder="Introduce tus observaciones" required="" ></textarea>
 
                 <input type="checkbox" name="condiciones" value="si" id="condiciones" class="" title="Condiciones" required=""  />
-                <a class="terminos_contactar" href="/privacidad?iframe=true&width=600&height=400" rel="prettyPhoto" title="Acepto los términos y condiciones">Acepto los términos y condiciones</a>
+                <a class="terminos_contactar" href="{{app.path}}/politica-de-privacidad?iframe=true&width=700&height=400" rel="prettyPhoto" title="Acepto los términos y condiciones">Acepto los términos y condiciones</a>
 
                 <input type="submit" name="btnSubmit" value="Solicitar información ahora" class="btnSubmit btn btn-amarillo"  />
             </div>

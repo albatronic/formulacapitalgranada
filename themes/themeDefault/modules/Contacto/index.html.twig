@@ -3,16 +3,31 @@
 {% block contenido %}
 <div id="contenido">
     {% include '_global/ruta.html.twig' %}
-    <div id="contenidoModuloBlanco" class="clearfix">
-        <div class="contenido_interior row">    
 
-            <div class="span9 columna_izquierda_contacta">
-		<h1 class="contenido_interior"><strong>{{values.contenido.Titulo}}</strong></h1>						
-                {% include 'Contacto/formulario.html.twig' %}
-            </div> 
-            {% include '_global/cajaLocalizacion.html.twig' %}                
-        </div> 
-    </div>
+    {% if values.accion == 'envio' %}
+        <div id="contenidoModuloBlanco" class="clearfix">
+            <div class="contenido_interior row">    
+                <h1 class="contenido_interior"><strong>{{values.contenido.Titulo}}</strong></h1>
+                <div class="request clearfix clearboth">
+                    <div class="textoComillas clearfix clearboth">
+                        <img src="{{app.path}}{{theme}}/images/contacto/ok_request.gif"/>
+                        <div>{%autoescape false%}{{values.mensaje}}{% endautoescape %}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div id="contenidoModuloBlanco" class="clearfix">
+            <div class="contenido_interior row">             
+                <div class="span9 columna_izquierda_contacta">
+                    <h1 class="contenido_interior"><strong>{{values.contenido.Titulo}}</strong></h1>						
+                    {% include 'Contacto/formulario.html.twig' %}
+                </div> 
+                {% include '_global/cajaLocalizacion.html.twig' %}  
+            </div>
+        </div>
+    {% endif %}
+
     {% include '_global/franjas.html.twig' %}              
 </div>	
 {% endblock %}
