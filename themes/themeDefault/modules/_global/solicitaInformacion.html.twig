@@ -1,0 +1,60 @@
+{# empty Twig template #}
+<div class="span3 columna_derecha columna_derecha_soluciones">
+
+    <div class="lateral">
+        <h2><strong>Solicita información sin compromiso</strong></h2>
+        <form action="" method="post" accept-charset="utf-8" id="formid" novalidate="novalidate">		
+            <input type="hidden" class="input_referer" name="referer" value="">
+            <fieldset>
+                <label for="nombre_apellidos" class="control-label required" aria-required="true">Nombre y apellidos</label>
+                <input type="text" name="nombre_apellidos" value="" id="nombre_apellidos" placeholder="Introduce tu nombre y apellidos" class="input-block-level " required="" aria-required="true">
+                <label for="telefono" class="control-label required" aria-required="true">Teléfono</label>
+                <input type="text" name="telefono" value="" id="telefono" placeholder="Introduce tu teléfono" class="input-block-level " required="" aria-required="true">
+                <label for="email" class="control-label required" aria-required="true">Email</label>
+                <input type="text" name="email" value="" id="email" placeholder="Introduce tu email" class="input-block-level " required="" aria-required="true">
+                <label for="importe" class="control-label required" aria-required="true">Importe</label>
+                <input type="text" name="importe" value="" id="importe" placeholder="Introduce el importe a solicitar" class="input-block-level " required="" aria-required="true">
+                <label for="domicilio" class="control-label required" aria-required="true">Domicilio</label>
+                <input type="text" name="domicilio" value="" id="domicilio" placeholder="Introduce tu domicilio" class="input-block-level " required="" aria-required="true">
+                <label for="comentarios" class="control-label required" aria-required="true">Observaciones</label>
+                <textarea name="comentarios" cols="40" rows="3" id="comentarios" class="input-block-level" placeholder="Introduce tus comentarios, dudas y/o sugerencias" required="" aria-required="true"></textarea>        
+                <input type="checkbox" name="condiciones" value="si" id="condiciones" class="terminos_llamamos" title="Condiciones" required="" maxlength="20" aria-required="true">
+                <a class="terminos_llamamos" href="{{app.url}}/politica-de-privacidad?iframe=true&amp;width=600&amp;height=400" rel="prettyPhoto" title="Acepto los términos y condiciones">Acepto los términos y condiciones</a>
+                <input type="submit" name="btnSubmit" value="Solicitar información ahora" class="btn btn-amarillo clearboth clearfix">
+            </fieldset>
+        </form></div>
+    <div class="pastillaLlamanos">
+        <p>O si lo prefieres, llámanos</p>
+        <a class="link_telefono clearfix" href="tel: {{values.datosContacto.telefono1}}" alt="{{values.datosContacto.telefono1}}" title="{{values.datosContacto.telefono1}}" onclick="javascript:_gaq.push(['_trackPageview', '/outbound/telefono']);">
+            <strong>{{values.datosContacto.telefono1}}</strong>
+        </a>
+        <a rel="prettyPhoto" href="{{app.url}}/te-llamamos?iframe=true&amp;width=864&amp;height=490" class="btn btn-llamamos btn-mini" alt="Si lo prefieres te llamamos" title="">Quiero que me llamen</a>
+    </div>
+    <a rel="nueva_ventana" class="registro_estatal clearfix clearboth" href="{{app.url}}/{{theme}}/pdf/registro_estatal_de_empresas.pdf" alt="FORMULA CAPITAL es una entidad Privada de Financiación regulada conforme a los dispuestos en la Ley 2/2009 de 31 de marzo de 2009. Nº Registro 182/2011 de la Sección Segunda" title="FORMULA CAPITAL es una entidad Privada de Financiación regulada conforme a los dispuestos en la Ley 2/2009 de 31 de marzo de 2009. Nº Registro 182/2011 de la Sección Segunda">
+        <img src="{{app.url}}/{{theme}}/images/soluciones/registro_estatal.jpg" alt="FORMULA CAPITAL es una entidad Privada de Financiación regulada conforme a los dispuestos en la Ley 2/2009 de 31 de marzo de 2009. Nº Registro 182/2011 de la Sección Segunda" title="FORMULA CAPITAL es una entidad Privada de Financiación regulada conforme a los dispuestos en la Ley 2/2009 de 31 de marzo de 2009. Nº Registro 182/2011 de la Sección Segunda">
+    </a>
+    <ul class="enlacesPDF">
+        <li><a rel="nueva_ventana" class="clearfix" href="{{app.url}}/{{theme}}/pdf/info_cliente_FP.pdf" alt="Folleto informativo para el cliente" title="Folleto informativo para el cliente">Folleto informativo para el cliente</a></li>
+        <li><a rel="nueva_ventana" class="clearfix" href="{{app.url}}/{{theme}}/pdf/condiciones_legales_de_contratacion.pdf" alt="Condiciones legales de contratación" title="Condiciones legales de contratación">Condiciones legales de contratación</a></li>
+    </ul>
+</div>
+<script>
+    $( document ).ready(function() {
+
+        /*console.log( "ready!" );*/
+        $("#formid").validate({
+            rules: {
+                //comentarios: { required:true, minlength: 20, maxlength: 20},
+                telefono: { required:true, minlength: 9, maxlength: 9, digits: true},
+                email: { required:true, email: true},
+                importe: {required:true, digits: true}
+            },
+            messages: {
+                //comentarios : "Debe introducir 20 dígitos.",
+                telefono: "Debe introducir 9 dígitos.",
+                email : "Debe introducir un email válido.",
+                importe: "Debe introducir dígitos."
+            }
+        });
+    });
+</script>

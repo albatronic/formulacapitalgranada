@@ -3,40 +3,29 @@
 
 {% set servicio = values.servicio.servicio %}
 {% block contenido %}
-<div class="col_drcha">
-    {% include '_global/ruta.html.twig' %}
-    <div class="contenedorNoticia">  
+    <div id="contenido">
+        {% include '_global/ruta.html.twig' %}
+        <div id="contenidoModuloBlanco" class="clearfix">
+            <div class="contenido_interior row"> 
+                <div class="span9 columna_izquierda_soluciones">
+                    <h1 class="contenido_interior">{{servicio.Titulo}}</h1>
 
-        {% if (servicio.ShowPublishedAt.IDTipo == '1') %}
-            <div class="fecha">{{servicio.PublishedAt | date('d/m/Y')}}</div>
-        {% endif %}
+                    {% if (servicio.Resumen) %}
+                        {% autoescape false %}{{servicio.Resumen}}{% endautoescape %}
+                    {% endif %}
 
-        {% set nH = nH + 1 %}       
-        <h{{nH}}>{{servicio.Titulo}}</h{{nH}}>
+                    {% for key,video in values.servicio.videos %}
+                        {% if (video.urlVideo != "") %}
+                            <div class="videos_youtube">
+                                <iframe width="{{contenido.videoYoutube.ancho}}" height="{{contenido.videoYoutube.alto}}" src="http://www.youtube.com/embed/{{contenido.videos[0].urlVideo}}" frameborder="{{contenido.videoYoutube.anchoBorde}}"></iframe>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
 
-        {% if (servicio.Subtitulo) %}
-            {% set nH = nH + 1 %}            
-            <h{{nH}}>{{servicio.Subtitulo}}</h{{nH}}>
-        {% endif %}
-
-        {% if (servicio.ResumenBreve) %}
-            {% set nH = nH + 1 %}        
-            <h{{nH}}>{{servicio.ResumenBreve}}</h{{nH}}>
-        {% endif %}
-
-        {% if (servicio.Resumen) %}
-            {% autoescape false%}{{servicio.Resumen}}{% endautoescape%}
-        {% endif %}
-
-        {% for key,video in values.servicio.videos %}
-        {% if (video.urlVideo != "") %}
-            <div class="videos_youtube">
-                <iframe width="{{contenido.videoYoutube.ancho}}" height="{{contenido.videoYoutube.alto}}" src="http://www.youtube.com/embed/{{contenido.videos[0].urlVideo}}" frameborder="{{contenido.videoYoutube.anchoBorde}}"></iframe>
+                </div>
+                {% include '_global/solicitaInformacion.html.twig' %}                     
             </div>
-        {% endif %}
-        {% endfor %}
-
-        <a href="javascript:history.back()" title="{{macro.idioma('volverAtras')}}" class="boton left">{{macro.idioma('volverAtras')}}</a>       
+        </div>
+        {% include '_global/franjas.html.twig' %}    
     </div>
-</div>
 {% endblock %}

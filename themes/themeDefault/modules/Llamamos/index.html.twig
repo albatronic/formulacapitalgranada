@@ -1,0 +1,54 @@
+{% extends '_global/LayoutLaptopPopup.html.twig' %}
+
+{% block body %}class="formulario_llamamos"{% endblock %}
+
+{% block contenido %}
+    {% if values.accion == 'envio' %}
+        <div id="contenidoModuloBlanco" class="clearfix">
+            <div class="contenido_interior row">    
+                <h1 class="contenido_interior"><strong>Quiero que me llamen</strong></h1>
+                <div class="request clearfix clearboth">
+                    <div class="textoComillas clearfix clearboth">
+                        <img src="{{app.url}}/{{theme}}/images/contacto/ok_request.gif"/>
+                        <div>{%autoescape false%}{{values.mensaje}}{% endautoescape %}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}    
+        <div class="llamamos_izquierda pull-left">
+            <ul>
+                <li>Cumplimenta debidamente el siguiente formulario.</li>
+                <li>Nuestro gestor comercial recibe tu petición.</li>
+                <li>En 24 horas* nos ponemos en contacto contigo.</li>
+            </ul>
+            <p>*24 horas laborables.</p>
+        </div>
+
+        <div class="llamamos_derecha pull-right">
+            <h1>Quiero que me llamen</h1>
+            <form action="" method="post" accept-charset="utf-8">			
+                <input type="hidden" class="input_referer" name="referer" value="">
+                <input type="hidden" class="input_referer" name="controller" value="Llamamos" />
+                <input type="hidden" class="input_referer" name="action" value="Index" />                
+                <fieldset>
+                    <label for="nombre_apellidos" class="control-label required">Nombre y apellidos</label>
+                    <input type="text" name="nombre_apellidos" value="" id="nombre_apellidos" placeholder="Introduce tu nombre y apellidos" class="input-block-level " required="">		    	
+                    <label for="telefono" class="control-label required">Teléfono</label>
+                    <input type="text" name="telefono" value="" id="telefono" placeholder="Introduce tu teléfono" class="input-block-level " required="">		   
+                    <p class="spacedBottom required">Deseo que me llamen</p>
+                    <input type="radio" name="horario" value="Por la mañana (de 9 a 14 h)" checked="checked" id="horario1" class="" title="Por la mañana (de 9 a 14 h)">
+                    <label for="horario1" class="control-label inline">Por la mañana (de 9 a 14 h)</label>
+                    <input type="radio" name="horario" value="Por la tarde (de 16 a 20 h)" id="horario2" class="" title="Por la mañana (de 9 a 14 h)">
+                    <label for="horario2" class="control-label inline">Por la tarde (de 16 a 20 h)</label>			
+                    <label for="comentarios" class="spacedTop control-label required">Observaciones</label>
+                    <textarea name="comentarios" cols="40" rows="3" id="comentarios" class="input-block-level" placeholder="Introduce tus comentarios, dudas y/o sugerencias" required=""></textarea>			
+                    <input type="checkbox" name="condiciones" value="si" id="condiciones" class="" title="Condiciones" required="">
+                    <a class="terminos_llamamos" href="{{app.path}}/politica-de-privacidad?iframe=true&amp;width=600&amp;height=400" rel="prettyPhoto" title="Acepto los términos y condiciones">Acepto los términos y condiciones</a>
+
+                    <input type="submit" name="btnSubmit" value="Enviar mis datos ahora" class="btn btn-amarillo clearboth clearfix">
+                </fieldset>
+            </form>
+        </div> 
+    {% endif %}
+{% endblock %}

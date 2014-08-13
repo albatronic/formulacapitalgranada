@@ -8,7 +8,7 @@
         {% include values.archivoCss %}
     </head>
 
-    <body class="terminos_legales">
+    <body {% block body %}class="terminos_legales"{% endblock %}>
       
         {% block contenido %}
         {% endblock %}

@@ -1,0 +1,17 @@
+{% extends '_global/LayoutLaptopPopup.html.twig' %}
+
+{% block body %}{% endblock %}
+
+{% block contenido %}
+    <div id="pagina">
+        <iframe 
+            width="800"
+            height="600" 
+            frameborder="0" 
+            scrolling="no" 
+            marginheight="0" 
+            marginwidth="0" 
+            src="https://maps.google.es/maps?f=q&amp;source=s_q&amp;hl=es&amp;geocode=&amp;q=Emperatriz+Eugenia,+26+18003+GRANADA&amp;aq=&amp;sll={{values.meta.geoPositionLatitude}},{{values.meta.geoPositionLongitude}}&amp;sspn=4.131153,7.064209&amp;t=m&amp;ie=UTF8&amp;hq=&amp;hnear=Emperatriz+Eugenia,+26,+18003+Granada&amp;ll={{values.meta.geoPositionLatitude}},{{values.meta.geoPositionLongitude}}&amp;spn=0.008083,0.013797&amp;z=17&amp;iwloc=A&amp;output=embed">
+        </iframe>
+    </div>    
+{% endblock %}
