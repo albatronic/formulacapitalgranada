@@ -185,7 +185,7 @@
     {% if texto|length > nCaracteres %}
         {% set puntos = " ..." %}
     {% endif %}
-    {{texto|slice(0,nCaracteres)}}{{puntos}}
+        {%autoescape false%}{{texto|slice(0,nCaracteres)}}{{puntos}}{% endautoescape%}
 {% endmacro %}
 
 {% macro moneda(importe, nDecimales, separadorMiles, separadorDecimales, simbolo)%}

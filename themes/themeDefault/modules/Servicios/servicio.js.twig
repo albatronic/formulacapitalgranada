@@ -5,3 +5,23 @@
 <script type="text/javascript" src="{{app.path}}/{{theme}}/js/prettyphoto/js/jquery.prettyPhoto.js"></script>
 <script type="text/javascript" src="{{app.path}}/{{theme}}/js/template/common.js"></script>
 <script type="text/javascript" src="{{app.path}}/{{theme}}/js/carousel/jquery.jcarousel.js"></script>
+<script>
+    $(function() {
+
+        /*console.log( "ready!" );*/
+        $("#formid").validate({
+            rules: {
+                //comentarios: { required:true, minlength: 20, maxlength: 20},
+                telefono: { required:true, minlength: 9, maxlength: 9, digits: true},
+                email: { required:true, email: true},
+                importe: {required:true, digits: true}
+            },
+            messages: {
+                //comentarios : "Debe introducir 20 dígitos.",
+                telefono: "Debe introducir 9 dígitos.",
+                email : "Debe introducir un email válido.",
+                importe: "Debe introducir dígitos."
+            }
+        });
+    });
+</script>

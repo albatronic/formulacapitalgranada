@@ -14,6 +14,7 @@ class FaqController extends ControllerProject {
 
     public function IndexAction() {
 
+        $this->values['contenido'] = new GconSecciones($this->request['IdEntity']);
         $this->values['faq'] = Contenidos::getContenidosSeccion($this->request['IdEntity'], 1, 9999);
         $this->values['servicios'] = Servicios::getServicios(3, true); // Servicios Particulares
         

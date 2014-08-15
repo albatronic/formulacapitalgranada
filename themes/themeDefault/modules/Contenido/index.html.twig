@@ -1,5 +1,9 @@
 {% extends layout %}
 
+{% block slider %}
+    {% include '_global/bannerCabecera.html.twig' with {'imagen': values.contenido.getPathNameImagenN(1)} %}
+{% endblock %}
+
 {% block contenido %}
 <div id="contenido">
     {% include '_global/ruta.html.twig' %}

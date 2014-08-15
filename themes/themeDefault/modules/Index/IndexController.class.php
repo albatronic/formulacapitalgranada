@@ -19,7 +19,10 @@ class IndexController extends ControllerProject {
         $this->values['slider'] = Sliders::getSliders(1);
         
         // SERVICIOS DE LA HOME     
-        $this->values['serviciosHome'] = Servicios::getServiciosAgrupados(true);        
+        $this->values['serviciosHome'] = Servicios::getServiciosAgrupados(true);  
+        
+        // POST DE LA HOME
+        $this->values['posts'] = Blog::getArticulos(0,true);
         
         /* SLIDER NOTICIAS */
         //$this->values['carruselNoticias'] = Noticias::getNoticias(true); 

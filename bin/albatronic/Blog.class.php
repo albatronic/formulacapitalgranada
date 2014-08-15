@@ -196,8 +196,9 @@ class Blog {
 
         Paginacion::paginar("GconContenidos", $filtro, $criterioOrden, $nPagina, $nItems);
 
-        foreach (Paginacion::getRows() as $row)
+        foreach (Paginacion::getRows() as $row) {
             $arrayArticulos[] = self::getArticulo($row['Id'], $nImagenDiseno);
+        }
 
         unset($seccion);
         unset($articulo);

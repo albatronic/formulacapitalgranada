@@ -24,13 +24,13 @@ class ContactoController extends ControllerProject {
 
                 $this->values['accion'] = "envio";
 
-                if ((file_exists('docs/plantillaMailVisitante.htm')) && ( file_exists('docs/plantillaMailWebMaster.htm'))) {
+                if (file_exists('docs/plantillaMailContacto.htm')) {
 
                     $mailer = new Mail($this->varWeb['Pro']['mail']);
-                    $envioOk = $this->enviaVisitante($mailer, 'docs/plantillaMailVisitante.htm');
+                    $envioOk = $this->enviaVisitante($mailer, 'docs/plantillaMailContacto.htm');
 
                     if ($envioOk) {
-                        $envioOk = $this->enviaWebMaster($mailer, 'docs/plantillaMailWebMaster.htm');
+                        $envioOk = $this->enviaWebMaster($mailer, 'docs/plantillaMailContacto.htm');
                     }
 
                     $this->values['mensaje'] = ($envioOk) ?
@@ -59,14 +59,9 @@ class ContactoController extends ControllerProject {
     private function enviaVisitante($mailer, $ficheroPlantilla) {
 
         $plantilla = file_get_contents($ficheroPlantilla);
-        $plantilla = str_replace("#TITLE#", $this->varWeb['Pro']['meta']['title'], $plantilla);
-        $plantilla = str_replace("#DOMINIO#", $this->varWeb['Pro']['globales']['dominio'], $plantilla);
+        $plantilla = str_replace("#MENSAJE#", $this->varWeb['Pro']['mail']['mensajeConfirmacion'], $plantilla);
         $plantilla = str_replace("#TEXTOLOPD#", $this->varWeb['Pro']['mail']['textoLOPD'], $plantilla);
-        $plantilla = str_replace("#FECHA#", date('d-m-Y'), $plantilla);
-        $plantilla = str_replace("#HORA#", date('H:m:i'), $plantilla);
-        $plantilla = str_replace("#EMPRESA#", $this->varWeb['Pro']['globales']['empresa'], $plantilla);
-        $plantilla = str_replace("#MAIL#", $this->varWeb['Pro']['globales']['from'], $plantilla);
-
+        
         return $mailer->send(
                         $this->request['email'], $this->varWeb['Pro']['mail']['from'], $this->varWeb['Pro']['mail']['from_name'], 'Hemos recibido su mensaje', $plantilla, array()
         );
@@ -83,21 +78,21 @@ class ContactoController extends ControllerProject {
     private function enviaWebMaster($mailer, $ficheroPlantilla) {
 
         $plantilla = file_get_contents($ficheroPlantilla);
-        $plantilla = str_replace("#TITLE#", $this->varWeb['Pro']['meta']['title'], $plantilla);
-        $plantilla = str_replace("#DOMINIO#", $this->varWeb['Pro']['globales']['dominio'], $plantilla);
+        
+        $mensaje  = "<p style='margin-bottom: 20px;'><strong>Han dejado el siguiente mensaje en el formulario de contacto:</strong></p>";
+        $mensaje .= "<p>Nombre: {$this->request['nombre']}</p>";
+        $mensaje .= "<p>Apellidos: {$this->request['apellidos']}</p>";
+        $mensaje .= "<p>Email: {$this->request['email']}</p>";
+        $mensaje .= "<p>Tel&eacute;fono: {$this->request['telefono']}</p>";
+        $mensaje .= "<p>Domicilio: {$this->request['domicilio']}</p>";
+        $mensaje .= "<p>Provincia: {$this->request['provincia']}</p>";
+        $mensaje .= "<p>Ciudad: {$this->request['ciudad']}</p>";
+        $mensaje .= "<p>Solucion: {$this->request['solucion']}</p>";
+        $mensaje .= "<p>Importe: {$this->request['importe']}</p>";
+        $mensaje .= "<p>Observaciones: {$this->request['observaciones']}</p>";
+        
         $plantilla = str_replace("#TEXTOLOPD#", $this->varWeb['Pro']['mail']['textoLOPD'], $plantilla);
-        $plantilla = str_replace("#FECHA#", date('d-m-Y'), $plantilla);
-        $plantilla = str_replace("#HORA#", date('H:m:i'), $plantilla);
-        $plantilla = str_replace("#NOMBRE#", $this->request['nombre'], $plantilla);
-        $plantilla = str_replace("#APELLIDOS#", $this->request['apellidos'], $plantilla);
-        $plantilla = str_replace("#EMAIL#", $this->request['email'], $plantilla);
-        $plantilla = str_replace("#TELEFONO#", $this->request['telefono'], $plantilla);
-        $plantilla = str_replace("#DOMICILIO#", $this->request['domicilio'], $plantilla);
-        $plantilla = str_replace("#PROVINCIA#", $this->request['provincia'], $plantilla);
-        $plantilla = str_replace("#CIUDAD#", $this->request['ciudad'], $plantilla);
-        $plantilla = str_replace("#SOLUCION#", $this->request['solucion'], $plantilla);
-        $plantilla = str_replace("#IMPORTE#", $this->request['importe'], $plantilla);
-        $plantilla = str_replace("#OBSERVACIONES#", $this->request['observaciones'], $plantilla);
+        $plantilla = str_replace("#MENSAJE#", $mensaje, $plantilla);        
 
         return $mailer->send(
                         $this->varWeb['Pro']['mail']['from'], $this->request['email'], $this->request['nombre'], 'Ha recibido un mensaje en la web', $plantilla, array()

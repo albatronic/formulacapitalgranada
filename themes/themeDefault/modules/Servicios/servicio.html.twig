@@ -2,9 +2,28 @@
 {% extends layout %}
 
 {% set servicio = values.servicio.servicio %}
+    
+{% block slider %}
+    {% include '_global/bannerCabecera.html.twig' with {'imagen': servicio.getPathNameImagenN(2)} %}
+{% endblock %}
+    
 {% block contenido %}
     <div id="contenido">
         {% include '_global/ruta.html.twig' %}
+
+    {% if values.accion == 'envio' %}
+        <div id="contenidoModuloBlanco" class="clearfix">
+            <div class="contenido_interior row">    
+                <h1 class="contenido_interior"><strong>{{values.contenido.Titulo}}</strong></h1>
+                <div class="request clearfix clearboth">
+                    <div class="textoComillas clearfix clearboth">
+                        <img src="{{app.path}}{{theme}}/images/contacto/ok_request.gif"/>
+                        <div>{%autoescape false%}{{values.mensaje}}{% endautoescape %}</div>
+                    </div>
+                </div>
+            </div>
+        </div>                
+    {% else %}
         <div id="contenidoModuloBlanco" class="clearfix">
             <div class="contenido_interior row"> 
                 <div class="span9 columna_izquierda_soluciones">
@@ -14,18 +33,12 @@
                         {% autoescape false %}{{servicio.Resumen}}{% endautoescape %}
                     {% endif %}
 
-                    {% for key,video in values.servicio.videos %}
-                        {% if (video.urlVideo != "") %}
-                            <div class="videos_youtube">
-                                <iframe width="{{contenido.videoYoutube.ancho}}" height="{{contenido.videoYoutube.alto}}" src="http://www.youtube.com/embed/{{contenido.videos[0].urlVideo}}" frameborder="{{contenido.videoYoutube.anchoBorde}}"></iframe>
-                            </div>
-                        {% endif %}
-                    {% endfor %}
-
                 </div>
                 {% include '_global/solicitaInformacion.html.twig' %}                     
             </div>
         </div>
-        {% include '_global/franjas.html.twig' %}    
-    </div>
+    {% endif %}
+            
+    {% include '_global/franjas.html.twig' %}    
+</div>
 {% endblock %}

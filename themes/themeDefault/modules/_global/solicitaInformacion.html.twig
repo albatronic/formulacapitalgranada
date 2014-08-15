@@ -5,6 +5,9 @@
         <h2><strong>Solicita información sin compromiso</strong></h2>
         <form action="" method="post" accept-charset="utf-8" id="formid" novalidate="novalidate">		
             <input type="hidden" class="input_referer" name="referer" value="">
+            <input type="hidden" class="input_referer" name="controller" value="{{values.controller}}">
+            <input type="hidden" class="input_referer" name="action" value="SocilitaInfo">
+            <input type="hidden" class="input_referer" name="servicio" value="{{servicio.Titulo}}">
             <fieldset>
                 <label for="nombre_apellidos" class="control-label required" aria-required="true">Nombre y apellidos</label>
                 <input type="text" name="nombre_apellidos" value="" id="nombre_apellidos" placeholder="Introduce tu nombre y apellidos" class="input-block-level " required="" aria-required="true">
@@ -22,7 +25,9 @@
                 <a class="terminos_llamamos" href="{{app.url}}/politica-de-privacidad?iframe=true&amp;width=600&amp;height=400" rel="prettyPhoto" title="Acepto los términos y condiciones">Acepto los términos y condiciones</a>
                 <input type="submit" name="btnSubmit" value="Solicitar información ahora" class="btn btn-amarillo clearboth clearfix">
             </fieldset>
-        </form></div>
+        </form>
+    </div>
+                
     <div class="pastillaLlamanos">
         <p>O si lo prefieres, llámanos</p>
         <a class="link_telefono clearfix" href="tel: {{values.datosContacto.telefono1}}" alt="{{values.datosContacto.telefono1}}" title="{{values.datosContacto.telefono1}}" onclick="javascript:_gaq.push(['_trackPageview', '/outbound/telefono']);">
@@ -30,6 +35,7 @@
         </a>
         <a rel="prettyPhoto" href="{{app.url}}/te-llamamos?iframe=true&amp;width=864&amp;height=490" class="btn btn-llamamos btn-mini" alt="Si lo prefieres te llamamos" title="">Quiero que me llamen</a>
     </div>
+    
     <a rel="nueva_ventana" class="registro_estatal clearfix clearboth" href="{{app.url}}/{{theme}}/pdf/registro_estatal_de_empresas.pdf" alt="FORMULA CAPITAL es una entidad Privada de Financiación regulada conforme a los dispuestos en la Ley 2/2009 de 31 de marzo de 2009. Nº Registro 182/2011 de la Sección Segunda" title="FORMULA CAPITAL es una entidad Privada de Financiación regulada conforme a los dispuestos en la Ley 2/2009 de 31 de marzo de 2009. Nº Registro 182/2011 de la Sección Segunda">
         <img src="{{app.url}}/{{theme}}/images/soluciones/registro_estatal.jpg" alt="FORMULA CAPITAL es una entidad Privada de Financiación regulada conforme a los dispuestos en la Ley 2/2009 de 31 de marzo de 2009. Nº Registro 182/2011 de la Sección Segunda" title="FORMULA CAPITAL es una entidad Privada de Financiación regulada conforme a los dispuestos en la Ley 2/2009 de 31 de marzo de 2009. Nº Registro 182/2011 de la Sección Segunda">
     </a>
@@ -38,23 +44,3 @@
         <li><a rel="nueva_ventana" class="clearfix" href="{{app.url}}/{{theme}}/pdf/condiciones_legales_de_contratacion.pdf" alt="Condiciones legales de contratación" title="Condiciones legales de contratación">Condiciones legales de contratación</a></li>
     </ul>
 </div>
-<script>
-    $( document ).ready(function() {
-
-        /*console.log( "ready!" );*/
-        $("#formid").validate({
-            rules: {
-                //comentarios: { required:true, minlength: 20, maxlength: 20},
-                telefono: { required:true, minlength: 9, maxlength: 9, digits: true},
-                email: { required:true, email: true},
-                importe: {required:true, digits: true}
-            },
-            messages: {
-                //comentarios : "Debe introducir 20 dígitos.",
-                telefono: "Debe introducir 9 dígitos.",
-                email : "Debe introducir un email válido.",
-                importe: "Debe introducir dígitos."
-            }
-        });
-    });
-</script>

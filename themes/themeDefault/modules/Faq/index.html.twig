@@ -1,16 +1,28 @@
 {% extends layout %}
 
+{% block slider %}
+    {% include '_global/bannerCabecera.html.twig' with {'imagen': values.contenido.getPathNameImagenN(1)} %}
+{% endblock %}
+
 {% block contenido %}
 <div id="contenido">
     {% include '_global/ruta.html.twig' %}
-    <div id="contenidoModuloBlanco" class="clearfix">
+    <div id="contenidoModuloBlanco" class="conBordeclearfix">
         <div class="contenido_interior row">    
 
-            <div class="span9 columna_izquierda_por_que">
-		<h1 class="contenido_interior"><strong>{{values.contenido.Titulo}}</strong></h1>						
-                <div class="clearfix clearboth contenido_textos contenido_porque">
-                    {% autoescape false%}{{values.contenido.Introduccion}}{% endautoescape %}
-                </div>
+            <div class="span9 columna_izquierda_faqs">
+		<h1 class="contenido_interior"><strong>{{values.contenido.Subtitulo}}</strong></h1>						
+                <ol class="listado_faqs clearfix clearboth">
+                    {% for item in values.faq.contenidos %}
+                        <li>
+                            <div class="numeracion"><strong>{{loop.index}}</strong></div>
+                            <h2><strong>{{item.contenido.Titulo}}</strong></h2>
+                            <div class="respuesta">
+                                {% autoescape false%}{{item.contenido.Desarrollo}}{% endautoescape %}
+                            </div>
+                        </li>
+                    {% endfor %}                  
+                </ol>
             </div> 
             {% include '_global/cajaServicios.html.twig' %}                
         </div> 
