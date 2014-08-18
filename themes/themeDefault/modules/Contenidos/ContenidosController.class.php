@@ -17,7 +17,18 @@ class ContenidosController extends ControllerProject {
         switch ($this->request['Entity']) {
 
             case 'GconContenidos':
-                $this->ContenidoAislado($this->request['IdEntity']);
+                $contenido = Contenidos::getContenido($this->request['IdEntity']);
+                if ($contenido->getBlogPublicar()->getIDTipo() == '1') {
+                    // Es un post del blog
+                    $this->values['contenido'] = Blog::getArticulo($this->request['IdEntity'],2);
+                    $this->values['ultimosPosts'] = Blog::getArticulos(0, false, 1, 3); // Los tres posts más recientes
+                    $this->values['servicios'] = Servicios::getServicios(3, true); // Servicios Particulares
+                    $this->template = $this->entity . "/post.html.twig";
+                } else {
+                    // Es un contenido normal
+                    $this->values['contenido'] = $contenido;
+                    $this->template = $this->entity . "/index.html.twig";
+                }
                 break;
 
             case 'GconSecciones':
@@ -25,7 +36,7 @@ class ContenidosController extends ControllerProject {
                 $seccion = new GconSecciones($this->request['IdEntity']);
                 $tieneSubsecciones = $seccion->getNumberOfSubsecciones();
 
-                if (($tieneSubsecciones > 0) and ($seccion->getMostrarSubsecciones()->getIDTipo() == '1')) {
+                if (($tieneSubsecciones > 0) and ( $seccion->getMostrarSubsecciones()->getIDTipo() == '1')) {
                     // La seccion tiene subsecciones y son mostrables:
                     // Saco un listado de subsecciones
                     $this->ListadoSubsecciones($this->request['IdEntity']);
@@ -57,10 +68,10 @@ class ContenidosController extends ControllerProject {
 
     public function Seccion($seccion) {
 
-        $this->values['seccion'] = $seccion; 
-        $this->template = $this->entity . "/seccion.html.twig";        
+        $this->values['seccion'] = $seccion;
+        $this->template = $this->entity . "/seccion.html.twig";
     }
-    
+
     /**
      * Muestra un contenido aislado
      */
@@ -95,7 +106,7 @@ class ContenidosController extends ControllerProject {
                 foreach (Paginacion::getRows() as $row) {
                     $this->values['listadoContenidos']['contenidos'][] = Contenidos::getContenido($row['Id']);
                 }
-                
+
                 $this->values['listadoContenidos']['paginacion'] = Paginacion::getPaginacion();
 
                 $this->template = $this->entity . '/listadoContenidos.html.twig';
@@ -109,9 +120,9 @@ class ContenidosController extends ControllerProject {
                 foreach (Paginacion::getRows() as $row) {
                     $this->values['listadoContenidos']['contenidos'][] = $this->getContenidoDesarrollado($row['Id'], 8);
                 }
-                
-                $this->values['listadoContenidos']['paginacion'] =  Paginacion::getPaginacion();
-                
+
+                $this->values['listadoContenidos']['paginacion'] = Paginacion::getPaginacion();
+
                 $this->template = $this->entity . '/index.html.twig';
                 break;
         }

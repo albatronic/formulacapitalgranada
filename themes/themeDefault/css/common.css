@@ -418,7 +418,7 @@ div.llamamos_izquierda {width:-webkit-calc(45% - 21px); width:-moz-calc(45% - 21
 div.llamamos_izquierda ul li {background: url("../images/comunes/tick_azul.png") no-repeat scroll 0 center transparent; padding-left: 60px; margin-top: 30px; list-style: none; margin-left: 8px;}
 div.llamamos_izquierda p {color: #4B4D58; font-family: Arial; font-size: 14px; margin-left: 68px; margin-top: 126px; max-width: 300px;}
 .formulario_llamamos label {color: #4b4d58;}
-.formulario_llamamos .inline {display: inline-block;  margin-right: 10px; margin-top: 5px; margin-bottom: 10px;}
+.formulario_llamamos .inline {display: inline-block;  margin-right: 5px; margin-top: 5px; margin-bottom: 10px;}
 .formulario_llamamos input[type="radio"], .formulario_llamamos input[type="checkbox"] {margin-top: -2px;}
 .terminos_llamamos {font-size: 11px; color: #4b4d58;}
 

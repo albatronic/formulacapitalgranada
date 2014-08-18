@@ -1,0 +1,77 @@
+{% extends layout %}
+
+{% block slider %}
+    {% include '_global/bannerCabecera.html.twig' with {'imagen': values.contenido.imagenSeccion} %}
+{% endblock %}
+
+{% block contenido %}
+    <div id="contenido">
+        {% include '_global/ruta.html.twig' %}
+        <div id="contenidoModuloBlanco" class="conBorde clearfix">
+            <div class="contenido_interior row">  
+                <h3 class="contenido_interior h3tipoh1"><strong>{{values.contenido.seccion}}</strong></h3>
+                <ul id="menu_magazine" class="clearfix">
+                    {% for item in values.serviciosPie%}
+                    <li class="menuT1Magazine "><a href="{{app.url}}{{item.Href.url}}" alt="{{item.Titulo}}" title="{{item.Titulo}}">{{item.Titulo}}</a></li>
+                    {% endfor %}
+                </ul>
+                <!-- COLUMNA IZQUIERDA -->
+                <div class="span9 columna_izquierda_blog">
+                    <div class="entrada_ampliada">
+                        <article>
+                            <h1 class="tituloPostAmpl"><strong>{{values.contenido.titulo}}</strong></h1>        
+                            <div class="texto_entrada">{% autoescape false %}{{values.contenido.desarrollo}}{% endautoescape %}</div>
+
+                            <img src="{{app.url}}/{{theme}}/{{values.contenido.imagen}}" alt="¿Cómo saldar una deuda fácilmente?" title="¿Cómo saldar una deuda fácilmente?">	
+                            <div class="clearfix" style="margin-bottom: 10px;"></div>
+                            {% if values.contenido.permitirComentarios == '1' %}
+                            <h3>Comentar este artículo ({{values.contenido.numeroPosts}})</h3>
+                            <div class="row">
+                                <form action="" method="post" accept-charset="utf-8">                
+                                    <input name="controller" value="Blog" type="hidden">
+                                    <input name="action" value="Comentario" type="hidden">
+                                    <input name="idContenido" value="{{values.contenido.idContenido}}" type="hidden">
+
+                                    <div class="span5">                    
+                                        <label for="nombre" class="control-label required">Nombre</label>
+                                        <input name="nombre" value="" id="nombre" title="introduce tu nombre" class="input-xlarge" placeholder="Introduce tu nombre" required="" type="text">                    
+                                        <label for="email" class="control-label required">Email</label>
+                                        <input name="email" value="" id="email" title="introduce tu email" class="input-xlarge" placeholder="Introduce tu email" required="" type="text">
+                                    </div>  
+                                    <div class="span4">     
+                                        <label for="comentarios" class="control-label required">Observaciones</label>
+                                        <textarea name="comentarios" cols="40" rows="10" id="comentarios" class="input-xlarge" placeholder="Introduce tus comentarios, dudas y/o sugerencias" title="introduce tu comentario" required=""></textarea>                    
+                                        <input name="condiciones" value="si" id="condiciones" class="" title="Condiciones" required="" type="checkbox">
+                                        <a href="{{app.path}}/politica-de-privacidad" rel="prettyPhoto" title="Acepto las condiciones legales">Acepto las condiciones legales</a>
+                                        <input name="btnSubmit" value="Enviar comentario" class="btn btn-amarillo" style="float:right" type="submit">
+                                    </div>     
+                                </form>                
+                            </div>
+                            {% endif %}
+                        </article>
+                        <a class="volver_listado" href="/informacion-y-consejos-financieros" alt="Volver" title="Volver">Volver</a>
+
+                    </div>
+                </div> 
+                <!-- END COLUMNA IZQUIERDA -->
+
+                <!-- COLUMNA DERECHA-->
+                <div class="span3 columna_derecha columna_derecha_blog">
+                    <div class="bloque_magazine">
+                        <h2>Últimas entradas</h2>
+                        <ul>
+                            {% for item in values.ultimosPosts.articulos%}
+                            <li class="clearfix">
+                                <h3><a class="optMenuA" href="{{app.url}}{{item.url.url}}" title="{{item.titulo}}"><strong>{{item.titulo}}</strong></a></h3>
+                                <p><a class="optMenuA" href="{{app.url}}{{item.subtitulo}}" title="{{item.titulo}}">{{item.subtitulo}}</a></p>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% include '_global/cajaServicios.html.twig' %}	
+                </div>
+            </div> 
+        </div>
+        {% include '_global/franjas.html.twig' %}              
+    </div>	
+{% endblock %}

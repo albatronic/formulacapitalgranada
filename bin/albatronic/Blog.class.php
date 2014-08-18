@@ -36,7 +36,7 @@ class Blog {
         }
 
         $filtro = "BlogPublicar='1' AND Publish='1' AND Deleted='0'";
-        if (($enPortada == 0) or ($enPortada == 1))
+        if (($enPortada == 0) or ( $enPortada == 1))
             $filtro .= " AND BlogMostrarEnPortada='{$enPortada}'";
 
         $criterioOrden = "SortOrder ASC";
@@ -90,10 +90,12 @@ class Blog {
         $mes = new Meses($fecha[1]);
         $articuloBlog = array(
             'seccion' => $articulo->getIdSeccion()->getTitulo(),
+            'imagenSeccion' => $articulo->getIdSeccion()->getPathNameImagenN(1),
             'fecha' => $articulo->getPublishedAt(),
             'dia' => $fecha[0],
             'mes' => $mes->getDescripcion(),
             'anio' => $fecha[2],
+            'idContenido' => $articulo->getPrimaryKeyValue(),
             'titulo' => $articulo->getTitulo(),
             'subtitulo' => $articulo->getSubtitulo(),
             'url' => $articulo->getHref(),
@@ -102,6 +104,8 @@ class Blog {
             'imagen' => $articulo->getPathNameImagenN($nImagenDiseno),
             'thumbnail' => $articulo->getPathNameThumbnailN($nImagenDiseno),
             'numeroPosts' => $numeroPosts,
+            'comentarios' => self::getComentarios("GconContenidos",$idArticuloBlog),
+            'permitirComentarios' => $articulo->getBlogPermitirComentarios()->getIDTipo(),
         );
 
         unset($articulo);
@@ -159,8 +163,9 @@ class Blog {
         $arraySecciones = array();
         $arrayArticulos = array();
 
-        if ($nPagina <= 0)
+        if ($nPagina <= 0) {
             $nPagina = 1;
+        }
         $var = CpanVariables::getVariables("Web", "Mod", "GconContenidos");
         if ($nItems <= 0) {
             $nItems = ($enPortada) ?
@@ -170,11 +175,13 @@ class Blog {
 
         $limite = ($nItems <= 0) ? "" : "LIMIT {$nItems}";
         $filtro = "BlogPublicar='1'";
-        if ($enPortada)
+        if ($enPortada) {
             $filtro .= " AND BlogMostrarEnPortada='{$enPortada}'";
+        }
 
-        if ($idSeccion > 0)
+        if ($idSeccion > 0) {
             $filtro .= " AND IdSeccion='{$idSeccion}'";
+        }
 
         $criterioOrden = "PublishedAt DESC";
 
@@ -188,6 +195,7 @@ class Blog {
             if (!isset($arraySecciones[$seccion->getId()])) {
                 $arraySecciones[$seccion->getId()] = array(
                     'titulo' => $seccion->getTitulo(),
+                    'imagen' => $seccion->getPathNameImagenN(1),
                     'url' => $seccion->getHref(),
                     'nArticulos' => $seccion->getNumberOfContenidos(),
                 );
@@ -680,5 +688,3 @@ class Blog {
     }
 
 }
-
-?>

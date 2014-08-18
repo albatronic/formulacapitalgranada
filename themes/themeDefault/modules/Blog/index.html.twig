@@ -1,0 +1,69 @@
+{# empty Twig template #}
+{% extends layout %}
+
+{% block slider %}
+    {% include '_global/bannerCabecera.html.twig' with {'imagen': values.seccion.getPathNameImagenN(1)} %}
+{% endblock %}
+
+{% block contenido %}
+    <div id="contenido">
+        {% include '_global/ruta.html.twig' %}
+        <div id="contenidoModuloBlanco" class="conBorde clearfix">
+            <div class="contenido_interior row">  
+                <h1 class="contenido_interior"><strong>{{values.seccion.Titulo}}</strong></h1>
+                <ul id="menu_magazine" class="clearfix">
+                    {% for item in values.serviciosPie%}
+                    <li class="menuT1Magazine "><a href="{{app.url}}{{item.Href.url}}" alt="{{item.Titulo}}" title="{{item.Titulo}}">{{item.Titulo}}</a></li>
+                    {% endfor %}
+                </ul>
+                <!-- COLUMNA IZQUIERDA -->
+                <div class="span9 columna_izquierda_blog">
+                    <ul class="listado_entradas clearfix clerboth">
+                    {% for item in values.blog.articulos %}
+                        <li id="entrada_elem{{loop.index}}" class="section entrada_elem{% if loop.index is odd %}I{% else %}D{% endif %}">
+                            <a href="{{path.url}}{{item.url.url}}">
+                                <img src="{{app.url}}/{{theme}}/{{item.imagen}}" alt="{{item.titulo}}" title="{{item.titulo}}">
+                            </a>								
+                            <h2>
+                                <a href="{{path.url}}{{item.url.url}}" title="{{item.titulo}}">
+                                    <strong>{{item.titulo}}</strong>
+                                </a>
+                            </h2>
+                            <p>{% autoescape false %}{{macro.recortaTexto(item.desarrollo,150)}}{% endautoescape %}</p>				                            
+                        </li>
+                    {% endfor %}
+                    </ul>
+                    <div class="pagination">
+                        <ul>
+                            {% if values.blog.paginacion.pagina > 1 %}
+                                <li><a href="{{app.url}}{{values.urlAmigable}}/{{values.blog.paginacion.pagina-1}}">Anterior</a></li>
+                            {% endif %}
+                            <li><a href="">Página {{values.blog.paginacion.pagina}}</a></li>
+                            {% if values.blog.paginacion.pagina < values.blog.paginacion.totalPaginas %}
+                                <li><a href="{{app.url}}{{values.urlAmigable}}/{{values.blog.paginacion.pagina+1}}">Siguiente</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div> 
+                <!-- END COLUMNA IZQUIERDA -->
+
+                <!-- COLUMNA DERECHA-->
+                <div class="span3 columna_derecha columna_derecha_blog">
+                    <div class="bloque_magazine">
+                        <h2>Últimas entradas</h2>
+                        <ul>
+                            {% for item in values.ultimosPosts.articulos%}
+                            <li class="clearfix">
+                                <h3><a class="optMenuA" href="{{app.url}}{{item.url.url}}" title="{{item.titulo}}"><strong>{{item.titulo}}</strong></a></h3>
+                                <p><a class="optMenuA" href="{{app.url}}{{item.subtitulo}}" title="{{item.titulo}}">{{item.subtitulo}}</a></p>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% include '_global/cajaServicios.html.twig' %}	
+                </div>
+            </div> 
+        </div>
+        {% include '_global/franjas.html.twig' %}              
+    </div>	
+{% endblock %}

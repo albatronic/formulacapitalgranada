@@ -17,9 +17,16 @@ class BlogController extends ControllerProject {
         switch ($this->request['METHOD']) {
             case 'GET':
                 // Puede ser la sección principal del blog o una categoría
+                $pagina = $this->request[1];
+                if ($pagina<0) {
+                    $pagina = 1;
+                }
                 $seccion = new GconSecciones($this->request['IdEntity']);
                 if ($seccion->getBelongsTo()->getId() == 0) {
-                    $this->values['blog'] = Blog::getArticulos(0, false, 1, 0, 1);
+                    $this->values['seccion'] = $seccion;
+                    $this->values['blog'] = Blog::getArticulos(0, false, $pagina, 0, 2);
+                    $this->values['ultimosPosts'] = Blog::getArticulos(0, false, 1, 3); // Los tres posts más recientes
+                    $this->values['servicios'] = Servicios::getServicios(3, true); // Servicios Particulares                    
                 } else {
                     $this->values['blog'] = Blog::getArticulos($this->request['IdEntity'], false, 1, 0, 1);
                     $this->values['blog']['categoria'] = $seccion->getTitulo();
@@ -56,4 +63,17 @@ class BlogController extends ControllerProject {
         return parent::IndexAction();
     }
 
+    public function ComentarioAction() {
+        
+        $comentario = new BlogComentarios();
+        $comentario->setEntidad("GconContenidos");
+        $comentario->setIdEntidad($this->request['idContenido']);
+        $comentario->setIpAddress($_SERVER['REMOTE_ADDR']);
+        $comentario->setNombre($this->request['nombre']);
+        $comentario->setEmail($this->request['email']);
+        $comentario->setComentario($this->request['comentarios']);
+        $comentario->setTiempoUnix(time());
+        $comentario->setPublish(1);
+        $comentario->create();
+    }
 }
