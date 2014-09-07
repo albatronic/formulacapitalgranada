@@ -92,37 +92,41 @@ class ControllerWeb {
         $this->values['LABELS'] = $textos->getTextos($this->entity);
         unset($textos);
         
-        // CONTROL DE VISITAS, SI ESTÁ ACTIVO POR LA VARIABLE DE ENTORNO
-        if ($_SESSION['varEnv']['Pro']['visitas']['activo']) {
 
-            // Borrar la tabla temporal de visitas, si procede según la
-            // frecuencia de horas de borrado
-            if (!$_SESSION['borradoTemporalVisitas']) {
-                $temp = new VisitVisitasTemporal();
-                $temp->borraTemporal();
-                unset($temp);
-            }
+        /**
+         * CONTROL DE VISITAS, SI ESTÁ ACTIVO POR LA VARIABLE DE ENTORNO
+         *
+         * OBSOLETO: SE GESTIONA DESDE GOOGLE ANALYTICS
 
-            // Control de visitas UNICAS a la url amigable
-            $temp = new VisitVisitasTemporal();
-            $temp->anotaVisitaUrlUnica($this->request['IdUrlAmigable']);
-            unset($temp);
+          if ($_SESSION['varEnv']['Pro']['visitas']['activo']) {
 
-            // Anotar en el registro de visitas
-            $visita = new VisitVisitas();
-            $visita->anotaVisita($this->request);
-            unset($visita);
-        }
+          // Borrar la tabla temporal de visitas, si procede según la
+          // frecuencia de horas de borrado
+          if (!$_SESSION['borradoTemporalVisitas']) {
+          $temp = new VisitVisitasTemporal();
+          $temp->borraTemporal();
+          unset($temp);
+          }
 
+          // Control de visitas UNICAS a la url amigable
+          $temp = new VisitVisitasTemporal();
+          $temp->anotaVisitaUrlUnica($this->request['IdUrlAmigable']);
+          unset($temp);
+
+          // Anotar en el registro de visitas
+          $visita = new VisitVisitas();
+          $visita->anotaVisita($this->request);
+          unset($visita);
+          }
+         * 
+         */
         // LECTURA DE METATAGS
         $this->values['meta'] = $this->getMetaInformacion();
 
-        /**
-         *
-         * PROCESOS PARA AUTOMATIZAR VIA CRON: BORRAR VISITAS NO HUMANAS, WS LOCALIZACION IPS, ETC
-         * VOLCADOS DE LOGS
-         * 
-         */
+        // INCREMENTA EL NÚMERO DE VISITAS DE LA URL AMIGABLE Y SU ENTIDAD ASOCIADA
+        $urlAmigable = new CpanUrlAmigables($this->request['IdUrlAmigable']);
+        $urlAmigable->IncrementaVisitas();
+        unset($urlAmigable);
     }
 
     /**
