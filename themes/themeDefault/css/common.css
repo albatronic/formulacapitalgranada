@@ -718,7 +718,7 @@ input[type="radio"], input[type="checkbox"] {margin-top: -3px !important;}
 .caja_localizacion a.localiza_google{color:#ff7500; text-decoration: underline;border-bottom:1px solid #fff; padding-bottom: 25px;}
 .caja_localizacion .localiza_bottom{border-top:1px solid #dadada;margin-left:25px;margin-right:25px;height: 0;}
 .caja_localizacion h3{background: url("../images/comunes/flecha_naranja_grande.png") no-repeat scroll 7px 27px transparent;display:block; padding-left:28px; margin-right: 22px; color:#6a6b73; font-size: 22px; margin-top: 0; padding-top: 25px; margin-bottom:20px;}
-.caja_localizacion .telefono{background: url("../images/comunes/icon_mobile_localizacion.gif") no-repeat scroll -1px center transparent; margin-bottom:10px;color: #000 !important; font-size: 34px; letter-spacing:-1.5px;line-height: 26px; padding-left: 24px; text-align: left;}
+.caja_localizacion .telefono{background: url("../images/comunes/icon_mobile_localizacion.gif") no-repeat scroll -1px center transparent; margin-bottom:10px;color: #000 !important; font-size: 30px; letter-spacing:-1.5px;line-height: 26px; padding-left: 24px; text-align: left;}
 .caja_localizacion .btn{ display:inline-block; margin-bottom:28px; font-size: 14px; padding: 4px 7px; }
 .caja_localizacion .fax{ background: url("../images/comunes/icon_fax_localizacion.gif") no-repeat scroll left center transparent; margin-bottom:5px; margin-left:28px; margin-right: 22px;line-height: 26px; color:#6a6b73; padding-left: 30px;}
 .caja_localizacion .skype{ background: url("../images/comunes/icon_skype_localizacion.gif") no-repeat scroll left center transparent;  margin-left:28px; margin-bottom:20px; margin-right: 22px;line-height: 26px; color:#6a6b73; padding-left: 30px;}
