@@ -39,7 +39,7 @@ config:
       user: 
       password: 
       timeout: 30
-      folder: formulacapital.local/themes/themeDefault
+      folder: www.formulacapitalgranada.es/themes/themeDefault
       
   # CONTROL DE ACCESO POR IP
   ip_control: true
