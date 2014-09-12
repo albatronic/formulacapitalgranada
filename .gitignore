@@ -1,4 +1,4 @@
-/log/
+/log/*.log
 /themes/themeDefault/cache/
 /nbproject/
 /config/config.yml
