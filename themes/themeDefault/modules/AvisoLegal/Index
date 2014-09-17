@@ -1,0 +1,9 @@
+{# AvisoLegal #}
+{% extends layout %}
+
+{% set widgets = values.widgets %}
+
+{% block content %}
+	<p>Template autogenerado para el controlador AvisoLegal</p>
+	<p>Edítalo en themes/themeDefault/modules/AvisoLegal/Index</p>
+{% endblock %}
