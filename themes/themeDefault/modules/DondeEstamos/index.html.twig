@@ -1,0 +1,48 @@
+{% extends layout %}
+
+{% block slider %}
+    {% include '_global/bannerCabecera.html.twig' with {'imagen': values.contenido.getPathNameImagenN(1)} %}
+{% endblock %}
+
+{% block contenido %}
+    <div id="contenido">
+        {% include '_global/ruta.html.twig' %}
+        <div id="contenidoModuloBlanco" class="clearfix">
+            <div class="contenido_interior row">    
+                {% include '_global/menuIzquierda.html.twig' %}
+                <div class="span9 columna_derecha columna_derecha_quienes_somos">
+                    <h1 class="contenido_interior">{{values.contenido.Titulo}}</h1>
+
+                    <div class="clearfix clearboth contenido_textos">
+                        <div class="textoComillas">
+                            <p>{{values.contenido.Subtitulo}}</p>
+                        </div>
+                        <div class="oficinaCentral row" itemtype="http://schema.org/PostalAddress" itemscope="" itemprop="address">
+                            <div class="span6">
+                                <h3><strong>Oficinas centrales</strong></h3>
+                                <address class="direccion_tienda" itemprop="streetAddress">
+                                    <p>{{values.datosContacto.direccion}}</p>
+                                    <p><strong>{{values.datosContacto.codigoPostal}} {{values.datosContacto.poblacion}} | {{values.datosContacto.provincia}}</strong></p>
+                                </address>
+                                <a class="enlaceNaranja" href="{{app.path}}/contacto">Formulario de contacto</a>
+                            </div>
+                            <div class="caja_localizacion span6">
+                                <h3><strong>Atención al cliente</strong></h3>
+                                <a class="link_tel telefono clearfix" href="tel: {{values.datosContacto.telefono1}}" alt="{{values.datosContacto.telefono1}}" title="{{values.datosContacto.telefono1}}">
+                                    <strong>{{values.datosContacto.telefono1}}</strong>
+                                </a>
+                                <p class="fax">{{values.datosContacto.telefono2}}</p>
+
+                                <a class="skype" title="" alt="" href="skype:formulacapitalgranada?call" rel="nueva_ventana me">formulacapitalgranada</a>
+                                <a rel="prettyPhoto" href="/te-llamamos?iframe=true&amp;width=864&amp;height=490" class="btn btn-llamamos" alt="Si lo prefieres te llamamos" title="">
+                                    <strong>Si lo prefieres te llamamos</strong>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+            </div> 
+        </div>
+        {% include '_global/franjas.html.twig' %}              
+    </div>	
+{% endblock %}

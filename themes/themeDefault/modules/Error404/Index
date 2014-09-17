@@ -1,0 +1,9 @@
+{# Error404 #}
+{% extends layout %}
+
+{% set widgets = values.widgets %}
+
+{% block content %}
+	<p>Template autogenerado para el controlador Error404</p>
+	<p>Edítalo en themes/themeDefault/modules/Error404/Index</p>
+{% endblock %}
