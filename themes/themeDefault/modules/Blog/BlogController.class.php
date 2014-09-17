@@ -63,17 +63,4 @@ class BlogController extends ControllerProject {
         return parent::IndexAction();
     }
 
-    public function ComentarioAction() {
-        
-        $comentario = new BlogComentarios();
-        $comentario->setEntidad("GconContenidos");
-        $comentario->setIdEntidad($this->request['idContenido']);
-        $comentario->setIpAddress($_SERVER['REMOTE_ADDR']);
-        $comentario->setNombre($this->request['nombre']);
-        $comentario->setEmail($this->request['email']);
-        $comentario->setComentario($this->request['comentarios']);
-        $comentario->setTiempoUnix(time());
-        $comentario->setPublish(1);
-        $comentario->create();
-    }
 }

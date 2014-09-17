@@ -1,0 +1,9 @@
+{# Blog #}
+{% extends layout %}
+
+{% set widgets = values.widgets %}
+
+{% block content %}
+	<p>Template autogenerado para el controlador Blog</p>
+	<p>Edítalo en themes/themeDefault/modules/Blog/Index</p>
+{% endblock %}

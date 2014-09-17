@@ -20,7 +20,7 @@ class ContenidosController extends ControllerProject {
                 $contenido = Contenidos::getContenido($this->request['IdEntity']);
                 if ($contenido->getBlogPublicar()->getIDTipo() == '1') {
                     // Es un post del blog
-                    $this->values['contenido'] = Blog::getArticulo($this->request['IdEntity'],2);
+                    $this->values['contenido'] = Blog::getArticulo($this->request['IdEntity'], 2);
                     $this->values['ultimosPosts'] = Blog::getArticulos(0, false, 1, 3); // Los tres posts más recientes
                     $this->values['servicios'] = Servicios::getServicios(3, true); // Servicios Particulares
                     $this->template = $this->entity . "/post.html.twig";
@@ -140,6 +140,22 @@ class ContenidosController extends ControllerProject {
         $this->template = $this->entity . '/listadoSubsecciones.html.twig';
     }
 
-}
+    public function ComentarioAction() {
 
-?>
+        $comentario = new BlogComentarios();
+        $comentario->setEntidad("GconContenidos");
+        $comentario->setIdEntidad($this->request['idContenido']);
+        $comentario->setIpAddress($_SERVER['REMOTE_ADDR']);
+        $comentario->setNombre($this->request['nombre']);
+        $comentario->setEmail($this->request['email']);
+        $comentario->setComentario($this->request['comentarios']);
+        $comentario->setTiempoUnix(time());
+        $comentario->setPublish(1);
+        $comentario->create();
+
+        $this->request['Entity'] = "GconContenidos";
+        $this->request['IdEntity'] = $this->request['idContenido'];
+        return $this->IndexAction();
+    }
+
+}

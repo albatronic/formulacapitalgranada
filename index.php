@@ -157,11 +157,10 @@ if ($rq->isOldBrowser()) {
 
 unset($url);
 $row = $rows[0];
-if (!$row['Id'])
-    die("No se ha localizado ninguna url amigable");
-
-$_SESSION['idiomas']['actual'] = $row['Idioma'];
-$_SESSION['urlFriendly'] = $row['UrlFriendly'];
+if ($row['Id'] != '') {
+    $_SESSION['idiomas']['actual'] = $row['Idioma'];
+    $_SESSION['urlFriendly'] = $row['UrlFriendly'];
+}
 
 //-----------------------------------------------------------------
 // INSTANCIAR UN OBJETO DE LA CLASE REQUEST PARA TENER DISPONIBLES
