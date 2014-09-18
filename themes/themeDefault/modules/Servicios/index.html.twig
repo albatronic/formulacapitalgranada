@@ -16,7 +16,9 @@
                 {% for fila in values.servicios %}
                     <div class="row listado_soluciones">
                         <div class="span6 izq">
+                            {% if fila.0.PathNameImagenN(1) %}
                             <img src="{{app.path}}{{theme}}/{{fila.0.PathNameImagenN(1)}}" alt="" title="">
+                            {% endif %}
                             <a class="titulo" alt="" title="" href="{{app.path}}{{fila.0.Href.url}}">
                                 <h2><strong>{{fila.0.Titulo}}</strong></h2>
                                 <h3 class="clearfix">{{fila.0.Subtitulo}}</h3>
@@ -28,7 +30,9 @@
                         </div>
                         {% if fila.1 %}
                         <div class="span6 der">
+                            {% if fila.1.PathNameImagenN(1) %}                            
                             <img src="{{app.path}}{{theme}}/{{fila.1.PathNameImagenN(1)}}" alt="" title="">
+                            {% endif %}                            
                             <a class="titulo" alt="" title="" href="{{app.path}}{{fila.1.Href.url}}">
                                 <h2><strong>{{fila.1.Titulo}}</strong></h2>
                                 <h3 class="clearfix">{{fila.1.Subtitulo}}</h3>
