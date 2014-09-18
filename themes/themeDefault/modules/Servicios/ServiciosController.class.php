@@ -21,11 +21,21 @@ class ServiciosController extends ControllerProject {
                 break;
 
             default:
-                // Minificha con todos los servicios
-                $this->values['servicios'] = Servicios::getServicios();
+                // Minificha con todos los servicios de una familia
+                $this->values['familiaServicio'] = Servicios::getFamilia($this->request['IdEntity']);
+                $servicios = Servicios::getServicios($this->request['IdEntity'], -1);
+                // hacer parejas de servcios para el template
+                $i = -1;
+                $array = array();
+                foreach ($servicios as $key => $servicio) {
+                    if (!($key % 2)) {
+                        $i++;
+                    }
+                    $array[$i][] = $servicio;
+                }
+                $this->values['servicios'] = $array;
                 $template = '/index.html.twig';
         }
-
 
         return array(
             'template' => $this->entity . $template,
@@ -34,9 +44,9 @@ class ServiciosController extends ControllerProject {
     }
 
     public function SocilitaInfoAction() {
-        
+
         $this->values['accion'] = "envio";
-        
+
         if (file_exists('docs/plantillaMailContacto.htm')) {
 
             $mailer = new Mail($this->varWeb['Pro']['mail']);
@@ -54,7 +64,7 @@ class ServiciosController extends ControllerProject {
         } else {
             $this->values['mensaje'] = "No se han definido las plantillas.";
         }
-        
+
         return array(
             'template' => $this->entity . '/servicio.html.twig',
             'values' => $this->values,
@@ -95,9 +105,9 @@ class ServiciosController extends ControllerProject {
         $mensaje = "<p style='margin-bottom: 20px;'><strong>Han dejado el siguiente mensaje en el formulario 'Solicita infromación sin compromiso':</strong></p>";
         $mensaje .= "<p>Para el servicio: {$this->request['servicio']}</p>";
         $mensaje .= "<p>Nombre y apellidos: {$this->request['nombre_apellidos']}</p>";
-        $mensaje .= "<p>Tel&eacute;fono: {$this->request['telefono']}</p>";        
+        $mensaje .= "<p>Tel&eacute;fono: {$this->request['telefono']}</p>";
         $mensaje .= "<p>Email: {$this->request['email']}</p>";
-        $mensaje .= "<p>Importe: {$this->request['importe']}</p>";        
+        $mensaje .= "<p>Importe: {$this->request['importe']}</p>";
         $mensaje .= "<p>Domicilio: {$this->request['domicilio']}</p>";
         $mensaje .= "<p>Comentarios: {$this->request['comentarios']}</p>";
 

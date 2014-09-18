@@ -20,6 +20,15 @@ class Servicios {
     }
 
     /**
+     * Devuelve el objeto Familia de servicio
+     * @param integer $idFamilia El id de la familia
+     * @return \ServFamilias
+     */
+    static function getFamilia($idFamilia) {
+        return new ServFamilias($idFamilia);
+    }
+    
+    /**
      * Devuelve un array con objetos Servicios
      * 
      * @param int $idFamilia El id de la familia de servicios. Si es <= 0 se muestran todas las familias. Por defecto 0
@@ -142,4 +151,26 @@ class Servicios {
         );
     }
 
+    /**
+     * Devuelve array con objetos Familias de servicios
+     * 
+     * @param integer $nItems EL número de familias a devolver. Opcional. O=Todas
+     * @return array Array de objetos \ServFamilias
+     */
+    static function getFamilias($nItems=0) {
+        
+        $limit = ($nItems<=0) ? "" : "limit {$nItems}";
+        
+        $familias = new ServFamilias();
+        $rows = $familias->cargaCondicion("Id","(1) {$limit}");
+        unset($familias);
+        
+        $array = array();
+        
+        foreach ($rows as $row) {
+            $array[] = new ServFamilias($row['Id']);
+        }
+        
+        return $array;
+    }
 }

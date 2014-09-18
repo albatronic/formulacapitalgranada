@@ -5,6 +5,17 @@
             <div class="navbar">
                 <div class="navbar-inner">
                     <ul class="nav clearfix">
+                        {# MENU DE SERVICIOS #}                        
+                        <li class="optMenu menuP4 ">
+                            <a class="optMenuA" data-toggle="dropdown" data-target="/soluciones-financieras-creditos-minicreditos" href="#" alt="Soluciones" title="Soluciones">Soluciones</a>
+                            <div class="dropdown-menu"  role="menu" aria-labelledby="dLabel">
+                                <ul class="listado_menu2">
+                                    {% for familia in values.familiasServicios %}
+                                    <li><a href="{{app.path}}{{familia.getHref.url}}" alt="{{familia.Titulo}}" title="{{familia.Titulo}}">{{familia.Titulo}}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </li>                        
                         {% for item in values.menuCabecera %}
                         <li class="optMenu menuP{{loop.index-1}}">
                             {% if item.subsecciones|length < 1 %}

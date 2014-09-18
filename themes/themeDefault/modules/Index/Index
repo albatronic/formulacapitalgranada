@@ -1,9 +1,0 @@
-{# Index #}
-{% extends layout %}
-
-{% set widgets = values.widgets %}
-
-{% block content %}
-	<p>Template autogenerado para el controlador Index</p>
-	<p>Edítalo en themes/themeDefault/modules/Index/Index</p>
-{% endblock %}

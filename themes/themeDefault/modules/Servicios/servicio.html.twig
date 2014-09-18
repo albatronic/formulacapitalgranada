@@ -28,7 +28,16 @@
             <div class="contenido_interior row"> 
                 <div class="span9 columna_izquierda_soluciones">
                     <h1 class="contenido_interior">{{servicio.Titulo}}</h1>
-
+                    <h2 class="soluciones">{{servicio.Subtitulo}}</h2>
+                    <div class="textoComillas textoComillasPeq">
+                        <p>{{servicio.ResumenBreve}}</p>
+                    </div>
+                    <ul class="compartir clearfix clearboth">
+                            <li class="txt">Compartir</li>
+                            <li><a rel="nueva_ventana me" href="http://www.facebook.com/share.php?u=http://www.formulacapitalgranada.es/renting" alt="" title=""><img src="{{app.path}}{{theme}}/images/soluciones/facebook_naranja.png" alt="" title="">&nbsp;</a></li>
+                            <li><a rel="nueva_ventana me" href="https://twitter.com/share?url=http://www.formulacapitalgranada.es/renting" alt="" title=""><img src="{{app.path}}{{theme}}/images/soluciones/twitter_naranja.png" alt="" title="">&nbsp;</a></li>
+                            <!--<li><a class="addthis_button_email" href="#" alt="" title="Email" target="_blank"><img src="{{app.path}}{{theme}}/images/soluciones/mail_naranja.png" alt="" title="">&nbsp;</a></li>-->
+                    </ul>                    
                     {% if (servicio.Resumen) %}
                         {% autoescape false %}{{servicio.Resumen}}{% endautoescape %}
                     {% endif %}

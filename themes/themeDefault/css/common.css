@@ -791,7 +791,7 @@ p.soluciones_destacado a:hover {text-decoration: none;}
 /* Pastilla llÃ¡manos */
 .pastillaLlamanos {background: #003641; margin-top: 8px; border-radius: 5px; padding: 15px 20px 12px;}
 .pastillaLlamanos p { color: #FFFFFF; font-size: 18px; margin-bottom: 10px;}
-.pastillaLlamanos .link_telefono {background: url("../images/soluciones/telefono_grande.png") no-repeat scroll left center transparent; font-size: 35px; font-family: Arial; color: #FFFFFF !important; text-decoration: none !important; text-align: right; padding: 5px 0 5px 10px; margin-bottom: 5px;}
+.pastillaLlamanos .link_telefono {background: url("../images/soluciones/telefono_grande.png") no-repeat scroll left center transparent; font-size: 32px; font-family: Arial; color: #FFFFFF !important; text-decoration: none !important; text-align: right; padding: 5px 0 5px 10px; margin-bottom: 5px;}
 
 /* Listado Soluciones */
 .listado_soluciones {margin-top: 20px;}

@@ -1,20 +1,52 @@
 {% extends layout %}
-
+    
+{% block slider %}
+    {% include '_global/bannerCabecera.html.twig' with {'imagen': values.familiaServicio.getPathNameImagenN(1)} %}
+{% endblock %}
+    
 {% block contenido %}
-<div class="col_drcha">
+<div id="contenido">
     {% include '_global/ruta.html.twig' %}
-    <h1>{{macro.idioma('servicios')}}</h1>
 
-    <div id="col_izqda">
-        {% for key,item in values.servicios %}    
-            {% if key is even %} {{ macro.servicio (item,1) }} {% endif %}
-        {% endfor %}
+    <div id="contenidoModuloBlanco" class="clearfix">
+        <div class="contenido_interior"> 
+            <div class="span9 columna_izquierda_soluciones">
+                <h1 class="contenido_interior"><strong>Soluciones</strong></h1>
+                <h2 class="soluciones"><strong>{{values.familiaServicio.Titulo}}</strong></h2>
+                {% for fila in values.servicios %}
+                    <div class="row listado_soluciones">
+                        <div class="span6 izq">
+                            <img src="{{app.path}}{{theme}}/{{fila.0.PathNameImagenN(1)}}" alt="" title="">
+                            <a class="titulo" alt="" title="" href="{{app.path}}{{fila.0.Href.url}}">
+                                <h2><strong>{{fila.0.Titulo}}</strong></h2>
+                                <h3 class="clearfix">{{fila.0.Subtitulo}}</h3>
+                            </a>
+                            <p>{{fila.0.ResumenBreve}}</p>
+                            <div class="caja_links">
+                                <a class="enlaceNaranja enlace_bot" alt="" title="" href="{{app.path}}{{fila.0.Href.url}}"><strong>Más sobre {{fila.0.Titulo}}</strong></a>
+                            </div>
+                        </div>
+                        {% if fila.1 %}
+                        <div class="span6 der">
+                            <img src="{{app.path}}{{theme}}/{{fila.1.PathNameImagenN(1)}}" alt="" title="">
+                            <a class="titulo" alt="" title="" href="{{app.path}}{{fila.1.Href.url}}">
+                                <h2><strong>{{fila.1.Titulo}}</strong></h2>
+                                <h3 class="clearfix">{{fila.1.Subtitulo}}</h3>
+                            </a>
+                            <p>{{fila.1.ResumenBreve}}</p>
+                            <div class="caja_links">
+                                <a class="enlaceNaranja enlace_bot" alt="" title="" href="{{app.path}}{{fila.1.Href.url}}"><strong>Más sobre {{fila.1.Titulo}}</strong></a>
+                            </div>                            
+                        </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+
+            </div>
+            {% include '_global/solicitaInformacion.html.twig' %}                     
+        </div>
     </div>
 
-    <div id="col_drcha">
-        {% for key,item in values.servicios %}    
-            {% if key is odd %} {{ macro.servicio (item,1) }} {% endif %}
-        {% endfor %}
-    </div> 
-</div>	
+    {% include '_global/franjas.html.twig' %}    
+</div>
 {% endblock %}

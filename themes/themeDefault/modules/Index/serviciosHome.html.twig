@@ -17,23 +17,20 @@
                         <div class="row bottom">
                         {% for item in familia.servicios %}
                             <div class="span3 div_under small" id="div_under0">
-                                <a alt="" title="" href="/minicreditos">
-                                    <img src="/resources/default_theme/img/comunes/quenecesitas_module/microcredito.png" alt="" title="" />
+                                <a alt="" title="" href="{{app.path}}{{item.Href.url}}">
+                                    <img src="{{app.path}}{{theme}}/{{item.PathNameImagenN(1)}}" alt="" title="" />
 
                                     <h3 class="clearfix">
                                         <span class="clearboth">
-                                            <img src="/resources/default_theme/img/comunes/quenecesitas_module/flecha_H3.png" alt="" title=""/>
+                                            <img src="{{app.path}}{{theme}}/images/comunes/quenecesitas_module/flecha_H3.png" alt="" title=""/>
                                             <strong>{{item.Titulo}}</strong>
                                         </span>
                                         <strong class="clearfix clearboth">{{item.Subtitulo}}</strong><br>
                                     </h3>
 
-                                    <div class="subtitulo clearboth">Fórmula Respiro</div>
+                                    <div class="subtitulo clearboth">Más sobre {{item.Titulo}}</div>
                                 </a>
-                                <a id="over_div0" alt="" title="" href="/minicreditos" class="over_div">
-                                    <p>{{item.ResumenBreve}}</p>
-                                    <p class="enlace_bot enlaceNegro">Más sobre Minicréditos</p>
-                                </a>
+
                             </div>                            
                         {% endfor %}
                         </div>
