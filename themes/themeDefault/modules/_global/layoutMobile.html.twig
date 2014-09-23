@@ -1,47 +1,38 @@
 {% import '_global/macros.html.twig' as macro %}
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es-ES" lang="es-ES">
     <head>
         {% include '_global/meta.twig' %}
+        {% include '_global/googleAnalytics.js.twig' %}      
         {% include values.archivoCss %}
-          
-        <!-- Para que esté disponible el path de la app en todos los java scripts -->
-        <script type="text/javascript">
-            var appPath = "{{appPath}}";
-            var language = "{{language}}";
-        </script>            
-        {% include values.archivoJs %}
-        <script type="text/javascript" src="{{app.path}}/{{theme}}/js/albatronic.js"></script> 
-        
-        <!-- Obtener la resolución del dispositivo de navegación del cliente web -->
-        {% if not chequeadaResolucionVisitante %}
-        <script type="text/javascript">chequeaResolucionVisitante();</script>
-        {% endif %}
     </head>
 
-    <body {% block bodyContacto %}{%endblock%}>
-        {% block body %}
-        <div id="contenedor_global">
-            <div class="contenedor_central">
-                {% block cabecera %}
-                    {% include '_global/cabecera.html.twig' %}
-                {% endblock %}
-                   
-                {% block menu %}
-                    {% include '_global/menuIzquieda.html.twig' %}
-                {% endblock %}
-                    
-                {% block contenido %}                    
-                {% endblock %}                    
+    <body {% block bodyContacto %}{% endblock %}>
+        <header>
+            {% include '_global/cabecera.html.twig' %}
+            {% block slider %}{% endblock %}
+        </header>
+       
+        {% block contenido %}
+            {% include '_global/contenido.html.twig' %}
+        {% endblock %}
 
-                {% block pie %}
-                    {% include '_global/pie.html.twig' %}
-                {% endblock %}
-            </div>
-         </div>
+        {% block footer %}
+            {% include '_global/pie.html.twig' %}
         {% endblock%}
+        
+        {% include '_global/avisoCookies.html.twig' %} 
+        
+        {# Para que esté disponible el path de la app en todos los java scripts #}
+        <script type="text/javascript">
+            var appPath = "{{appPath}}";
+            var theme = "{{theme}}";
+            var language = "{{language}}";
+        </script>
 
+        {% include values.archivoJs %}
+    
         {# PARA HACER DEBUGER EN ENTORNO DE DESARROLLO #}            
         {% if values._debugMode %}
             {% include '_global/debuger.html.twig' %}
