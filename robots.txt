@@ -1,3 +1,5 @@
+Sitemap: http://www.formulacapitalgranada.es/sitemap/index.xml
+
 User-agent: *
 # Desarrollo
 #Disallow: /
