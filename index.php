@@ -192,7 +192,9 @@ $request['Parameters'] = $row['Parameters'];
 $request['Entity'] = $row['Entity'];
 $request['IdEntity'] = $row['IdEntity'];
 
-$controller = ControllerWeb::validaController($controller,$row['Template']);
+if ($config['debug_mode']) {
+    $controller = ControllerWeb::validaController($controller,$row['Template']);
+}
 
 // Si no se ha localizado el controlador, lo pongo a Error404
 if ($controller == '') {
