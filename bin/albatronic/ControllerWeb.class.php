@@ -84,14 +84,13 @@ class ControllerWeb {
         $this->values['LANGUAGE'] = $codigoIdiomaActual;
         //$this->values['LABELS'] = $this->getEtiquetasIdioma($codigoIdiomaActual);
         //$_SESSION['LABELS'] = $this->values['LABELS'];
-
         // CARGA LOS TEXTOS DE LOS PÁRRAFOS DEL CONTROLLER EN CURSO
         // CORRESPONDIENTES AL IDIOMA SELECCIONADO
         //$this->values['TEXTS'] = $this->getTextosIdioma($codigoIdiomaActual);
         $textos = new CpanTextos();
         $this->values['LABELS'] = $textos->getTextos($this->entity);
         unset($textos);
-        
+
 
         /**
          * CONTROL DE VISITAS, SI ESTÁ ACTIVO POR LA VARIABLE DE ENTORNO
@@ -165,7 +164,7 @@ class ControllerWeb {
         $locations = explode(",", $this->varWeb['Pro']['signatures']['locations']);
         $location = trim($locations[rand(0, count($locations) - 1)]);
 
-        $idioma = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'],0,2);
+        $idioma = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
         if (!is_array($this->varWeb['Pro']['signatures']['services'][$idioma]))
             $idioma = 'es';
 
@@ -196,38 +195,53 @@ class ControllerWeb {
     protected function getRuta() {
 
         $array = array();
-
-        if ($this->request['Entity'] == 'GconContenidos') {
-            $contenido = new GconContenidos($this->request['IdEntity']);
-            $idSeccion = $contenido->getIdSeccion()->getId();
-            unset($contenido);
-        } else {
-            $idSeccion = $this->request['IdEntity'];
-        }
-
-        $seccion = new GconSecciones($idSeccion);
-        if ($seccion->getBelongsTo()->getId() > 0) {
-            $ruta = $seccion->getPadres();
-            foreach ($ruta as $IdPadre) {
-                $subSeccion = new GconSecciones($IdPadre);
+        echo $this->request['Entity'];
+        switch ($this->request['Entity']) {
+            case 'GconSecciones':
+                $seccion = new GconSecciones($this->request['IdEntity']);
                 $array[] = array(
-                    'nombre' => $subSeccion->getTitulo(),
-                    'url' => $subSeccion->getHref(),
+                    'nombre' => $seccion->getTitulo(),
+                    'url' => $seccion->getHref(),
                 );
-            }
-        } else {
-            $array[] = array(
-                'nombre' => 'Inicio',
-                'url' => array('url' => $_SESSION['appPath'], 'targetBlank' => 0),
-            );
+                unset($seccion);
+                break;
+            case 'GconContenidos':
+                $contenido = new GconContenidos($this->request['IdEntity']);
+                $seccion = $contenido->getIdSeccion();
+                $array[] = array(
+                    'nombre' => $seccion->getTitulo(),
+                    'url' => $seccion->getHref(),
+                );   
+                $array[] = array(
+                    'nombre' => $contenido->getTitulo(),
+                    'url' => $contenido->getHref(),
+                ); 
+                unset($seccion);                
+                unset($contenido);
+                break;
+            case 'ServFamilias':
+                $familia = new ServFamilias($this->request['IdEntity']);
+                $array[] = array(
+                    'nombre' => $familia->getTitulo(),
+                    'url' => $familia->getHref(),
+                );
+                unset($familia);
+                break;                
+            case 'ServServicios':
+                $servicio = new ServServicios($this->request['IdEntity']);                
+                $familia = $servicio->getIDFamilia();
+                $array[] = array(
+                    'nombre' => $familia->getTitulo(),
+                    'url' => $familia->getHref(),
+                ); 
+                $array[] = array(
+                    'nombre' => $servicio->getTitulo(),
+                    'url' => $servicio->getHref(),
+                );
+                unset($familia);                
+                unset($servicio);                
+                break;
         }
-
-        $array[] = array(
-            'nombre' => $seccion->getTitulo(),
-            'url' => $seccion->getHref(),
-        );
-
-        unset($seccion);
 
         return $array;
     }
@@ -717,5 +731,5 @@ class ControllerWeb {
 
         return ($ok) ? $controller : "";
     }
-}
 
+}

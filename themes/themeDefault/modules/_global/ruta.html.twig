@@ -3,7 +3,13 @@
         <li><span class="estasen">Estás en</span></li>
         <li class="divider"><span class="miga_divider">&nbsp;</span></li>
         <li><a class="inicio" href="/" title="Home"><span class="icon-home">&nbsp;</span></a></li>
-        <li class="divider"><span class="miga_divider">&nbsp;</span></li>
-        <li class="active"><span>{{values.ruta[1].nombre}}</span></li>
+        {% for item in values.ruta %}
+            <li class="divider"><span class="miga_divider">&nbsp;</span></li>
+            {% if loop.last %}
+                <li class="active"><span>{{item.nombre}}</span></li>
+            {% else %}
+                <li class="active"><span><a href="{{item.url.url}}">{{item.nombre}}</a></span></li>                
+            {% endif %}
+        {% endfor %}
     </ul>
 </div>
