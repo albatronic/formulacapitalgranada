@@ -897,7 +897,7 @@ class Entity {
 
         return $imagen->getPathName();
     }
-
+    
     /**
      * Devuelve el pathname del thumbnail de la imagen de diseño $nImagen
      * 

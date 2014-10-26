@@ -20,7 +20,7 @@ class ContenidosController extends ControllerProject {
                 $contenido = Contenidos::getContenido($this->request['IdEntity']);
                 if ($contenido->getBlogPublicar()->getIDTipo() == '1') {
                     // Es un post del blog
-                    $this->values['contenido'] = Blog::getArticulo($this->request['IdEntity'], 2);
+                    $this->values['contenido'] = Blog::getArticulo($this->request['IdEntity'], 3);
                     $this->values['ultimosPosts'] = Blog::getArticulos(0, false, 1, 3); // Los tres posts más recientes
                     $this->values['servicios'] = Servicios::getServicios(3, true); // Servicios Particulares
                     $this->template = $this->entity . "/post.html.twig";

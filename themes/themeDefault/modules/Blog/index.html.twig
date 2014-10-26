@@ -22,7 +22,7 @@
                     {% for item in values.blog.articulos %}
                         <li id="entrada_elem{{loop.index}}" class="section entrada_elem{% if loop.index is odd %}I{% else %}D{% endif %}">
                             <a href="{{path.url}}{{item.url.url}}">
-                                <img src="{{app.url}}/{{theme}}/{{item.imagen}}" alt="{{item.titulo}}" title="{{item.titulo}}">
+                                <img src="{{app.url}}/{{theme}}/{{item.imagen.PathName}}" alt="{{item.imagen.Observations}}" title="{{item.imagen.Title}}">
                             </a>								
                             <h2>
                                 <a href="{{path.url}}{{item.url.url}}" title="{{item.titulo}}">

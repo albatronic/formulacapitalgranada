@@ -195,7 +195,7 @@ class ControllerWeb {
     protected function getRuta() {
 
         $array = array();
-        echo $this->request['Entity'];
+
         switch ($this->request['Entity']) {
             case 'GconSecciones':
                 $seccion = new GconSecciones($this->request['IdEntity']);

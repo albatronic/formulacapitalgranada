@@ -19,11 +19,13 @@
                 <div class="span9 columna_izquierda_blog">
                     <div class="entrada_ampliada">
                         <article>
-                            <h1 class="tituloPostAmpl"><strong>{{values.contenido.titulo}}</strong></h1>        
+                            <h1 class="tituloPostAmpl"><strong>{{values.contenido.titulo}}</strong></h1> 
+                            {% if values.contenido.imagen %}
+                                <img src="{{app.url}}/{{theme}}/{{values.contenido.imagen.PathName}}" alt="{{values.contenido.imagen.Observations}}" title="{{values.contenido.imagen.Title}}">	
+                                <div class="clearfix" style="margin-bottom: 10px;"></div>
+                            {% endif %}
                             <div class="texto_entrada">{% autoescape false %}{{values.contenido.desarrollo}}{% endautoescape %}</div>
 
-                            <img src="{{app.url}}/{{theme}}/{{values.contenido.imagen}}" alt="¿Cómo saldar una deuda fácilmente?" title="¿Cómo saldar una deuda fácilmente?">	
-                            <div class="clearfix" style="margin-bottom: 10px;"></div>
                             {% if values.contenido.permitirComentarios == '1' %}
                             <h3>Comentar este artículo ({{values.contenido.numeroPosts}})</h3>
                             <div class="row">
@@ -49,7 +51,7 @@
                             </div>
                             {% endif %}
                         </article>
-                        <a class="volver_listado" href="/informacion-y-consejos-financieros" alt="Volver" title="Volver">Volver</a>
+                        <a class="volver_listado" href="/blog" alt="Volver" title="Volver">Volver</a>
 
                     </div>
                 </div> 

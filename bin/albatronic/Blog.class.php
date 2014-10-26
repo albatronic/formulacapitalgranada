@@ -101,7 +101,7 @@ class Blog {
             'url' => $articulo->getHref(),
             'resumen' => Textos::limpiaTiny($articulo->getResumen()),
             'desarrollo' => Textos::limpiaTiny($articulo->getDesarrollo()),
-            'imagen' => $articulo->getPathNameImagenN($nImagenDiseno),
+            'imagen' => $articulo->getImagenN($nImagenDiseno),
             'thumbnail' => $articulo->getPathNameThumbnailN($nImagenDiseno),
             'numeroPosts' => $numeroPosts,
             'comentarios' => self::getComentarios("GconContenidos",$idArticuloBlog),
@@ -195,7 +195,7 @@ class Blog {
             if (!isset($arraySecciones[$seccion->getId()])) {
                 $arraySecciones[$seccion->getId()] = array(
                     'titulo' => $seccion->getTitulo(),
-                    'imagen' => $seccion->getPathNameImagenN(1),
+                    'imagen' => $seccion->getImagenN(1),
                     'url' => $seccion->getHref(),
                     'nArticulos' => $seccion->getNumberOfContenidos(),
                 );
