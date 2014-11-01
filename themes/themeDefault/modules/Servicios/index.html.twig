@@ -13,6 +13,8 @@
             <div class="span9 columna_izquierda_soluciones">
                 <h1 class="contenido_interior"><strong>Soluciones</strong></h1>
                 <h2 class="soluciones"><strong>{{values.familiaServicio.Titulo}}</strong></h2>
+                {%if values.familiaServicio.Subtitulo%}<p>values.familiaServicio.Subtitulo</p>{%endif%}
+                {%if values.familiaServicio.Resumen%}<p>values.familiaServicio.Resumen</p>{%endif%}               
                 {% for fila in values.servicios %}
                     <div class="row listado_soluciones">
                         <div class="span6 izq">
