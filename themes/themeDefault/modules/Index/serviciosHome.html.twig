@@ -14,32 +14,31 @@
             <div class="tab-content">
                 {% for familia in values.serviciosHome %}
                     <div class="tab-pane active" id="{{familia.familia.primaryKeyMD5}}">
-                        <div class="row bottom">
+                        <div class="row">
                         {% for item in familia.servicios %}
-                            <div class="span3 div_under small" id="div_under0">
-                                <a alt="" title="" href="{{app.path}}{{item.Href.url}}">
-                                    <img src="{{app.path}}{{theme}}/{{item.PathNameImagenN(1)}}" alt="" title="" />
-
-                                    <h3 class="clearfix">
-                                        <span class="clearboth">
-                                            <img src="{{app.path}}{{theme}}/images/comunes/quenecesitas_module/flecha_H3.png" alt="" title=""/>
-                                            <strong>{{item.Titulo}}</strong>
-                                        </span>
-                                        <strong class="clearfix clearboth">{{item.Subtitulo}}</strong><br>
-                                    </h3>
-
-                                    <div class="subtitulo clearboth">Más sobre {{item.Titulo}}</div>
-                                </a>
-
-                            </div>                            
+                            {% if loop.index < 5 %}
+                                <div class="span6emp {%if loop.index is odd %}izq{%else%}der{%endif%}-emp" style="width:234px;">
+                                    <div style="height: 200px;">
+                                        <img src="{{app.path}}{{theme}}/{{item.PathNameImagenN(1)}}" alt="" title="" style="width: 110px; margin-top:35px;"/>
+                                    </div>
+                                    <img class="imgflecha" src="{{app.path}}{{theme}}/images/comunes/quenecesitas_module/flecha_H3.png" alt="" title=""/>
+                                    <a class="titulo" alt="{{item.Titulo}}" tile="{{item.Titulo}}" href="{{item.Href.url}}">
+                                        <h2><strong>{{item.Titulo}}</strong></h2>
+                                        <h3 class="clearfix">{{item.Subtitulo}}</h3>
+                                    </a>
+                                    <p>{{item.ResumenBreve}}</p>
+                                    <div class="caja_links_emp">
+                                        <a style="margin-left: 22px; width: 220px;" class="enlaceNaranja enlace_bot enlace_top_der" alt="" title="" href="{{app.path}}{{item.Href.url}}">Más sobre {{item.Titulo}}</a>
+                                    </div>
+                                </div>
+                            {% endif %}
                         {% endfor %}
                         </div>
                     </div>
                 {% endfor %}
             </div>
         </div>
-    </div>
-            
+    </div>        
 </div>
             
             
