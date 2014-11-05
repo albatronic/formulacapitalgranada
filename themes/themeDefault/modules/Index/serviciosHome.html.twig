@@ -13,7 +13,7 @@
             </ul>
             <div class="tab-content">
                 {% for familia in values.serviciosHome %}
-                    <div class="tab-pane active" id="{{familia.familia.primaryKeyMD5}}">
+                    <div class="tab-pane {% if loop.first %}active{% endif %}" id="{{familia.familia.primaryKeyMD5}}">
                         <div class="row">
                         {% for item in familia.servicios %}
                             {% if loop.index < 5 %}
@@ -26,9 +26,9 @@
                                         <h2><strong>{{item.Titulo}}</strong></h2>
                                         <h3 class="clearfix">{{item.Subtitulo}}</h3>
                                     </a>
-                                    <p>{{item.ResumenBreve}}</p>
+                                        <p>{{item.ResumenBreve|slice(0, 140)}} ...</p>
                                     <div class="caja_links_emp">
-                                        <a style="margin-left: 22px; width: 220px;" class="enlaceNaranja enlace_bot enlace_top_der" alt="" title="" href="{{app.path}}{{item.Href.url}}">Más info {{item.Titulo}}</a>
+                                        <a style="margin-left: 22px; width: 220px;" class="enlaceNaranja enlace_bot enlace_top_der" alt="" title="" href="{{app.path}}{{item.Href.url}}">Más información</a>
                                     </div>
                                 </div>
                             {% endif %}
