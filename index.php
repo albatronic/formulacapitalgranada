@@ -181,7 +181,7 @@ switch ($rq->getMethod()) {
     case 'POST':
         $request = $rq->getRequest();
         $request['METHOD'] = "POST";
-        $controller = ucfirst($request['controller']);
+        $controller = ucfirst($row['Controller']);
         $action = $request['action'];
         break;
 }
