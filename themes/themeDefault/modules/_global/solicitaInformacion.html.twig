@@ -5,7 +5,7 @@
         <h2><strong>Solicita información sin compromiso</strong></h2>
         <form action="" method="post" accept-charset="utf-8" id="formid" novalidate="novalidate">		
             <input type="hidden" class="input_referer" name="referer" value="">
-            <input type="hidden" class="input_referer" name="controller" value="{{values.controller}}">
+            <input type="hidden" class="input_referer" name="controller" value="{% if values.urlAmigable == '/empresas' %}empresas{% else %}particulares{% endif %}">
             <input type="hidden" class="input_referer" name="action" value="SocilitaInfo">
             <input type="hidden" class="input_referer" name="servicio" value="{{servicio.Titulo}}">
             <fieldset>
