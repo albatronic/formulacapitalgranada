@@ -35,7 +35,12 @@ class ContactoController extends ControllerProject {
                 if (file_exists('docs/plantillaMailContacto.htm')) {
 
                     $mailer = new Mail($this->varWeb['Pro']['mail']);
-                    $envioOk = $this->enviaVisitante($mailer, 'docs/plantillaMailContacto.htm');
+                    
+                    if ($this->request['email'] !== '') {
+                        $envioOk = $this->enviaVisitante($mailer, 'docs/plantillaMailContacto.htm');
+                    } else {
+                        $envioOk = true;
+                    }
 
                     if ($envioOk) {
                         $envioOk = $this->enviaWebMaster($mailer, 'docs/plantillaMailContacto.htm');
