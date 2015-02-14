@@ -1,4 +1,4 @@
-Sitemap: http://www.formulacapitalgranada.es/sitemap/index.xml
+Sitemap: http://www.cdcreditgranada.es/sitemap/index.xml
 
 User-agent: *
 # Desarrollo
@@ -13,8 +13,8 @@ Disallow: /lang/
 Disallow: /lib/
 Disallow: /log/
 Disallow: /tmp/
-Sitemap: http://www.formulacapitalgranada.es/sitemap/index.xml
-Sitemap: http://www.formulacapitalgranada.es/sitemap/secciones.xml
-Sitemap: http://www.formulacapitalgranada.es/sitemap/contenidos.xml
-Sitemap: http://www.formulacapitalgranada.es/sitemap/blog.xml
-#Sitemap: http://www.formulacapitalgranada.es/sitemap/eventos.xml
+Sitemap: http://www.cdcreditgranada.es/sitemap/index.xml
+Sitemap: http://www.cdcreditgranada.es/sitemap/secciones.xml
+Sitemap: http://www.cdcreditgranada.es/sitemap/contenidos.xml
+Sitemap: http://www.cdcreditgranada.es/sitemap/blog.xml
+#Sitemap: http://www.cdcreditgranada.es/sitemap/eventos.xml
