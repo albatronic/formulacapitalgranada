@@ -3,7 +3,7 @@
 
     <div class="lateral">
         <h2><strong>Solicita información sin compromiso</strong></h2>
-        <form action="" method="post" accept-charset="utf-8" id="formid" novalidate="novalidate">		
+        <form action="" method="post" accept-charset="utf-8" id="formid">		
             <input type="hidden" class="input_referer" name="referer" value="">
             <input type="hidden" class="input_referer" name="controller" value="{% if values.urlAmigable == '/empresas' %}empresas{% else %}particulares{% endif %}">
             <input type="hidden" class="input_referer" name="action" value="SocilitaInfo">
@@ -11,18 +11,25 @@
             <fieldset>
                 <label for="nombre_apellidos" class="control-label required" aria-required="true">Nombre y apellidos</label>
                 <input type="text" name="nombre_apellidos" value="" id="nombre_apellidos" placeholder="Introduce tu nombre y apellidos" class="input-block-level " required="" aria-required="true">
+                
                 <label for="telefono" class="control-label required" aria-required="true">Teléfono</label>
                 <input type="text" name="telefono" value="" id="telefono" placeholder="Introduce tu teléfono" class="input-block-level " required="" aria-required="true">
+                
                 <label for="email" class="control-label " aria-required="true">Email</label>
                 <input type="text" name="email" value="" id="email" placeholder="Introduce tu email" class="input-block-level " aria-required="true">
+                
                 <label for="importe" class="control-label " aria-required="true">Importe</label>
-                <input type="text" name="importe" value="" id="importe" placeholder="Introduce el importe a solicitar" class="input-block-level " required="" aria-required="true">
+                <input type="text" name="importe" value="" id="importe" placeholder="Introduce el importe a solicitar" class="input-block-level " aria-required="true">
+                
                 <label for="domicilio" class="control-label " aria-required="true">Domicilio</label>
-                <input type="text" name="domicilio" value="" id="domicilio" placeholder="Introduce tu domicilio" class="input-block-level " required="" aria-required="true">
+                <input type="text" name="domicilio" value="" id="domicilio" placeholder="Introduce tu domicilio" class="input-block-level " aria-required="true">
+                
                 <label for="comentarios" class="control-label " aria-required="true">Observaciones</label>
-                <textarea name="comentarios" cols="40" rows="3" id="comentarios" class="input-block-level" placeholder="Introduce tus comentarios, dudas y/o sugerencias" required="" aria-required="true"></textarea>        
+                <textarea name="comentarios" cols="40" rows="3" id="comentarios" class="input-block-level" placeholder="Introduce tus comentarios, dudas y/o sugerencias" aria-required="true"></textarea>   
+                
                 <input type="checkbox" name="condiciones" value="si" id="condiciones" class="terminos_llamamos" title="Condiciones" required="" maxlength="20" aria-required="true">
                 <a class="terminos_llamamos" href="{{app.url}}/politica-de-privacidad?iframe=true&amp;width=600&amp;height=400" rel="prettyPhoto" title="Acepto los términos y condiciones">Acepto los términos y condiciones</a>
+                
                 <input type="submit" name="btnSubmit" value="Solicitar información ahora" class="btn btn-amarillo clearboth clearfix">
             </fieldset>
         </form>
