@@ -18,6 +18,7 @@ class ContactoController extends ControllerProject {
         switch ($this->request['METHOD']) {
             case 'GET':
                 $this->values['accion'] = "";
+                mail("info@albatronic.com","Credit Granada", "Han entrado en el formulario de contacto general");
                 break;
 
             case 'POST':
