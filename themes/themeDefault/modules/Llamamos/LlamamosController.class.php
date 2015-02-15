@@ -19,6 +19,14 @@ class LlamamosController extends ControllerProject {
         switch ($this->request['METHOD']) {
             case 'GET':
                 $this->values['accion'] = "";
+                if ($this->request[1] == "log") {
+                    return $this->Log();
+                } else {
+                    mail($this->varWeb['Pro']['mail']['from'], "Credit Granada", "Han entrado en el formulario 'te llamamos'");
+                    $fp = fopen("log/contacto.log", "a");
+                    fwrite($fp, date("Y-m-d H:i:s") . ";" . $_SERVER['REMOTE_ADDR'] . ";Entran en 'te llamamos'" . "\n");
+                    fclose($fp);
+                }
                 break;
 
             case 'POST':
