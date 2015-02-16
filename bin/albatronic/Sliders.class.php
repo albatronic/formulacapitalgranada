@@ -63,12 +63,14 @@ class Sliders {
                     $subtitulo = $row['Subtitulo'];
                     $resumen = $row['Resumen'];
                 }
-
-                if ($row['Entidad'] != '') {
-                    $objetoEnlazado = new $row['Entidad']($row['IdEntidad']);
-                    $href = $objetoEnlazado->getHref();
-                    unset($objetoEnlazado);
-                } elseif ($row['UrlTarget'] != '') {
+                
+                // Buscar contenido relacionado
+                $relacion = new CpanRelaciones();
+                $relaciones = $relacion->getObjetosRelacionados("SldSliders", $row['Id']);
+                unset($relacion);
+                if ($relaciones[0]) {
+                    $href = $relaciones[0]->getHref();
+                } elseif ($row['UrlTarget'] !== '') {
                     $prefijo = ($row['UrlIsHttps']) ? "https://" : "http://";
                     $url = $prefijo . $row['UrlTarget'] . $row['UrlParameters'];
                     $href = array('url' => $url, 'targetBlank' => $row['UrlTargetBlank']);
