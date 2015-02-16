@@ -46,7 +46,7 @@
                     <h3>{{item.titulo}}</h3>
                     <h4>{{item.subtitulo}}</h4>
                     {% if item.url.url %}
-                    <a class="btn btn-amarillo" href="{{app.url}}{{item.url.url}}" {% if item.url.targetBlank == '1' %}target="_blank"{% endif %}>Más info</a>
+                    <a class="btn btn-amarillo" href="{{item.url.url}}" {% if item.url.targetBlank == '1' %}target="_blank"{% endif %}>Más info</a>
                     {% endif %}
                 </div>
                 <div class="textoBanner"></div>
