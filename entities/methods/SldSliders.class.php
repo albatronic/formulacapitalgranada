@@ -132,5 +132,3 @@ class SldSliders extends SldSlidersEntity {
     }
 
 }
-
-?>

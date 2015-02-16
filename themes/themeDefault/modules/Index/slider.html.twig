@@ -45,7 +45,9 @@
                 <div class="pastilla">
                     <h3>{{item.titulo}}</h3>
                     <h4>{{item.subtitulo}}</h4>
-                    <a class="btn btn-amarillo" href="/creditos-rapidos">Más info</a>
+                    {% if item.url.url %}
+                    <a class="btn btn-amarillo" href="{{app.url}}{{item.url.url}}" {% if item.url.targetBlank == '1' %}target="_blank"{% endif %}>Más info</a>
+                    {% endif %}
                 </div>
                 <div class="textoBanner"></div>
             </div>
