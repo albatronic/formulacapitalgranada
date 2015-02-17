@@ -34,7 +34,11 @@ class LlamamosController extends ControllerProject {
                 $this->values['accion'] = "envio";
 
                 if (file_exists('docs/plantillaMailContacto.htm')) {
-
+                    
+                    $fp = fopen("log/contacto.log", "a");
+                    fwrite($fp, date("Y-m-d H:i:s") . ";" . $_SERVER['REMOTE_ADDR'] . ";Envío en 'te llamamos';" . print_r($this->request,true) . "\n");
+                    fclose($fp);
+                    
                     $mailer = new Mail($this->varWeb['Pro']['mail']);
                     $envioOk = $this->enviaWebMaster($mailer, 'docs/plantillaMailContacto.htm');
 

@@ -33,7 +33,11 @@ class ContactoController extends ControllerProject {
                 $this->values['accion'] = "envio";
 
                 if (file_exists('docs/plantillaMailContacto.htm')) {
-
+                    
+                    $fp = fopen("log/contacto.log", "a");
+                    fwrite($fp, date("Y-m-d H:i:s") . ";" . $_SERVER['REMOTE_ADDR'] . ";Envío en contacto principal;" . print_r($this->request,true) . "\n");
+                    fclose($fp);
+                    
                     $mailer = new Mail($this->varWeb['Pro']['mail']);
                     
                     if ($this->request['email'] !== '') {
