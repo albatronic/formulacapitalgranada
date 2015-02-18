@@ -9,6 +9,10 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     # EXCEPCIONES
 
+    # REDIRECCIONES
+    Redirect 301 /refinanciacion-de-deudas-35 http://www.cgcreditgranada.es/refinanciacion-de-deudas-en-granada
+
+
     RewriteRule ^(.*)$ index.php [QSA,L]
 </IfModule>
 
