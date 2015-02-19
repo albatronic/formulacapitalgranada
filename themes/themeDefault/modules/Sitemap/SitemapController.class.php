@@ -29,7 +29,23 @@ class SitemapController extends ControllerProject {
                 //$rows[]['UrlFriendly'] = "/productos.xml";
                 $rows[]['UrlFriendly'] = "/contenidos.xml";
                 $rows[]['UrlFriendly'] = "/secciones.xml";
+                $rows[]['UrlFriendly'] = "/familiasServicios.xml";
+                $rows[]['UrlFriendly'] = "/servicios.xml";
                 $xml = Feeds::getSiteMapIndex($rows);
+                break;
+
+            case 'familiasServicios.xml':
+                $contenido = new ServFamilias();
+                $rows = $contenido->cargaCondicion($columnas, "{$filtro}", "{$orden} {$limit}");
+                unset($contenido);
+                $xml = Feeds::getSiteMap($rows);
+                break;
+
+            case 'servicios.xml':
+                $contenido = new ServServicios();
+                $rows = $contenido->cargaCondicion($columnas, "{$filtro}", "{$orden} {$limit}");
+                unset($contenido);
+                $xml = Feeds::getSiteMap($rows);
                 break;
 
             case 'blog.xml':
