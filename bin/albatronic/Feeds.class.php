@@ -88,7 +88,7 @@ class Feeds {
         $urls = "";
         foreach ($rows as $row) {
             $urls .= "<sitemap>"
-                    . "<loc>{$_SESSION['appUrl']}{$row['UrlFriendly']}</loc>"
+                    . "<loc>{$_SESSION['appUrl']}/sitemap{$row['UrlFriendly']}</loc>"
                     . "</sitemap>";
         }
 
