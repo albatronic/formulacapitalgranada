@@ -1,14 +1,24 @@
+
 {% extends layout %}
 
+{% block slider %}
+    {% include '_global/bannerCabecera.html.twig' with {'imagen': values.seccion.getPathNameImagenN(1)} %}
+{% endblock %}
+
 {% block contenido %}
+    <div id="contenido">
+        {% include '_global/ruta.html.twig' %}
+        <div id="contenidoModuloBlanco" class="clearfix">
 
-<div class="col_drcha">
-    <div id="error_404">
-        <img src="{{app.path}}/{{theme}}/images/aspa.png" alt="Error 404" title="Error 404" />
-        <h1>{{macro.idioma('loSentimos')}}<br />{{macro.idioma('noHemosPodidoLocalizarLaPagina')}}.</h1>
-        <p class="exito">{{macro.idioma('sigueNavegando')}}</p>
+            <div class="contenido_interior row">
+                <div class="KOMapaweb">
+                    <h2>Credit Granada - página no encontrada</h2>
+                    <p>Parece que la página que busca no existe o no está disponible.</p>
+                    <p>Utilice los menús para encontrar lo que está buscando</p>
+                </div>
+            </div>
+        </div>
+        {% include '_global/franjas.html.twig' %} 
     </div>
-</div>
-
 {% endblock %}
 
