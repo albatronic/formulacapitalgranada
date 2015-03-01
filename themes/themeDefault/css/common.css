@@ -737,7 +737,7 @@ ul.mapaweb .titulo_mapa_web ul {margin-top: 10px;}
 ul.mapaweb .titulo_mapa_web ul li {list-style: none; background: url("../images/comunes/quenecesitas_module/flecha_enlace.png") no-repeat scroll left center transparent; padding-left: 5px;}
 ul.mapaweb .titulo_mapa_web ul li a {font-size: 14px; color: #4b4d58; display: block; margin-top: 5px;}
 ul.mapaweb .titulo_mapa_web a.enlace_titulo {color: #4B4D58;}
-.KOMapaweb {height: 170px; background: url("../images/comunes/mapaweb/bg_mapaweb.png") no-repeat scroll 25px center #f3f3f3; font-family: "pt_serif_regular"; width: 765px; padding-left: 160px; padding-right: 60px; border-radius: 15px; margin-bottom: 20px; padding-top: 1px;}
+.KOMapaweb {height: 170px; background: url("../images/comunes/bg_mapaweb.png") no-repeat scroll 25px center #f3f3f3; font-family: "pt_serif_regular"; width: 765px; padding-left: 160px; padding-right: 60px; border-radius: 15px; margin-bottom: 20px; padding-top: 1px;}
 
 .KOMapaweb h2 {color: #FF0000; font-size: 24px; margin-bottom: 15px; margin-top: 25px;}
 .KOMapaweb p {font-size: 24px; color: #4b4d58; letter-spacing: -0.5px; margin-bottom: 5px; line-height: 30px;}
