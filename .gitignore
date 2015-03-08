@@ -2,4 +2,6 @@
 /themes/themeDefault/cache/
 /nbproject/
 /config/config.yml
+/config/config_prod.yml
 error_log
+.DS_Store
