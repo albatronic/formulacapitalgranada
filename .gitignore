@@ -3,5 +3,6 @@
 /nbproject/
 /config/config.yml
 /config/config_prod.yml
+/config/config_dev.yml
 error_log
 .DS_Store
