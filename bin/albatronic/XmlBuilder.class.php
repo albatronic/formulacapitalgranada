@@ -145,4 +145,3 @@ class XmlBuilder {
 }
 
 // Fin de la clase xmlBuilder
-?>

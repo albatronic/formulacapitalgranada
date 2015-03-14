@@ -59,6 +59,7 @@ $_SESSION['project']['ftpWeb'] = $config['projectFtp'];
 
 $app = $config['app'];
 
+$_SESSION['conections'] = $config['conections'];
 $_SESSION['appPath'] = $app['path'];
 $_SESSION['appUrl'] = $app['url'];
 $_SESSION['theme'] = $app['theme'];

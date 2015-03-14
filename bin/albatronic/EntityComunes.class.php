@@ -209,7 +209,7 @@ class EntityComunes extends Entity {
      * @orm Column(type="tinyint")
      * @var entities\ValoresSN
      */
-    protected $LockMetatagTitle = '';
+    protected $LockMetatagTitle = '0';
 
     /**
      * @orm Column(type="string")
@@ -335,11 +335,11 @@ class EntityComunes extends Entity {
      * @orm Column(type="tinyint")
      * @var entities\CpanAplicaciones
      */
-    protected $CodigoAppAsociada = NULL;
-    protected $IdAlbumExterno = NULL;
-    protected $IdSliderAsociado = NULL;
-    protected $IdSeccionEnlaces = NULL;
-    protected $IdSeccionVideos = NULL;
+    protected $CodigoAppAsociada = 0;
+    protected $IdAlbumExterno = 0;
+    protected $IdSliderAsociado = 0;
+    protected $IdSeccionEnlaces = 0;
+    protected $IdSeccionVideos = 0;
     protected $RevisitAfter = '10';
     protected $NivelJerarquico = 1;
 

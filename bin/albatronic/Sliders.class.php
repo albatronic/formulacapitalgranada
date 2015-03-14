@@ -41,10 +41,12 @@ class Sliders {
         if ($tipoSlider->getIDTipo() == null)
             $tipo = 0;
 
+        $slider = new SldSliders();
+        
         $where = ($idZona == '*') ? "(1)" : "s.IdZona='{$idZona}'";
         $where .= " AND s.IdTipo='{$tipo}'";
 
-        $em = new EntityManager("");
+        $em = new EntityManager($slider->getConectionName());
         $select = "select distinct s.Id,s.Titulo,s.Subtitulo,s.Resumen,s.MostrarTextos,s.Entidad,s.IdEntidad,s.UrlTarget,s.UrlIsHttps,s.UrlParameters,s.UrlTargetBlank,d.PathName as imagen
                     from SldSliders s 
                     join CpanDocs d on s.Id=d.IdEntity and d.Entity='SldSliders' and d.Type='image1' and d.IsThumbnail='0' and d.Publish='1'";
@@ -93,5 +95,3 @@ class Sliders {
     }
 
 }
-
-?>

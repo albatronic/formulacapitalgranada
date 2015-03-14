@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Description of XmlRead
  *
@@ -11,7 +12,6 @@
  * @since 04-nov-2011
  *
  */
-
 class XmlRead {
 
     /**
@@ -19,16 +19,18 @@ class XmlRead {
      * @var string
      */
     protected $file;
+
     /**
      * Array con el objeto XML
      * @var array
      */
     protected $xml = array();
 
-    public function  __construct($file) {
+    public function __construct($file) {
         $this->file = $file;
         $this->load();
     }
+
     /**
      * Devuelve un array con el objeto XML completo
      * @return array
@@ -47,7 +49,7 @@ class XmlRead {
      * @param <type> $nodeNumber 
      * @return array Contenido del nodo solicitado
      */
-    public function getNode($nodeName,$nodeNumber=0) {
+    public function getNode($nodeName, $nodeNumber = 0) {
         $cont = 0;
         foreach ($this->xml->{$nodeName} as $key => $value) {
             if ($cont == $nodeNumber) {
@@ -68,8 +70,8 @@ class XmlRead {
         if (is_file($this->file)) {
             $str = file_get_contents($this->file);
             $str = preg_replace("/\<\!\[CDATA\[(.*?)\]\]\>/ies", "'[CDATA]'.base64_encode('$1').'[/CDATA]'", $str);
-            $this->xml = new SimpleXMLElement($str);
+            $this->xml = new SimpleXMLElement($str);          
         }
     }
+
 }
-?>

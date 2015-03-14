@@ -39,7 +39,7 @@ class Menu {
         $where = "s.MostrarEnMenu{$nMenu}='1'";
         $orden = "s.OrdenMenu{$nMenu}";
 
-        $em = new EntityManager("");
+        $em = new EntityManager($seccion->getConectionName());
         $select = "SELECT s.Id,s.EtiquetaWeb{$nMenu},s.SubetiquetaWeb{$nMenu},s.Titulo,s.Subtitulo,s.UrlFriendly,s.UrlTarget,s.UrlIsHttps,s.UrlParameters,s.UrlTargetBlank,u.Controller FROM GconSecciones s "
                 . "LEFT JOIN CpanUrlAmigables u on s.Id=u.IdEntity and u.Entity='GconSecciones' and u.Idioma='{$_SESSION['idiomas']['actual']}'";
         $rows = $em->getResult("s", $select, $where, $orden, $limite);
@@ -123,4 +123,3 @@ class Menu {
 
 }
 
-?>

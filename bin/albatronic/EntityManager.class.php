@@ -22,7 +22,6 @@ class EntityManager {
      */
     private $file = "config/config.yml";
     public static $dbLinkInstance = null;
-    public static $currentDbLink = null;
     public static $dbEngine = null;
     public static $host = null;
     public static $user = null;
@@ -31,6 +30,8 @@ class EntityManager {
     public static $conection = array();
     private $result = null;
     private $affectedRows = null;
+    private $logErrorQueryFile;
+    private $logQueryFile;    
 
     /**
      * Guardar el eventual error producido en la conexión
@@ -61,38 +62,35 @@ class EntityManager {
      * @param string $conection Nombre de la conexion, opcional
      * @param string $fileConfig Nombre del fichero de configuracion, opcional
      */
-    public function __construct($conection, $fileConfig = '') {
+    public function __construct($conection) {
 
-        //if (is_null(self::$dbLinkInstance)) {
+        $this->logErrorQueryFile = str_replace("bin" . DIRECTORY_SEPARATOR . "albatronic", "", __DIR__) . "log/error_query.log";
+        //$this->logErrorQueryFile = str_replace("bin\\nimbus", "", __DIR__) . "log/error_query.log";
+        $this->logQueryFile = str_replace("bin" . DIRECTORY_SEPARATOR . "albatronic", "", __DIR__) . "log/query.log";
+        //$this->logQueryFile = str_replace("bin\\nimbus", "", __DIR__) . "log/query.log";
+
         if (is_array($conection)) {
-            self::$dbEngine = $conection['dbEngine'];
-            self::$host = $conection['host'];
-            self::$user = $conection['user'];
-            self::$password = $conection['password'];
-            self::$dataBase = $conection['database'];
-            if (is_null(self::$dbLinkInstance)) {
+            if (is_null(self::$dbLinkInstance) || (self::$host !== $conection['host']) || (self::$dataBase !== $conection['database'])) {
+                self::$dbEngine = $conection['dbEngine'];
+                self::$host = $conection['host'];
+                self::$user = $conection['user'];
+                self::$password = $conection['password'];
+                self::$dataBase = $conection['database'];
                 $this->conecta();
             }
         } else {
-            if (count(self::$conection) == 0) {
-                if ($fileConfig == '') {
-                    $fileConfig = $_SERVER['DOCUMENT_ROOT'] . $_SESSION['appPath'] . "/" . $this->file;
-                }
-                if (file_exists($fileConfig)) {
-                    $yaml = sfYaml::load($fileConfig);
-                    // Si no se ha indicado el nombre de la conexión, se tomara la primera
-                    if ($conection == '')
-                        list($conection, $nada) = each($yaml['config']['conections']);
-                    self::$conection = $yaml['config']['conections'][$conection];
+            if (!isset(self::$conection[$conection])) {
+                if ($conection === '') {
+                    die("No se ha indicado el nombre de la conexión a la BD.\n");
                 } else {
-                    die("EntityManager []: ERROR AL LEER EL ARCHIVO DE CONFIGURACION. " . $fileConfig . " NO EXISTE\n");
+                    self::$conection[$conection] = $_SESSION['conections'][$conection];
                 }
             }
-            self::$dbEngine = self::$conection['dbEngine'];
-            self::$host = self::$conection['host'];
-            self::$user = self::$conection['user'];
-            self::$password = self::$conection['password'];
-            self::$dataBase = self::$conection['database'];
+            self::$dbEngine = self::$conection[$conection]['dbEngine'];
+            self::$host = self::$conection[$conection]['host'];
+            self::$user = self::$conection[$conection]['user'];
+            self::$password = self::$conection[$conection]['password'];
+            self::$dataBase = self::$conection[$conection]['database'];
             if (is_null(self::$dbLinkInstance)) {
                 $this->conecta();
             }
@@ -106,7 +104,7 @@ class EntityManager {
      * $this->error tendra el mensaje de error.
      */
     private function conecta() {
-
+        //echo "conecta...";
         switch (self::$dbEngine) {
             case 'mysql':
                 self::$dbLinkInstance = mysql_connect(self::$host, self::$user, self::$password);
@@ -167,39 +165,55 @@ class EntityManager {
     public function query($query) {
         $this->result = null;
 
+        if ($_SESSION['debug']['save_queries']) {
+            $fp = fopen($this->logQueryFile, "a");
+            if ($fp) {
+                fwrite($fp, date("Y-m-d H:i:s") . "\t" . $query . "\n");
+                fclose($fp);
+            }
+        }
+        
         switch (self::$dbEngine) {
             case 'mysql':
                 //mysql_select_db($this->getdataBase());
                 $this->result = mysql_query($query, self::$dbLinkInstance);
-                //$fp = fopen("log/queries.sql", "a");
-                //fwrite($fp, date("Y-m-d H:i:s") . "\t" . $query . "\n");
-                //fclose($fp);
-                if (!$this->result)
-                    $this->setError("query");
-                else
+                if (!$this->result) {
+                    $this->setError("query", $query);
+                } else {
                     $this->affectedRows = mysql_affected_rows(self::$dbLinkInstance);
+                }
                 break;
 
             case 'mssql':
                 //mssql_select_db($this->dataBase);
+                $query = str_replace("`", "", $query);
                 $this->result = mssql_query($query, self::$dbLinkInstance);
-                if (!$this->result)
-                    $this->setError("query");
-                else
+                if (!$this->result) {
+                    $this->setError("query", $query);
+                } else {
                     $this->affectedRows = mysql_affected_rows(self::$dbLinkInstance);
+                }
                 break;
 
             case 'interbase':
                 $query = str_replace("`", "", $query);
                 $this->result = ibase_query(self::$dbLinkInstance, $query);
-                if (!$this->result)
-                    $this->setError("query");
-                else
+                if (!$this->result) {
+                    $this->setError("query", $query);
+                } else {
                     $this->affectedRows = ibase_affected_rows(self::$dbLinkInstance);
+                }
                 break;
 
-            default:
-                $this->setError("query", "No se ha indicado el tipo de base de datos");
+            case 'pgsql':
+                $query = str_replace("`", "", $query);
+                $this->result = pg_query(self::$dbLinkInstance, $query);
+                if (!$this->result) {
+                    $this->setError("query", $query);
+                } else {
+                    $this->affectedRows = pg_affected_rows(self::$dbLinkInstance);
+                }
+                break;
         }
         return $this->result;
     }
@@ -217,18 +231,27 @@ class EntityManager {
 
         switch (self::$dbEngine) {
             case 'mysql':
-                while ($row = mysql_fetch_array($this->result, MYSQL_ASSOC))
+                while ($row = mysql_fetch_array($this->result, MYSQL_ASSOC)) {
                     $rows[] = $row;
+                }
                 break;
 
             case 'mssql':
-                while ($row = mssql_fetch_array($this->result, MYSQL_ASSOC))
+                while ($row = mssql_fetch_array($this->result, MYSQL_ASSOC)) {
                     $rows[] = $row;
+                }
                 break;
 
             case 'interbase':
-                while ($row = ibase_fetch_assoc($this->result))
+                while ($row = ibase_fetch_assoc($this->result)) {
                     $rows[] = $row;
+                }
+                break;
+
+            case 'pgsql':
+                while ($row = pg_fetch_assoc($this->result)) {
+                    $rows[] = $row;
+                }
                 break;
 
             default:
@@ -479,9 +502,9 @@ class EntityManager {
 
         $mensaje = "EntityManager [{$method}]: ";
 
-        if ($error != '')
+        if ($error != '') {
             $mensaje .= $error;
-        else {
+        } else {
             switch (self::$dbEngine) {
                 case 'mysql':
                     switch (mysql_errno()) {
@@ -500,6 +523,20 @@ class EntityManager {
             }
         }
 
+        if ($_SESSION['debug']['save_error_query']) {
+            // ESCRIBE EL ERROR EN EL LOG
+            $fp = fopen($this->logErrorQueryFile, "a");
+            if ($fp) {
+                fwrite($fp, date('Y-m-d H:i:s') . "\t" . $_SERVER['PHP_SELF'] . "\t" . $mensaje . "\n");
+                fclose($fp);
+            }
+        }
+
+        // ENVIA CORREO AL SUPER ADMINISTRADOR
+        $email = trim($_SESSION['debug']['email_error_query']);
+        if ($email != '') {
+            mail($email, "Error query", $_SERVER['PHP_SELF'] . " " .$mensaje);
+        }
         $this->error[] = $mensaje;
     }
 

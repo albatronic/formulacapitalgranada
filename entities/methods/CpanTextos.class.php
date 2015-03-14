@@ -84,10 +84,10 @@ class CpanTextos extends CpanTextosEntity {
             $this->setStatus($this->_em->numRows());
 
             $rows = $this->_em->fetchResult();
-            $this->_em->desConecta();
+            //$this->_em->desConecta();
         }
 
-        unset($this->_em);
+        //unset($this->_em);
 
         return $rows;
     }
@@ -114,13 +114,11 @@ class CpanTextos extends CpanTextosEntity {
             $this->_em->query($query);//echo $query;
             $this->setStatus($this->_em->numRows());
             $rows = $this->_em->fetchResult();
-            $this->_em->desConecta();
+            //$this->_em->desConecta();
         }
 
-        unset($this->_em);
+        //unset($this->_em);
 
         return new $this($rows[0][$this->_primaryKeyName]);
     }
 }
-
-?>
