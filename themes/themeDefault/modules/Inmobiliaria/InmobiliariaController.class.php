@@ -16,6 +16,9 @@ class InmobiliariaController extends ControllerProject {
         $this->values['menuLateral'] = Menu::getMenuN(2);
         $this->values['contenido'] = new GconSecciones($this->request['IdEntity']);
 
+        $inmuebles = new Inmuebles();
+        $this->values['inmuebles'] = $inmuebles->cargaCondicion("*");
+        
         $template = ($this->request['Template'] !== '') ? $this->entity . "/" . $this->request['Template'] :
                 $this->controller . "/index.html.twig";
         

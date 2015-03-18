@@ -100,5 +100,5 @@ Inmuebles:
     zoom_coordenadas: { type: integer, default: 0 }
     solo_web: { type: boolean, default: 0 }
     estadoinmueble: { type: string(50), default: null }
-    #Fotos: { type: string(50), default: null }
+    Fotos: { type: text, default: null }
     <?php include '../../entities/schema/schemaColumnsCommon.yml'; echoln('');?>    
