@@ -16,7 +16,7 @@
                     {% for item in values.inmuebles %}
                         <div class="row-fluid">
                             <div>
-                                <img src="{{item.rutagraf}}" width="172">
+                                <img src="{{app.url}}/{{theme}}/{{item.rutagraf}}" width="172">
                             </div>
                             <div class="">
                                 {% autoescape false %}
