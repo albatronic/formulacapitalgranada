@@ -88,7 +88,9 @@ class CargaInmuebles {
 
         // Descargar la foto principal
         $name = "{$idFoto}_00.jpg";
-        mkdir($pathPhotos . $carpeta, 0755, true);
+        if (!file_exists($pathPhotos . $carpeta)) {
+            mkdir($pathPhotos . $carpeta, 0755, true);
+        }
         if ($principal != '') {
             //echo "{$pathPhotos}{$carpeta}{$name}\t{$principal}\n";
             $ok = file_put_contents("{$pathPhotos}{$carpeta}{$name}", file_get_contents($principal));
