@@ -13,7 +13,25 @@
             <div class="span9 columna_izquierda_por_que">
 		<h1 class="contenido_interior"><strong>{{values.contenido.Titulo}}</strong></h1>						
                 <div class="clearfix clearboth contenido_textos contenido_porque">
-                    {% autoescape false%}{{values.contenido.Introduccion}}{% endautoescape %}
+                    {% for item in values.inmuebles %}
+                        <div class="row-fluid">
+                            <div>
+                                <img src="{{item.rutagraf}}" width="172">
+                            </div>
+                            <div class="">
+                                {% autoescape false %}
+                                <h3>Referencia {{item.cod_elemento}}, {{item.des_tipoelem}}<h3>
+                                <p>{{item.des_zona}} - {{item.des_poblacion}}</p>
+                                <p>{{item.numhabitac}} Habitaciones, {{item.numbanios}} Baños</p>
+                                {% if item.m2constr > 0 %}<p>{{item.m2constr}} M2 Construidos</p>{% endif %}
+                                <p>{{item.Estado}}</p>
+                                {% endautoescape%}
+                            </div>
+                            <div>
+                                {{macro.moneda(item.precio)}}
+                            </div>
+                        </div>
+                    {% endfor %}
                 </div>
             </div> 
             {% include '_global/cajaLocalizacion.html.twig' %}                
