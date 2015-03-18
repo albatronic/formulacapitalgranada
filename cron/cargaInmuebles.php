@@ -82,9 +82,9 @@ class CargaInmuebles {
     static function trataFotos($idInmueble, $principal, $fotosExtra) {
 
         $mapeo = array();
-        $pathPhotos = "../" . THEME . "/docs/";
+        $pathPhotos = "../" . THEME . "/";
         $idFoto = str_pad($idInmueble, 4, "0", STR_PAD_LEFT);
-        $carpeta = "Inmobiliaria/$idFoto/";
+        $carpeta = "docs/Inmobiliaria/$idFoto/";
 
         // Descargar la foto principal
         $name = "{$idFoto}_00.jpg";
