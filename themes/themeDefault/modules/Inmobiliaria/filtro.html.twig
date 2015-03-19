@@ -1,0 +1,36 @@
+{# empty Twig template #}
+<div class="filtro">
+    Provincia
+    <select id="provincia" name="provincia">
+        <option value="">Todas las provincias</option>
+        {% for provincia,poblaciones in filtro.provPobZon %}
+            <option value="{{provincia}}">{{provincia}}</option>
+        {% endfor %}
+    </select>
+    
+    Poblacion
+    <select id="poblacion" name="poblacion">
+        <option value="Todas las poblaciones">Todas las poblaciones</option>
+    </select>
+    
+    Zona
+    <select id="zona" name="zona">
+        <option value="Todas las zonas">Todas las zonas</option>
+    </select>
+    
+    Operación
+    <select id="tipoOperacion" name="tipoOperacion">
+        <option value="Todas">Todas</option>
+        {% for key,tipo in filtro.tiposOperacion %}
+            <option value="{{key}}">{{tipo}}</option>
+        {% endfor %}
+    </select>
+    
+    Tipo Inmueble
+    <select id="tipoInmueble" name="tipoInmueble">
+        <option value="Todos">Todos</option>
+        {% for key,tipo in filtro.tiposInmueble %}
+            <option value="{{key}}">{{tipo}}</option>
+        {% endfor %}
+    </select>
+</div>

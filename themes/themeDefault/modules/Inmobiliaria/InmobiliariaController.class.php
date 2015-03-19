@@ -15,8 +15,15 @@ class InmobiliariaController extends ControllerProject {
 
         $this->values['menuLateral'] = Menu::getMenuN(2);
         $this->values['contenido'] = new GconSecciones($this->request['IdEntity']);
-
+     
         $inmuebles = new Inmuebles();
+        
+        $this->values['filtro'] = array(
+            'provPobZon' => $inmuebles->getProvinciasPoblacionesZonas(),
+            'tiposOperacion' => $inmuebles->getTiposOperacion(),
+            'tiposInmueble' => $inmuebles->getTiposInmueble(),
+        );
+        $this->values['provPobZon'] = json_encode($this->values['filtro']['provPobZon']);
         $this->values['inmuebles'] = $inmuebles->cargaCondicion("*");
         
         $template = ($this->request['Template'] !== '') ? $this->entity . "/" . $this->request['Template'] :

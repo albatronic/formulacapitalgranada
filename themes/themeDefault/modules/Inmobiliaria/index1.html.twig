@@ -13,6 +13,7 @@
             <div class="span9 columna_izquierda_por_que">
 		<h1 class="contenido_interior"><strong>{{values.contenido.Titulo}}</strong></h1>						
                 <div class="clearfix clearboth contenido_textos contenido_porque">
+                    {% include 'Inmobiliaria/filtro.html.twig' with {'filtro' : values.filtro} %}
                     {% for item in values.inmuebles %}
                         <div class="row-fluid">
                             <div>

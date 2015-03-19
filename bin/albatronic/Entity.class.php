@@ -537,8 +537,9 @@ class Entity {
                 $filtro .= " AND ( (Privacy='2') OR ( (Privacy='1') AND LOCATE('{$idPerfil}',AccessProfileListWeb) ) )";
             }
 
-            if ($condicion != '')
+            if ($condicion != '') {
                 $filtro .= " AND {$condicion}";
+            }
 
             $query = "SELECT {$columnas} FROM `{$this->_dataBaseName}`.`{$this->_tableName}` WHERE {$filtro} {$orderBy}";
             $this->_em->query($query); //echo $query,"<br/>";

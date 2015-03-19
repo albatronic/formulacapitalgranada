@@ -5,3 +5,45 @@
 <script type="text/javascript" src="{{app.path}}/{{theme}}/js/prettyphoto/js/jquery.prettyPhoto.js"></script>
 <script type="text/javascript" src="{{app.path}}/{{theme}}/js/template/common.js"></script>
 <script type="text/javascript" src="{{app.path}}/{{theme}}/js/carousel/jquery.jcarousel.js"></script>
+
+<script>
+
+    var provPobZon ={{values.provPobZon|raw}}
+
+    $(function () {
+        // Actualizar poblaciones y zonas
+        $('#provincia').change(function () {
+            html = "<option value=''>Todas las poblaciones</option>";
+            provincia = $('#provincia').val();
+
+            if (provincia !== '') {
+                $.each(provPobZon[provincia], function (key, value) {
+                    html = html + "<option value=" + key + ">" + key + "</option>";
+                });
+            }
+            $('#poblacion option').remove();
+            $('#poblacion').append(html);
+            $('#poblacion').change();
+
+            // Resetear las zonas
+            //$('#zona option').remove();
+            //$('#zona').append("<option value=''>Todas las zonas</option>");
+
+        });
+
+        // Actualizar zonas
+        $("#poblacion").change(function () {
+            html = "<option value=''>Todas las zonas</option>";
+            provincia = $('#provincia').val();
+            poblacion = $('#poblacion').val();
+
+            if (provincia !== '' && poblacion !== '') {
+                $.each(provPobZon[provincia][poblacion], function (key, value) {
+                    html = html + "<option value=" + key + ">" + key + "</option>";
+                });
+            }
+            $('#zona option').remove();
+            $('#zona').append(html);
+        });
+    });
+</script>
