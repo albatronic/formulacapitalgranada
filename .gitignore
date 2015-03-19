@@ -1,5 +1,6 @@
 /log/*.log
 /themes/themeDefault/cache/
+/themes/themeDefault/docs/Inmobiliaria/
 /nbproject/
 /config/config.yml
 /config/config_prod.yml
