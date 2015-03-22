@@ -31,6 +31,7 @@ class SitemapController extends ControllerProject {
                 $rows[]['UrlFriendly'] = "/secciones.xml";
                 $rows[]['UrlFriendly'] = "/familiasServicios.xml";
                 $rows[]['UrlFriendly'] = "/servicios.xml";
+                $rows[]['UrlFriendly'] = "/inmuebles.xml";
                 $xml = Feeds::getSiteMapIndex($rows);
                 break;
 
@@ -96,6 +97,13 @@ class SitemapController extends ControllerProject {
 
             case 'contenidos.xml':
                 $contenido = new GconContenidos();
+                $rows = $contenido->cargaCondicion($columnas, $filtro, "{$orden} {$limit}");
+                unset($contenido);
+                $xml = Feeds::getSiteMap($rows);
+                break;
+
+            case 'inmuebles.xml':
+                $contenido = new Inmuebles();
                 $rows = $contenido->cargaCondicion($columnas, $filtro, "{$orden} {$limit}");
                 unset($contenido);
                 $xml = Feeds::getSiteMap($rows);

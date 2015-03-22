@@ -118,7 +118,7 @@ class CargaInmuebles {
 
         return $mapeo;
     }
-
+    
     static function limpia($texto) {
         $texto = str_replace("[CDATA]", "", $texto);
         $texto = str_replace("[/CDATA]", "", $texto);
@@ -135,6 +135,9 @@ if ($inmuebles != '') {
 
     $inmo = new Inmuebles();
     $inmo->truncate();
+    // Borrar las urls amigables de inmuebles
+    $url = new CpanUrlAmigables();
+    $url->queryDelete("Controller='Inmobiliaria' and Action='Inmueble'");
 
     CargaInmuebles::log("Se vacia la tabla de inmuebles");
 
@@ -148,6 +151,7 @@ if ($inmuebles != '') {
             $data[$key] = $value;
         }
         $data['Publish'] = 1;
+        $data['ShowOnSitemap'] = 1;
         $fotosExtra = $data['Fotos'];
         unset($data['Fotos']);
         unset($data['Idiomas']);

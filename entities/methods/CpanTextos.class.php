@@ -91,27 +91,31 @@ class CpanTextos extends CpanTextosEntity {
 
         return $rows;
     }
+
     /**
      * Devuelve un objeto cuyo valor de la columna $columna es igual a $valor
      *
      * @param string $columna El nombre de la columna
      * @param variant $valor El valor a buscar
+     * @param boolean $showDeleted Devolver o no los registros marcados como borrados, por defecto no se devuelven
      * @return this El objeto encontrado
      */
-    public function find($columna, $valor) {
+    public function find($columna, $valor, $showDeleted = FALSE) {
 
         $this->conecta();
 
         if (is_resource($this->_dbLink)) {
 
             $condicion = "({$columna}='{$valor}')";
-
+            if ($showDeleted == FALSE) {
+                $condicion .= " AND (Deleted = '0')";
+            }
             // Condición de vigencia
             $ahora = date("Y-m-d H:i:s");
-            $condicion .= " AND Publish='1' AND (Deleted='0') AND (ActiveFrom<='{$ahora}') AND ( (ActiveTo>='{$ahora}') or (ActiveTo='0000-00-00 00:00:00') )";
+            $condicion .= " AND Publish='1' AND (ActiveFrom<='{$ahora}') AND ( (ActiveTo>='{$ahora}') or (ActiveTo='0000-00-00 00:00:00') )";
 
             $query = "SELECT {$this->_primaryKeyName} FROM `{$this->_dataBaseName}`.`{$this->_tableName}` WHERE ({$condicion})";
-            $this->_em->query($query);//echo $query;
+            $this->_em->query($query); //echo $query;
             $this->setStatus($this->_em->numRows());
             $rows = $this->_em->fetchResult();
             //$this->_em->desConecta();
@@ -121,4 +125,5 @@ class CpanTextos extends CpanTextosEntity {
 
         return new $this($rows[0][$this->_primaryKeyName]);
     }
+
 }

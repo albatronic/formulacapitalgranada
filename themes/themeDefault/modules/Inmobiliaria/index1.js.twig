@@ -1,6 +1,6 @@
 <script type="text/javascript" src="{{app.path}}/{{theme}}/js/jquery/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="{{app.path}}/{{theme}}/js/jquery/jquery-ui-1.10.3.js"></script>
-<script type="text/javascript" src="{{app.path}}/{{theme}}/js/jquery/jquery.validate.js"></script>
+<!--<script type="text/javascript" src="{{app.path}}/{{theme}}/js/jquery/jquery.validate.js"></script>-->
 <script type="text/javascript" src="{{app.path}}/{{theme}}/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="{{app.path}}/{{theme}}/js/prettyphoto/js/jquery.prettyPhoto.js"></script>
 <script type="text/javascript" src="{{app.path}}/{{theme}}/js/template/common.js"></script>
@@ -44,6 +44,21 @@
             }
             $('#zona option').remove();
             $('#zona').append(html);
+            $('#zona').change();
+        });
+        
+        $('#zona').change(function(){
+            seleccion = $('#zona').val() + $('#poblacion').val() + $('#tipoOperacion').val() + $('#tipoInmueble').val();
+            <!--alert(seleccion);-->
+            $('.rowL1').hide();            
+            $(".rowL1:contains('"+seleccion+"')").show();
+        });
+        
+        $('#tipoOperacion').change(function(){
+            $('#zona').change();
+        });
+        $('#tipoInmueble').change(function(){
+            $('#zona').change();
         });
     });
 </script>

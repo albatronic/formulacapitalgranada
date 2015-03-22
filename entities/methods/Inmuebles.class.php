@@ -54,4 +54,25 @@ class Inmuebles extends InmueblesEntity {
         return $array;       
     }
 
+    public function save() {
+        
+        // Crear la url amigable
+        $tipoOperacion = str_replace(" ","_",strtolower(trim($this->_tiposOperacion[$this->cod_destino])));
+        $poblacion = str_replace(" ","_",strtolower(trim($this->des_poblacion)));
+        $tipoInmuble = str_replace(" ","_",strtolower(trim($this->des_tipoelem)));
+        $this->UrlFriendly = "/{$tipoOperacion}_{$poblacion}_{$tipoInmuble}_{$this->cod_elemento}";
+        //echo $this->UrlFriendly,"\n";
+
+        $url = new CpanUrlAmigables();
+        $url->setIdioma(0);
+        $url->setUrlFriendly($this->UrlFriendly);
+        $url->setController('Inmobiliaria');
+        $url->setAction('Inmueble');
+        $url->setTemplate('inmueble.html.twig');
+        $url->setEntity('Inmuebles');
+        $url->setIdEntity($this->Id);
+        $url->create();
+
+        return parent::save();
+    }
 }

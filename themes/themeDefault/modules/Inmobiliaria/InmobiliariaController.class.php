@@ -24,7 +24,7 @@ class InmobiliariaController extends ControllerProject {
             'tiposInmueble' => $inmuebles->getTiposInmueble(),
         );
         $this->values['provPobZon'] = json_encode($this->values['filtro']['provPobZon']);
-        $this->values['inmuebles'] = $inmuebles->cargaCondicion("*");
+        $this->values['inmuebles'] = $inmuebles->cargaCondicion("*","","Id Desc");
         
         $template = ($this->request['Template'] !== '') ? $this->entity . "/" . $this->request['Template'] :
                 $this->controller . "/index.html.twig";
@@ -35,4 +35,10 @@ class InmobiliariaController extends ControllerProject {
         );
     }
 
+    public function InmuebleAction() {
+
+        $this->values['inmueble'] = new Inmuebles($this->request['IdEntity']);
+        
+        return $this->IndexAction();
+    }
 }

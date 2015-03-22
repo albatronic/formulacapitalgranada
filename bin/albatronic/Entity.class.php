@@ -431,7 +431,7 @@ class Entity {
 
         if ($this->getPrimaryKeyValue() != '') {
             // Estoy validando antes de actualizar
-            if (($this->IsSuper) and ($_SESSION['usuarioWeb']['IdPerfil'] != '1'))
+            if (($this->IsSuper) and ( $_SESSION['usuarioWeb']['IdPerfil'] != '1'))
                 $this->_errores[] = "No se puede modificar, es un valor reservado";
         }
 
@@ -652,21 +652,17 @@ class Entity {
      */
     public function find($columna, $valor, $showDeleted = FALSE) {
 
-        $condicion = "({$columna} = '{$valor}')";
-
-        if ($showDeleted == FALSE) {
-            $condicion .= " AND (Deleted = '0')";
-        }
-
         $this->conecta();
 
         if (is_resource($this->_dbLink)) {
 
             $condicion = "({$columna}='{$valor}')";
-
+            if ($showDeleted == FALSE) {
+                $condicion .= " AND (Deleted = '0')";
+            }
             // Condición de vigencia
             $ahora = date("Y-m-d H:i:s");
-            $condicion .= " AND Publish='1' AND (Deleted='0') AND (ActiveFrom<='{$ahora}') AND ( (ActiveTo>='{$ahora}') or (ActiveTo='0000-00-00 00:00:00') )";
+            $condicion .= " AND Publish='1' AND (ActiveFrom<='{$ahora}') AND ( (ActiveTo>='{$ahora}') or (ActiveTo='0000-00-00 00:00:00') )";
 
             // Condición de privacidad
             if (!$_SESSION['usuarioWeb']['Id']) {

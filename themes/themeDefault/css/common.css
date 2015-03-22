@@ -1159,3 +1159,32 @@ footer.landing .orange a {text-decoration: underline;}
 footer.landing .orange p span { font-weight: bold; font-size: 18px;}
 footer.landing .orange .tel {font-size: 14px; font-weight: bold;}
 footer.landing .black {text-align: center; background: #000000; color: #8d8d8d; font-size: 12px;}
+
+/************************
+// INMUEBLES
+/************************/
+.rowL1 { margin-top: 30px; margin-left: 0px; float: left; font-size: 21px; border-bottom: dotted; border-width: 1px; border-color: #FF7500;}
+.rowL1 .inmu3 { float: left; width: 195px;}
+.rowL1 .inmu7 { margin-left: 15px; float: left; width: 585px;}
+.rowL1 .inmu2 { margin-left: 5px; float: left; width: 140px; text-align: right;color: #FF7500; font-weight: bold;}
+h2.tituloInmueble {margin-top: 0; font-size: 21px; color: #FF7500; font-weight: bold;}
+.rowL1 p { margin: 5px; font-size: 14px;}
+.rowL1 .comentarios {font-size: 13px;}
+.rowL1 .zonaInmueble { font-weight: bold; }
+.rowL1 .estado { font-weight: bold; }
+.filtro { margin-top: 20px; border-bottom: dotted; border-width: 1px; border-color: #FF7500;}
+.filtro label {font-weight: bold;}
+.itemFiltro select {
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857;
+    color: #555;
+    background-color: #FFF;
+    background-image: none;
+    border: 1px solid #CCC;
+    border-radius: 4px;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;    
+}
+.itemFiltro {float:left; width:31%; margin-right: 20px;}

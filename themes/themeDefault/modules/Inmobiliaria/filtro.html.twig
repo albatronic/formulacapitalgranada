@@ -1,36 +1,46 @@
 {# empty Twig template #}
 <div class="filtro">
-    Provincia
-    <select id="provincia" name="provincia">
-        <option value="">Todas las provincias</option>
-        {% for provincia,poblaciones in filtro.provPobZon %}
-            <option value="{{provincia}}">{{provincia}}</option>
-        {% endfor %}
-    </select>
-    
-    Poblacion
-    <select id="poblacion" name="poblacion">
-        <option value="Todas las poblaciones">Todas las poblaciones</option>
-    </select>
-    
-    Zona
-    <select id="zona" name="zona">
-        <option value="Todas las zonas">Todas las zonas</option>
-    </select>
-    
-    Operación
-    <select id="tipoOperacion" name="tipoOperacion">
-        <option value="Todas">Todas</option>
-        {% for key,tipo in filtro.tiposOperacion %}
-            <option value="{{key}}">{{tipo}}</option>
-        {% endfor %}
-    </select>
-    
-    Tipo Inmueble
-    <select id="tipoInmueble" name="tipoInmueble">
-        <option value="Todos">Todos</option>
-        {% for key,tipo in filtro.tiposInmueble %}
-            <option value="{{key}}">{{tipo}}</option>
-        {% endfor %}
-    </select>
+    <div class="row">
+        <div class="itemFiltro">
+        <label for="provincia">Provincia</label>
+        <select id="provincia" name="provincia">
+            <option value="">Todas las provincias</option>
+            {% for provincia,poblaciones in filtro.provPobZon %}
+                <option value="{{provincia}}">{{provincia}}</option>
+            {% endfor %}
+        </select>
+        </div>
+        <div class="itemFiltro">    
+        <label for="poblacion">Población</label>
+        <select id="poblacion" name="poblacion">
+            <option value="">Todas las poblaciones</option>
+        </select>
+        </div>
+        <div class="itemFiltro">    
+        <label for="zona">Zona</label>
+        <select id="zona" name="zona">
+            <option value="">Todas las zonas</option>
+        </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="itemFiltro">
+        <label for="operacon">Operación</label>
+        <select id="tipoOperacion" name="tipoOperacion">
+            <option value="">Todas</option>
+            {% for key,tipo in filtro.tiposOperacion %}
+                <option value="{{tipo}}">{{tipo}}</option>
+            {% endfor %}
+        </select>
+        </div>    
+        <div class="itemFiltro">    
+        <label for="tipoInmueble">Tipo Inmueble</label>
+        <select id="tipoInmueble" name="tipoInmueble">
+            <option value="">Todos</option>
+            {% for key,tipo in filtro.tiposInmueble %}
+                <option value="{{key}}">{{tipo}}</option>
+            {% endfor %}
+        </select>
+        </div>    
+    </div>
 </div>
