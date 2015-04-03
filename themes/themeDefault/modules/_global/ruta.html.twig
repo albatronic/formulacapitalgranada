@@ -6,7 +6,7 @@
         {% for item in values.ruta %}
             <li class="divider"><span class="miga_divider">&nbsp;</span></li>
             {% if loop.last %}
-                <li class="active"><span>{{item.nombre}}</span></li>
+                <li class="active"><span>{% autoescape false %}{{item.nombre}}{% endautoescape %}</span></li>
             {% else %}
                 <li class="active"><span><a href="{{item.url.url}}">{{item.nombre}}</a></span></li>                
             {% endif %}

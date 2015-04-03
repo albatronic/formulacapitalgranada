@@ -31,7 +31,7 @@
                                 {% autoescape false %}
                                     <div style="display: none">{{item.des_zona}}{{item.des_poblacion}}{{values.filtro.tiposOperacion[item.cod_destino]}}{{item.des_tipoelem}}</div>
                                     <h2 class="tituloInmueble">
-                                        <a href="{{app.url}}{{item.UrlFriendly}}">Referencia {{item.cod_elemento}}, {{item.des_tipoelem}} - {{values.filtro.tiposOperacion[item.cod_destino]}}</a></h2>
+                                        <a href="{{app.url}}{{item.UrlFriendly}}">Referencia {{item.cod_elemento}}, {{item.des_tipoelem}} - {{values.tiposOperacion[item.cod_destino]}}</a></h2>
                                     <p class="zonaInmueble">{{item.des_zona}} - {{item.des_poblacion}}</p>
                                     <p class="items">{{item.numhabitac}} Habitaciones, {{item.numbanios}} Baños</p>
                                     {% if item.m2constr > 0 %}
