@@ -1199,9 +1199,19 @@ h2.tituloInmueble {margin-top: 0; font-size: 21px; color: #FF7500; font-weight: 
 .paginador .anterior { float: left; margin-left: 5px; width: 31%; text-align: center; }
 .paginador .siguiente { float: left; margin-left: 5px; width: 31%; text-align: center; }
 
+.rowDeta { margin-top: 30px; padding-bottom: 10px; margin-left: 0px; float: left; font-size: 21px;}
+.rowDeta h3 {margin: 10px 0 15px 0;}
+.rowDeta .miniFicha {height: 309px; padding: 3px; width: 300px; float: left; margin-right: 5px; border: 2px solid #C0C0C0; margin: 0 3px 3px 0;}
+.rowDeta .miniFicha .imagen {height: 196px; float: left; width: 100%; text-align: center;}
+.rowDeta .miniFicha img {max-width: 294px; max-height: 196px; alignment-adjust: middle;}
+.rowDeta .miniFicha .descripcion { float: left; font-size: 14px; margin-top: 5px; padding: 5px;}
+.rowDeta .miniFicha .descripcion  p { line-height: 2px; font-size: 16px;}
+.rowDeta .comentarios {font-size: 13px;}
 .deta-inmu-fotos { float: left; width: 380px;}
 .deta-inmu-textos { margin-left: 15px; float: left; width: 545px;}
+
 
 #imagenPrincipal { margin-bottom: 10px;}
 .slideimagenes { outline: medium none; text-decoration: none; }
 .slideimagenes img { border: 2px solid #C0C0C0; margin: 0 3px 3px 0;}
+

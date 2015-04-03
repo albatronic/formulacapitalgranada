@@ -81,6 +81,7 @@ class InmobiliariaController extends ControllerProject {
         $this->values['ruta'][] = array('nombre' => "Inmobiliaria", "url" => array("url" => "Inmobiliaria"),);
         $this->values['ruta'][] = array('nombre' => $inmueble->getBreadcrumb() , );    
         $this->values['tiposOperacion'] = $inmueble->getTiposOperacion();
+        $this->values['relacionados'] = $inmueble->getRelacionados();
         
         return array(
             "template" => $this->entity . "/inmueble.html.twig",

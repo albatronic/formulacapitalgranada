@@ -13,26 +13,23 @@
             <div class="contenido_interior row">    
 
                 <div class="span12 columna_izquierda_por_que">
-                    <h1 class="contenido_interior"><strong>{{values.contenido.Titulo}}</strong></h1>						
+                    <h1 class="contenido_interior"><strong>Referencia {{item.cod_elemento}}, {{item.des_tipoelem}} - {{values.tiposOperacion[item.cod_destino]}} - {{item.des_poblacion}}</strong></h1>						
                     <div class="clearfix clearboth contenido_textos contenido_porque">
-                        <div class="rowL1">
+                        <div class="rowDeta">
                             <div class="deta-inmu-fotos">
                                 <img id="imagenPrincipal" src="{{app.url}}/{{theme}}/{{item.rutagraf}}" width="380" height="286"/>
                                 {% for foto in item.getFotos %}
-                                    <a href="javascript:;" class="slideimagenes" onclick="$('#imagenPrincipal').attr('src','{{app.url}}/{{theme}}/{{foto.url}}');">
+                                    <a href="javascript:;" class="slideimagenes" onclick="$('#imagenPrincipal').attr('src', '{{app.url}}/{{theme}}/{{foto.url}}');">
                                         <img src="{{app.url}}/{{theme}}/{{foto.url}}" width="64"/>
                                     </a>
                                 {% endfor %}  
-                                    <a href="javascript:;" class="slideimagenes" onclick="$('#imagenPrincipal').attr('src','{{app.url}}/{{theme}}/{{item.rutagraf}}');">
-                                        <img src="{{app.url}}/{{theme}}/{{item.rutagraf}}" width="64"/>
-                                    </a>                                
+                                <a href="javascript:;" class="slideimagenes" onclick="$('#imagenPrincipal').attr('src', '{{app.url}}/{{theme}}/{{item.rutagraf}}');">
+                                    <img src="{{app.url}}/{{theme}}/{{item.rutagraf}}" width="64"/>
+                                </a>                                
                             </div>
                             <div class="deta-inmu-textos">
                                 {% autoescape false %}
-                                    <div style="display: none">{{item.des_zona}}{{item.des_poblacion}}{{values.filtro.tiposOperacion[item.cod_destino]}}{{item.des_tipoelem}}</div>
-                                    <h2 class="tituloInmueble">
-                                        <a href="{{app.url}}{{item.UrlFriendly}}">Referencia {{item.cod_elemento}}, {{item.des_tipoelem}} - {{values.tiposOperacion[item.cod_destino]}}</a></h2>
-                                    <p class="zonaInmueble">{{item.des_zona}} - {{item.des_poblacion}}</p>
+                                    <p class="zonaInmueble">{{item.des_poblacion}} - {{item.des_zona}} - {{item.des_provincia}}</p>
                                     <p class="items">{{item.numhabitac}} Habitaciones, {{item.numbanios}} Baños</p>
                                     {% if item.m2constr > 0 %}
                                         <p class="items">{{item.m2constr}} M2 Construidos</p>
@@ -44,6 +41,24 @@
                             </div>
                         </div>
 
+                        {% if values.relacionados %}
+                            <div class="rowDeta">
+                                <h3>Tal vez te pueda interesar...</h3>
+                                {% for key,item in values.relacionados %}
+                                    <div class="miniFicha">
+                                        <div class="imagen">
+                                            <img src="{{app.url}}/{{theme}}/{{item.rutagraf}}"/>
+                                        </div>
+                                        <div class="descripcion">
+                                            <p>{{item.des_tipoelem}} - {{values.tiposOperacion[item.cod_destino]}}</p>
+                                            <p>{{item.des_poblacion}} - {{item.des_zona}} - {{item.des_provincia}}</p>
+                                            <p>{{item.m2constr}} M2 Construidos</p>
+                                            <p>{{macro.moneda(item.precio)}}</p>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
                     </div>
                 </div>              
             </div> 

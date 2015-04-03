@@ -10,10 +10,10 @@
  */
 class Inmuebles extends InmueblesEntity {
 
-     var $_tiposOperacion = array(
+    var $_tiposOperacion = array(
         'V' => 'Venta',
     );
-    
+
     public function __toString() {
         return ($this->Id) ? $this->Id : '';
     }
@@ -29,9 +29,9 @@ class Inmuebles extends InmueblesEntity {
 
         return $array;
     }
-    
-    public function getTiposOperacion(){
- 
+
+    public function getTiposOperacion() {
+
         $array = array();
 
         $rows = $this->cargaCondicion("distinct(cod_destino) destino", "");
@@ -39,11 +39,11 @@ class Inmuebles extends InmueblesEntity {
             $array[$row['destino']] = $this->_tiposOperacion[$row['destino']];
         }
 
-        return $array;       
+        return $array;
     }
-    
-    public function getTiposInmueble(){
- 
+
+    public function getTiposInmueble() {
+
         $array = array();
 
         $rows = $this->cargaCondicion("distinct(des_tipoelem) tipo", "", "des_tipoelem ASC");
@@ -51,11 +51,11 @@ class Inmuebles extends InmueblesEntity {
             $array[$row['tipo']] = $row['tipo'];
         }
 
-        return $array;       
+        return $array;
     }
-    
-    public function getSituaciones(){
- 
+
+    public function getSituaciones() {
+
         $array = array();
 
         $rows = $this->cargaCondicion("distinct(situacion) situacion", "situacion<>''", "situacion ASC");
@@ -63,15 +63,15 @@ class Inmuebles extends InmueblesEntity {
             $array[$row['situacion']] = $row['situacion'];
         }
 
-        return $array;       
+        return $array;
     }
-    
+
     public function save() {
-        
+
         // Crear la url amigable
-        $tipoOperacion = str_replace(" ","_",strtolower(trim($this->_tiposOperacion[$this->cod_destino])));
-        $poblacion = str_replace(" ","_",strtolower(trim($this->des_poblacion)));
-        $tipoInmuble = str_replace(" ","_",strtolower(trim($this->des_tipoelem)));
+        $tipoOperacion = str_replace(" ", "_", strtolower(trim($this->_tiposOperacion[$this->cod_destino])));
+        $poblacion = str_replace(" ", "_", strtolower(trim($this->des_poblacion)));
+        $tipoInmuble = str_replace(" ", "_", strtolower(trim($this->des_tipoelem)));
         $this->UrlFriendly = "/{$tipoOperacion}_{$poblacion}_{$tipoInmuble}_{$this->cod_elemento}";
         //echo $this->UrlFriendly,"\n";
 
@@ -87,13 +87,31 @@ class Inmuebles extends InmueblesEntity {
 
         return parent::save();
     }
-    
+
     public function getBreadcrumb() {
         return $this->getdes_provincia() . " > " . $this->getdes_poblacion() . " > " . $this->getdes_tipoelem();
     }
-    
+
     public function getFotos() {
-        $array = json_decode($this->Observations);
+        return json_decode($this->Observations);
+    }
+
+    public function getRelacionados($nItems = 6, $orden = "Id DESC") {
+
+        $array = array();
+
+        if ($nItems <= 0) {
+            $nItems = 5;
+        }
+
+        $filtro = "Id<>'{$this->Id}' and des_poblacion='{$this->des_poblacion}' and des_tipoelem='{$this->des_tipoelem}'";
+        
+        $rows = $this->cargaCondicion("Id", $filtro, $orden . " limit {$nItems}");
+        foreach ($rows as $row) {
+            $array[] = new Inmuebles($row['Id']);
+        }
+
         return $array;
     }
+
 }
