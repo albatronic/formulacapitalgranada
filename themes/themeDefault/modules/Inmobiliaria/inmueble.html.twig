@@ -13,31 +13,53 @@
             <div class="contenido_interior row">    
 
                 <div class="span12 columna_izquierda_por_que">
-                    <h1 class="contenido_interior"><strong>Referencia {{item.cod_elemento}}, {{item.des_tipoelem}} - {{values.tiposOperacion[item.cod_destino]}} - {{item.des_poblacion}}</strong></h1>						
+                    <h1 class="titulo-inmueble"><strong>Referencia {{item.cod_elemento}}, {{item.des_tipoelem}} - {{values.tiposOperacion[item.cod_destino]}} - {{item.des_poblacion}}</strong></h1>						
                     <div class="clearfix clearboth contenido_textos contenido_porque">
                         <div class="rowDeta">
                             <div class="deta-inmu-fotos">
-                                <img id="imagenPrincipal" src="{{app.url}}/{{theme}}/{{item.rutagraf}}" width="380" height="286"/>
+                                <img id="imagenPrincipal" class="principal" src="{{app.url}}/{{theme}}/{{item.rutagraf}}"/>
                                 {% for foto in item.getFotos %}
                                     <a href="javascript:;" class="slideimagenes" onclick="$('#imagenPrincipal').attr('src', '{{app.url}}/{{theme}}/{{foto.url}}');">
-                                        <img src="{{app.url}}/{{theme}}/{{foto.url}}" width="64"/>
+                                        <img class="thumbnail" src="{{app.url}}/{{theme}}/{{foto.url}}"/>
                                     </a>
                                 {% endfor %}  
                                 <a href="javascript:;" class="slideimagenes" onclick="$('#imagenPrincipal').attr('src', '{{app.url}}/{{theme}}/{{item.rutagraf}}');">
-                                    <img src="{{app.url}}/{{theme}}/{{item.rutagraf}}" width="64"/>
+                                    <img class="thumbnail" src="{{app.url}}/{{theme}}/{{item.rutagraf}}"/>
                                 </a>                                
                             </div>
                             <div class="deta-inmu-textos">
                                 {% autoescape false %}
-                                    <p class="zonaInmueble">{{item.des_poblacion}} - {{item.des_zona}} - {{item.des_provincia}}</p>
-                                    <p class="items">{{item.numhabitac}} Habitaciones, {{item.numbanios}} Baños</p>
+                                    <p>{{item.des_poblacion}} - {{item.des_zona}} - {{item.des_provincia}}</p>
+                                    <p>{{item.numhabitac}} Habitaciones, {{item.numbanios}} Baños</p>
                                     {% if item.m2constr > 0 %}
-                                        <p class="items">{{item.m2constr}} M2 Construidos</p>
+                                        <p>{{item.m2constr}} M2 Construidos</p>
                                     {% endif %}
-                                    <p class="estado">{{item.estgen}}</p>
+                                    {% if item.situacion %}
+                                        <p>{{item.situacion}}</p>
+                                    {% endif %}
+                                    {% if item.des_vista %}
+                                        <p>Vistas {{item.des_vista}}</p>
+                                    {% endif %}
+                                    {% if item.des_orientacion %}                                        
+                                        <p>Orientación {{item.des_orientacion}}</p> 
+                                    {% endif %}  
+                                    {% if item.ubicacion %}                                        
+                                        <p>Ubicación {{item.ubicacion}}</p>
+                                    {% endif %}    
+                                    <p>{{item.num_salones}} Salones</p>
+                                    {% if item.numaseos %}
+                                        <p>{{item.numaseos}} Aseos</p>
+                                    {% endif %}
+                                    <p>{{item.num_pgaraje}} Plaza garaje</p>
+                                    <p>Pax {{item.pax}}</p>
+                                    <p>{{item.amueblado}}</p>
+                                    <p>{{item.estgen}}</p>
                                     <p class="comentarios">{{item.comentarios}}</p>
+                                    <p class="precio">{{macro.moneda(item.precio)}}</p>
                                 {% endautoescape%}
-                                {{macro.moneda(item.precio)}}
+                                <div class="condicionesLegales">
+                                    <a rel="prettyPhoto" href="{{app.path}}/condiciones-legales-inmobiliaria?iframe=true&width=570&height=630">Condiciones legales</a>
+                                </div>
                             </div>
                         </div>
 
@@ -51,9 +73,10 @@
                                         </div>
                                         <div class="descripcion">
                                             <p>{{item.des_tipoelem}} - {{values.tiposOperacion[item.cod_destino]}}</p>
-                                            <p>{{item.des_poblacion}} - {{item.des_zona}} - {{item.des_provincia}}</p>
+                                            <p>{% autoescape false %}{{item.des_poblacion}} - {{item.des_zona}} - {{item.des_provincia}}{% endautoescape %}</p>
                                             <p>{{item.m2constr}} M2 Construidos</p>
-                                            <p>{{macro.moneda(item.precio)}}</p>
+                                            <div class="precio">{{macro.moneda(item.precio)}}</div>
+                                            <div class="masInfo"><a href="{{app.url}}{{item.UrlFriendly}}">Más Info</a></div>
                                         </div>
                                     </div>
                                 {% endfor %}

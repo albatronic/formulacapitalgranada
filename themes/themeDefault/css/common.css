@@ -1163,6 +1163,7 @@ footer.landing .black {text-align: center; background: #000000; color: #8d8d8d; 
 /************************
 // INMUEBLES
 /************************/
+
 .rowL1 { margin-top: 30px; padding-bottom: 10px; margin-left: 0px; float: left; font-size: 21px; border-bottom: solid; border-width: 1px; border-color: #FF7500;}
 .rowL1 .inmu3 { float: left; width: 195px;}
 .rowL1 .inmu7 { margin-left: 15px; float: left; width: 565px;}
@@ -1199,17 +1200,24 @@ h2.tituloInmueble {margin-top: 0; font-size: 21px; color: #FF7500; font-weight: 
 .paginador .anterior { float: left; margin-left: 5px; width: 31%; text-align: center; }
 .paginador .siguiente { float: left; margin-left: 5px; width: 31%; text-align: center; }
 
+.titulo-inmueble { margin-bottom: 10px !important; padding-top: 0px !important; width: 940 !important; }
 .rowDeta { margin-top: 30px; padding-bottom: 10px; margin-left: 0px; float: left; font-size: 21px;}
 .rowDeta h3 {margin: 10px 0 15px 0;}
 .rowDeta .miniFicha {height: 309px; padding: 3px; width: 300px; float: left; margin-right: 5px; border: 2px solid #C0C0C0; margin: 0 3px 3px 0;}
 .rowDeta .miniFicha .imagen {height: 196px; float: left; width: 100%; text-align: center;}
 .rowDeta .miniFicha img {max-width: 294px; max-height: 196px; alignment-adjust: middle;}
-.rowDeta .miniFicha .descripcion { float: left; font-size: 14px; margin-top: 5px; padding: 5px;}
-.rowDeta .miniFicha .descripcion  p { line-height: 2px; font-size: 16px;}
+.rowDeta .miniFicha .descripcion { float: left; font-size: 14px; margin-top: 5px; padding: 5px; width: 100%;}
+.rowDeta .miniFicha .descripcion p { margin-top: 18px !important; line-height: 2px; font-size: 16px;}
+.rowDeta .miniFicha .descripcion .precio { margin-top: 13px; float: left; font-size: 18px; text-align: right; width: 50%;}
+.rowDeta .miniFicha .descripcion .masInfo { float: left; font-size: 16px; text-align: center; width: 50%; margin-top: 13px !important }
 .rowDeta .comentarios {font-size: 13px;}
-.deta-inmu-fotos { float: left; width: 380px;}
-.deta-inmu-textos { margin-left: 15px; float: left; width: 545px;}
-
+.deta-inmu-fotos { float: left; width: 469px;}
+.deta-inmu-fotos .principal { width: 469px;}
+.deta-inmu-fotos .thumbnail { width: 102px; display: inline !important;}
+.deta-inmu-textos { margin-left: 15px; float: left; width: 456px;}
+.deta-inmu-textos p { margin-top: 9px !important; font-size: 18px;}
+.deta-inmu-textos .condicionesLegales { margin-top: 9px !important; text-align: right; font-size: 13px;}
+.deta-inmu-textos .precio { color: #FF7500; font-weight: bold; text-align: right; font-size: 21px;}
 
 #imagenPrincipal { margin-bottom: 10px;}
 .slideimagenes { outline: medium none; text-decoration: none; }

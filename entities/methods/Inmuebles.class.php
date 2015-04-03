@@ -104,7 +104,7 @@ class Inmuebles extends InmueblesEntity {
             $nItems = 5;
         }
 
-        $filtro = "Id<>'{$this->Id}' and des_poblacion='{$this->des_poblacion}' and des_tipoelem='{$this->des_tipoelem}'";
+        $filtro = "Id<>'{$this->Id}' and (des_poblacion='{$this->des_poblacion}' or des_tipoelem='{$this->des_tipoelem}')";
         
         $rows = $this->cargaCondicion("Id", $filtro, $orden . " limit {$nItems}");
         foreach ($rows as $row) {
