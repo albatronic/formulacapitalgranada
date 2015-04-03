@@ -1,0 +1,21 @@
+{# Paginacion #}
+<div class="paginador">
+    <div class="pagina">
+        Página {{paginacion.pagina}} de {{paginacion.totalPaginas}}
+    </div>
+    <div class="anterior">  
+        {% if paginacion.pagina > 1 %}
+            <a href="javascript:void(0);" onclick="paginar({{paginacion.pagina-1}});">Anterior</a>
+        {% endif %}
+    </div>
+        {#
+        {% for pagina in 1..paginacion.totalPaginas %}
+            <li><a {% if pagina == paginacion.pagina %} class="active" {% endif %} href="javascript:void(0);" onclick="paginar({{pagina}});">{{pagina}}</a></li>
+        {% endfor %}
+        #}
+    <div class="siguiente">    
+        {% if paginacion.pagina < paginacion.totalPaginas %}
+            <a href="javascript:void(0);" onclick="paginar({{paginacion.pagina+1}});">Siguiente</a>      
+        {% endif %}
+    </div>
+</div>

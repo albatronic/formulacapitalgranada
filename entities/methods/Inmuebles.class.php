@@ -53,7 +53,19 @@ class Inmuebles extends InmueblesEntity {
 
         return $array;       
     }
+    
+    public function getSituaciones(){
+ 
+        $array = array();
 
+        $rows = $this->cargaCondicion("distinct(situacion) situacion", "situacion<>''", "situacion ASC");
+        foreach ($rows as $row) {
+            $array[$row['situacion']] = $row['situacion'];
+        }
+
+        return $array;       
+    }
+    
     public function save() {
         
         // Crear la url amigable
@@ -74,5 +86,14 @@ class Inmuebles extends InmueblesEntity {
         $url->create();
 
         return parent::save();
+    }
+    
+    public function getBreadcrumb() {
+        return $this->getdes_provincia() . " > " . $this->getdes_poblacion() . " > " . $this->getdes_tipoelem();
+    }
+    
+    public function getFotos() {
+        $array = json_decode($this->Observations);
+        return $array;
     }
 }

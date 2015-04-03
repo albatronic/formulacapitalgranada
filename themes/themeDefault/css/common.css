@@ -635,7 +635,7 @@ input[type="radio"], input[type="checkbox"] {margin-top: -3px !important;}
 .breadcrumb.contenido_interior{height: 20px; padding-left: 10px; padding-top: 0 !important;width: 970px;padding-bottom: 1px;}
 .breadcrumb ul{border-radius: 4px 4px 4px 4px;background-color: #CCC9C9; margin-top: 2px;}
 
-.breadcrumb > li {color: #FFFFFF; text-shadow: none;}
+.breadcrumb > li {color: #FFFFFF; text-shadow: none; margin-left: 5px;}
 .breadcrumb > li a{font-size: 11px; color: #FFFFFF;}
 .breadcrumb > li a.inicio{font-size: 15px;}
 .breadcrumb > li a.inicio:hover {text-decoration: none;}
@@ -1163,18 +1163,22 @@ footer.landing .black {text-align: center; background: #000000; color: #8d8d8d; 
 /************************
 // INMUEBLES
 /************************/
-.rowL1 { margin-top: 30px; margin-left: 0px; float: left; font-size: 21px; border-bottom: dotted; border-width: 1px; border-color: #FF7500;}
+.rowL1 { margin-top: 30px; padding-bottom: 10px; margin-left: 0px; float: left; font-size: 21px; border-bottom: solid; border-width: 1px; border-color: #FF7500;}
 .rowL1 .inmu3 { float: left; width: 195px;}
-.rowL1 .inmu7 { margin-left: 15px; float: left; width: 585px;}
-.rowL1 .inmu2 { margin-left: 5px; float: left; width: 140px; text-align: right;color: #FF7500; font-weight: bold;}
+.rowL1 .inmu7 { margin-left: 15px; float: left; width: 565px;}
+.rowL1 .inmu2 { margin-left: 5px; float: left; width: 160px;}
 h2.tituloInmueble {margin-top: 0; font-size: 21px; color: #FF7500; font-weight: bold;}
 .rowL1 p { margin: 5px; font-size: 14px;}
 .rowL1 .comentarios {font-size: 13px;}
 .rowL1 .zonaInmueble { font-weight: bold; }
 .rowL1 .estado { font-weight: bold; }
-.filtro { margin-top: 20px; border-bottom: dotted; border-width: 1px; border-color: #FF7500;}
+.precio { color: #FF7500; font-weight: bold; text-align: right;}
+.datos-tecnicos ul{margin:30px 0;}
+.datos-tecnicos li{list-style: none;text-align: left; margin-bottom: 10px;  font-size:14px; background:url("../images/comunes/tick_azul_mini.png") no-repeat; padding-left: 18px; min-height:0 !important;}
+.masInfo { margin-top: 30px; font-size: 14px; text-align: right; }
+.filtro { margin-top: 20px; border-bottom: solid; border-width: 1px; border-color: #FF7500;}
 .filtro label {font-weight: bold;}
-.itemFiltro select {
+.o select {
     height: 34px;
     padding: 6px 12px;
     font-size: 14px;
@@ -1187,4 +1191,17 @@ h2.tituloInmueble {margin-top: 0; font-size: 21px; color: #FF7500; font-weight: 
     box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset;
     transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;    
 }
-.itemFiltro {float:left; width:31%; margin-right: 20px;}
+.itemFiltro {float:left; width:31%; margin-right: 20px;text-align: center;}
+.submit { margin-top: 13px; font-size: 18px;; height: 45px; width: 150px !important;}
+
+.paginador { width: 940px; margin-top: 30px; margin-left: 0px; float: left; font-size: 18px; border: solid; border-width: 1px; border-color: #FF7500; padding: 10px 0px 10px 0px;}
+.paginador .pagina { float: left; width: 31%; text-align: center; }
+.paginador .anterior { float: left; margin-left: 5px; width: 31%; text-align: center; }
+.paginador .siguiente { float: left; margin-left: 5px; width: 31%; text-align: center; }
+
+.deta-inmu-fotos { float: left; width: 380px;}
+.deta-inmu-textos { margin-left: 15px; float: left; width: 545px;}
+
+#imagenPrincipal { margin-bottom: 10px;}
+.slideimagenes { outline: medium none; text-decoration: none; }
+.slideimagenes img { border: 2px solid #C0C0C0; margin: 0 3px 3px 0;}

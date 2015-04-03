@@ -24,6 +24,8 @@
             $('#poblacion option').remove();
             $('#poblacion').append(html);
             $('#poblacion').change();
+            
+            $('#pagina').val('');
 
             // Resetear las zonas
             //$('#zona option').remove();
@@ -44,21 +46,36 @@
             }
             $('#zona option').remove();
             $('#zona').append(html);
-            $('#zona').change();
+            $('#pagina').val('');            
+            <!--$('#zona').change();-->
         });
         
         $('#zona').change(function(){
-            seleccion = $('#zona').val() + $('#poblacion').val() + $('#tipoOperacion').val() + $('#tipoInmueble').val();
+            $('#pagina').val('');            
+            <!--seleccion = $('#zona').val() + $('#poblacion').val() + $('#tipoOperacion').val() + $('#tipoInmueble').val();-->
             <!--alert(seleccion);-->
-            $('.rowL1').hide();            
-            $(".rowL1:contains('"+seleccion+"')").show();
+            <!--$('.rowL1').hide();-->           
+            <!--$(".rowL1:contains('"+seleccion+"')").show();-->
         });
         
         $('#tipoOperacion').change(function(){
-            $('#zona').change();
+            $('#pagina').val('');            
+            <!--$('#zona').change();-->
         });
         $('#tipoInmueble').change(function(){
-            $('#zona').change();
+            $('#pagina').val('');            
+            <!--$('#zona').change();-->
+        });
+        $('#orden').change(function(){
+            $('#pagina').val('');            
+        });
+        $('#situacion').change(function(){
+            $('#pagina').val('');            
         });
     });
+    
+    function paginar(pagina) {
+        $('#pagina').val(pagina);
+        $('#formFiltro').submit();
+    }
 </script>

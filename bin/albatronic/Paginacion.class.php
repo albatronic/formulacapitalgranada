@@ -46,23 +46,25 @@ class Paginacion {
             $filtro .= " AND ( (Privacy='1') OR (Privacy='2') OR LOCATE('{$idPerfil}',AccessProfileListWeb) )";
         }
         // Condición específica
-        if ($condicion != '')
+        if ($condicion != '') {
             $filtro .= " AND {$condicion}";
+        }
 
         self::$pagina = ($nPagina <= 0) ? 1 : $nPagina;
 
         $objeto = new $entidad();
 
         $query = "SELECT {$objeto->getPrimaryKeyName()} FROM {$objeto->getDataBaseName()}.{$objeto->getTableName()} WHERE {$filtro} ORDER BY {$criterioOrden}";
-
+        //echo $query;
         $em = new EntityManager($objeto->getConectionName());
         if ($em->getDbLink()) {
             $em->query($query);
             self::$totalItems = $em->numRows();
             self::$itemsPorPagina = ($itemsPorPagina <= 0) ? self::$totalItems : $itemsPorPagina;            
             self::$totalPaginas = floor(self::$totalItems / self::$itemsPorPagina);
-            if ((self::$totalItems % self::$itemsPorPagina) > 0)
+            if ((self::$totalItems % self::$itemsPorPagina) > 0) {
                 self::$totalPaginas++;
+            }
             $offset = (self::$pagina - 1) * self::$itemsPorPagina;
             self::$rows = $em->fetchResultLimit(self::$itemsPorPagina, $offset);
             $em->desConecta();
@@ -134,4 +136,3 @@ class Paginacion {
 
 }
 
-?>

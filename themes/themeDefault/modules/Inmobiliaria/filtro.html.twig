@@ -1,46 +1,81 @@
-{# empty Twig template #}
-<div class="filtro">
-    <div class="row">
-        <div class="itemFiltro">
-        <label for="provincia">Provincia</label>
-        <select id="provincia" name="provincia">
-            <option value="">Todas las provincias</option>
-            {% for provincia,poblaciones in filtro.provPobZon %}
-                <option value="{{provincia}}">{{provincia}}</option>
-            {% endfor %}
-        </select>
+{# Filtro Inmuebles #}
+
+<form name="formFiltro" id="formFiltro" action="" method="POST">
+    <input type="hidden" name="controller" value="{{values.controller}}"/>
+    <input type="hidden" name="action" value="Index"/>
+    <input type="hidden" name="pagina" id="pagina" value="{{values.paginacion.pagina}}"/>
+    <div class="filtro">
+        <div class="row">
+            <div class="itemFiltro">
+                <label for="provincia">Provincia</label>
+                <select id="provincia" name="filtro[provincia]">
+                    <option value="">Todas las provincias</option>
+                    {% for provincia,poblaciones in filtro.provPobZon %}
+                        <option value="{{provincia}}" {% if provincia == values.seleccion.provincia%}selected{% endif %}>{%autoescape false%}{{provincia}}{%endautoescape%}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="itemFiltro">    
+                <label for="poblacion">Población</label>
+                <select id="poblacion" name="filtro[poblacion]">
+                    <option value="">Todas las poblaciones</option>
+                    {% for poblacion,zonas in filtro.provPobZon[values.seleccion.provincia] %}
+                        <option value="{{poblacion}}" {% if poblacion == values.seleccion.poblacion %}selected{% endif %}>{%autoescape false%}{{poblacion}}{%endautoescape%}</option>
+                    {% endfor %}                    
+                </select>
+            </div>
+            <div class="itemFiltro">    
+                <label for="zona">Zona</label>
+                <select id="zona" name="filtro[zona]">
+                    <option value="">Todas las zonas</option>
+                    {% for keyZona,zona in filtro.provPobZon[values.seleccion.provincia][values.seleccion.poblacion] %}
+                        <option value="{{keyZona}}" {% if keyZona == values.seleccion.zona %}selected{% endif %}>{%autoescape false%}{{zona}}{%endautoescape%}</option>
+                    {% endfor %}                     
+                </select>
+            </div>
         </div>
-        <div class="itemFiltro">    
-        <label for="poblacion">Población</label>
-        <select id="poblacion" name="poblacion">
-            <option value="">Todas las poblaciones</option>
-        </select>
+        <div class="row">
+            <div class="itemFiltro">
+                <label for="tipoOperacion">Operación</label>
+                <select id="tipoOperacion" name="filtro[tipoOperacion]">
+                    <option value="">Todas</option>
+                    {% for key,tipo in filtro.tiposOperacion %}
+                        <option value="{{key}}" {% if key == values.seleccion.tipoOperacion%}selected{% endif %}>{{tipo}}</option>
+                    {% endfor %}
+                </select>
+            </div>    
+            <div class="itemFiltro">    
+                <label for="tipoInmueble">Tipo Inmueble</label>
+                <select id="tipoInmueble" name="filtro[tipoInmueble]">
+                    <option value="">Todos</option>
+                    {% for key,tipo in filtro.tiposInmueble %}
+                        <option value="{{key}}" {% if key == values.seleccion.tipoInmueble%}selected{% endif %}>{{tipo}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="itemFiltro">    
+                <label for="situacion">Estado</label>
+                <select id="situacion" name="filtro[situacion]">
+                    <option value="">Todos</option>
+                    {% for key,tipo in filtro.situacion %}
+                        <option value="{{key}}" {% if key == values.seleccion.situacion%}selected{% endif %}>{{tipo}}</option>
+                    {% endfor %}
+                </select>
+            </div>
         </div>
-        <div class="itemFiltro">    
-        <label for="zona">Zona</label>
-        <select id="zona" name="zona">
-            <option value="">Todas las zonas</option>
-        </select>
+          
+        <div class="row">
+            <div class="itemFiltro">
+                <label for="orden">Ordenar por</label>
+                <select id="orden" name="filtro[orden]">
+                    {% for key,orden in filtro.ordenes %}
+                        <option value="{{key}}" {% if key == values.seleccion.orden%}selected{% endif %}>{{orden}}</option>
+                    {% endfor %}
+                </select>                    
+            </div>
+            <div class="itemFiltro">
+                <input class="submit" type="submit" value="Buscar" />
+            </div>
         </div>
     </div>
-    <div class="row">
-        <div class="itemFiltro">
-        <label for="operacon">Operación</label>
-        <select id="tipoOperacion" name="tipoOperacion">
-            <option value="">Todas</option>
-            {% for key,tipo in filtro.tiposOperacion %}
-                <option value="{{tipo}}">{{tipo}}</option>
-            {% endfor %}
-        </select>
-        </div>    
-        <div class="itemFiltro">    
-        <label for="tipoInmueble">Tipo Inmueble</label>
-        <select id="tipoInmueble" name="tipoInmueble">
-            <option value="">Todos</option>
-            {% for key,tipo in filtro.tiposInmueble %}
-                <option value="{{key}}">{{tipo}}</option>
-            {% endfor %}
-        </select>
-        </div>    
-    </div>
-</div>
+</form>

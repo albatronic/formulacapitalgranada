@@ -5,43 +5,67 @@
 {% endblock %}
 
 {% block contenido %}
-<div id="contenido">
-    {% include '_global/ruta.html.twig' %}
-    <div id="contenidoModuloBlanco" class="clearfix">
-        <div class="contenido_interior row">    
+    <div id="contenido">
+        {% include '_global/ruta.html.twig' %}
+        <div id="contenidoModuloBlanco" class="clearfix">
+            <div class="contenido_interior row">    
 
-            <div class="span12 columna_izquierda_por_que">
-		<h1 class="contenido_interior"><strong>{{values.contenido.Titulo}}</strong></h1>						
-                <div class="clearfix clearboth contenido_textos contenido_porque">
-                    {% include 'Inmobiliaria/filtro.html.twig' with {'filtro' : values.filtro} %}
-                    {% for item in values.inmuebles %}
-                        <div class="rowL1">
-                            <div class="inmu3">
-                                <img src="{{app.url}}/{{theme}}/{{item.rutagraf}}" width="192"/>
+                <div class="span12 columna_izquierda_por_que">
+                    <h1 class="contenido_interior"><strong>{{values.contenido.Titulo}}</strong></h1>						
+                    <div class="clearfix clearboth contenido_textos contenido_porque">
+                        {% include 'Inmobiliaria/filtro.html.twig' with {'filtro' : values.filtro} %}
+                        {% for item in values.inmuebles %}
+                            <div class="rowL1">
+                                <div class="inmu3">
+                                    <img src="{{app.url}}/{{theme}}/{{item.rutagraf}}" width="192"/>
+                                </div>
+                                <div class="inmu7">
+                                    {% autoescape false %}
+                                        <div style="display: none">{{item.des_zona}}{{item.des_poblacion}}{{values.filtro.tiposOperacion[item.cod_destino]}}{{item.des_tipoelem}}</div>
+                                        <h2 class="tituloInmueble">
+                                            <a href="{{app.url}}{{item.UrlFriendly}}">Referencia {{item.cod_elemento}}, {{item.des_tipoelem}} - {{values.filtro.tiposOperacion[item.cod_destino]}}</a></h2>
+                                        <p class="zonaInmueble">{{item.des_zona}} - {{item.des_poblacion}} ({{item.des_provincia}})</p>
+                                        <p class="items">{{item.numhabitac}} Habitaciones, {{item.numbanios}} Baños</p>
+                                        {% if item.m2constr > 0 %}
+                                            <p class="items">{{item.m2constr}} M2 Construidos</p>
+                                        {% endif %}
+                                        <p class="estado">{{item.estgen}}</p>
+                                        <p class="comentarios">{{item.comentarios}}</p>
+                                    {% endautoescape%}
+                                </div>
+                                <div class="inmu2">
+                                    <div class="precio">{{macro.moneda(item.precio)}}</div>
+                                    <ul class="datos-tecnicos">
+                                        {% if item.situacion %}
+                                            <li>
+                                                {% autoescape false %}{{item.situacion}}{% endautoescape %}
+                                            </li>
+                                        {% endif %}
+                                        {% if item.des_vista %}
+                                            <li>
+                                                Vistas {% autoescape false %}{{item.des_vista}}{% endautoescape %}
+                                            </li>
+                                        {% endif %}
+                                        {% if item.des_orientacion %}                                        
+                                            <li>
+                                                Orientación {% autoescape false %}{{item.des_orientacion}}{% endautoescape %}
+                                            </li> 
+                                        {% endif %}  
+                                        {% if item.ubicacion %}                                        
+                                            <li>
+                                                Ubicación {% autoescape false %}{{item.ubicacion}}{% endautoescape %}
+                                            </li>
+                                        {% endif %}                                        
+                                    </ul>
+                                    <div class="masInfo"><a href="{{app.url}}{{item.UrlFriendly}}">Más Información</a></div>
+                                </div>
                             </div>
-                            <div class="inmu7">
-                                {% autoescape false %}
-                                <div style="display: none">{{item.des_zona}}{{item.des_poblacion}}{{values.filtro.tiposOperacion[item.cod_destino]}}{{item.des_tipoelem}}</div>
-                                <h2 class="tituloInmueble">
-                                    <a href="{{app.url}}{{item.UrlFriendly}}">Referencia {{item.cod_elemento}}, {{item.des_tipoelem}} - {{values.filtro.tiposOperacion[item.cod_destino]}}</a></h2>
-                                <p class="zonaInmueble">{{item.des_zona}} - {{item.des_poblacion}}</p>
-                                <p class="items">{{item.numhabitac}} Habitaciones, {{item.numbanios}} Baños</p>
-                                {% if item.m2constr > 0 %}
-                                    <p class="items">{{item.m2constr}} M2 Construidos</p>
-                                {% endif %}
-                                <p class="estado">{{item.estgen}}</p>
-                                <p class="comentarios">{{item.comentarios}}</p>
-                                {% endautoescape%}
-                            </div>
-                            <div class="inmu2">
-                                {{macro.moneda(item.precio)}}
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>              
-        </div> 
-    </div>
-    {% include '_global/franjas.html.twig' %}              
-</div>	
+                        {% endfor %}
+                    </div>
+                    {% include 'Inmobiliaria/paginacion.html.twig' with {'paginacion' : values.paginacion} %}
+                </div>              
+            </div> 
+        </div>
+        {% include '_global/franjas.html.twig' %}              
+    </div>	
 {% endblock %}
