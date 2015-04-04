@@ -14,7 +14,7 @@
 
                 <div class="span12 columna_izquierda_por_que">
                     <h1 class="titulo-inmueble"><strong>Referencia {{item.cod_elemento}}, {{item.des_tipoelem}} - {{values.tiposOperacion[item.cod_destino]}} - {{item.des_poblacion}}</strong></h1>						
-                    <div class="clearfix clearboth contenido_textos contenido_porque">
+                    <div class="clearfix clearboth contenido_porque">
                         <div class="rowDeta">
                             <div class="deta-inmu-fotos">
                                 <img id="imagenPrincipal" class="principal" src="{{app.url}}/{{theme}}/{{item.rutagraf}}"/>
@@ -57,6 +57,12 @@
                                     <p class="comentarios">{{item.comentarios}}</p>
                                     <p class="precio">{{macro.moneda(item.precio)}}</p>
                                 {% endautoescape%}
+                    <ul class="compartir clearfix clearboth">
+                            <li class="txt">Compartir</li>
+                            <li><a rel="nueva_ventana me" href="http://www.facebook.com/share.php?u=http://www.cgcreditgranada.es{{urlAmigable}}" alt="" title=""><img src="{{app.path}}{{theme}}/images/soluciones/facebook_naranja.png" alt="" title="">&nbsp;</a></li>
+                            <li><a rel="nueva_ventana me" href="https://twitter.com/share?url=http://www.cgcreditgranada.es{{urlAmigable}}" alt="" title=""><img src="{{app.path}}{{theme}}/images/soluciones/twitter_naranja.png" alt="" title="">&nbsp;</a></li>
+                            <!--<li><a class="addthis_button_email" href="#" alt="" title="Email" target="_blank"><img src="{{app.path}}{{theme}}/images/soluciones/mail_naranja.png" alt="" title="">&nbsp;</a></li>-->
+                    </ul>                                 
                                 <div class="condicionesLegales">
                                     <a rel="prettyPhoto" href="{{app.path}}/condiciones-legales-inmobiliaria?iframe=true&width=570&height=630">Condiciones legales</a>
                                 </div>
