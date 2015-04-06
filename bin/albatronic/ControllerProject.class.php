@@ -20,7 +20,7 @@ class ControllerProject extends ControllerWeb {
         $this->values['ruta'] = $this->getRuta();
         //$this->values['calendario'] = Calendario::getCalendario();
         $this->values['ustedEstaEn'] = $this->getUstedEstaEn();
-        $this->values['menuCabecera'] = Menu::getMenuDesplegable(1,6);
+        $this->values['menuCabecera'] = Menu::getMenuDesplegable(1,7);
         $this->values['menuPie'] = Menu::getMenuN(3,8);    
         $this->values['serviciosPie'] = Servicios::getServicios(0, true, 7);
         $this->values['familiasServicios'] = Servicios::getFamilias();
