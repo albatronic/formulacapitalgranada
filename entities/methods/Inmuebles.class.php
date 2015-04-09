@@ -69,10 +69,10 @@ class Inmuebles extends InmueblesEntity {
     public function save() {
 
         // Crear la url amigable
-        $tipoOperacion = str_replace(" ", "_", strtolower(trim($this->_tiposOperacion[$this->cod_destino])));
-        $poblacion = str_replace(" ", "_", strtolower(trim($this->des_poblacion)));
-        $tipoInmuble = str_replace(" ", "_", strtolower(trim($this->des_tipoelem)));
-        $this->UrlFriendly = "/{$tipoOperacion}_{$poblacion}_{$tipoInmuble}_{$this->cod_elemento}";
+        $tipoOperacion = trim($this->_tiposOperacion[$this->cod_destino]);
+        $poblacion = trim($this->des_poblacion);
+        $tipoInmuble = trim($this->des_tipoelem);
+        $this->UrlFriendly = "/inmobiliaria/" . Textos::limpia("{$tipoOperacion}-{$tipoInmuble}-{$poblacion}-{$this->cod_elemento}");
         //echo $this->UrlFriendly,"\n";
 
         $url = new CpanUrlAmigables();

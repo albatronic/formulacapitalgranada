@@ -14,6 +14,11 @@
                     <h1 class="contenido_interior"><strong>{{values.contenido.Titulo}}</strong></h1>						
                     <div class="clearfix clearboth contenido_textos contenido_porque">
                         {% include 'Inmobiliaria/filtro.html.twig' with {'filtro' : values.filtro} %}
+                        
+                        {% if values.mensajeVendido %}
+                            <h4>{{ values.mensajeVendido }}</h4>
+                        {% endif %}
+                        
                         {% for item in values.inmuebles %}
                             <div class="rowL1">
                                 <div class="inmu3">
