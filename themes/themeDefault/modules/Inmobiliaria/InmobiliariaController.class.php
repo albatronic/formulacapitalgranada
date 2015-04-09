@@ -10,7 +10,6 @@
 class InmobiliariaController extends ControllerProject {
 
     var $entity = "Inmobiliaria";
-    
     var $ordenes = array(
         'precio ASC' => 'Precio a-z',
         'precio DESC' => 'Precio z-a',
@@ -36,10 +35,26 @@ class InmobiliariaController extends ControllerProject {
 
         switch ($this->request['METHOD']) {
             case 'GET':
-                $filtro = "";
-                $pagina = 1;
-                $orden = "Id DESC";
-                $valoresFiltro = array();
+                if ($this->request[1] != '') {
+                    $urlAmigable = new CpanUrlAmigables();
+                    $rows = $urlAmigable->cargaCondicion("*", "UrlFriendly='/inmobiliaria/{$this->request[1]}'");
+                    $row = $rows[0];
+                    if ($row['Id']) {
+                        $this->request['IdEntity'] = $row['IdEntity'];
+                        return $this->InmuebleAction();
+                    } else {
+                        $this->values['mensajeVendido'] = "El inmueble que buscadas ha sido vendido pero te podemos ofrecer estos otros.";
+                        $filtro = "";
+                        $pagina = 1;
+                        $orden = "Id DESC";
+                        $valoresFiltro = array();
+                    }
+                } else {
+                    $filtro = "";
+                    $pagina = 1;
+                    $orden = "Id DESC";
+                    $valoresFiltro = array();
+                }
                 break;
             case 'POST':
                 $pagina = ($this->request['pagina'] != '') ? $this->request['pagina'] : 1;
@@ -79,10 +94,10 @@ class InmobiliariaController extends ControllerProject {
         $inmueble = new Inmuebles($this->request['IdEntity']);
         $this->values['inmueble'] = $inmueble;
         $this->values['ruta'][] = array('nombre' => "Inmobiliaria", "url" => array("url" => "Inmobiliaria"),);
-        $this->values['ruta'][] = array('nombre' => $inmueble->getBreadcrumb() , );    
+        $this->values['ruta'][] = array('nombre' => $inmueble->getBreadcrumb(),);
         $this->values['tiposOperacion'] = $inmueble->getTiposOperacion();
         $this->values['relacionados'] = $inmueble->getRelacionados();
-        
+
         return array(
             "template" => $this->entity . "/inmueble.html.twig",
             "values" => $this->values,
